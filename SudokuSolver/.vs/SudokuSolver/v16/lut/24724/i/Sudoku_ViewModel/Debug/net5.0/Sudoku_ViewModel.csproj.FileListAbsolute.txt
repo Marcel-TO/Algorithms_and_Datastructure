@@ -1,0 +1,9 @@
+M:\Visual_Studio\Semester_3\SudokuSolver\.vs\SudokuSolver\v16\lut\0\b\Sudoku_ViewModel\Debug\net5.0\Sudoku_ViewModel.deps.json
+M:\Visual_Studio\Semester_3\SudokuSolver\.vs\SudokuSolver\v16\lut\0\b\Sudoku_ViewModel\Debug\net5.0\Sudoku_ViewModel.dll
+M:\Visual_Studio\Semester_3\SudokuSolver\.vs\SudokuSolver\v16\lut\0\b\Sudoku_ViewModel\Debug\net5.0\ref\Sudoku_ViewModel.dll
+M:\Visual_Studio\Semester_3\SudokuSolver\.vs\SudokuSolver\v16\lut\0\i\Sudoku_ViewModel\Debug\net5.0\Sudoku_ViewModel.GeneratedMSBuildEditorConfig.editorconfig
+M:\Visual_Studio\Semester_3\SudokuSolver\.vs\SudokuSolver\v16\lut\0\i\Sudoku_ViewModel\Debug\net5.0\Sudoku_ViewModel.AssemblyInfoInputs.cache
+M:\Visual_Studio\Semester_3\SudokuSolver\.vs\SudokuSolver\v16\lut\0\i\Sudoku_ViewModel\Debug\net5.0\Sudoku_ViewModel.AssemblyInfo.cs
+M:\Visual_Studio\Semester_3\SudokuSolver\.vs\SudokuSolver\v16\lut\0\i\Sudoku_ViewModel\Debug\net5.0\Sudoku_ViewModel.csproj.CopyComplete
+M:\Visual_Studio\Semester_3\SudokuSolver\.vs\SudokuSolver\v16\lut\0\i\Sudoku_ViewModel\Debug\net5.0\Sudoku_ViewModel.dll
+M:\Visual_Studio\Semester_3\SudokuSolver\.vs\SudokuSolver\v16\lut\0\i\Sudoku_ViewModel\Debug\net5.0\ref\Sudoku_ViewModel.dll

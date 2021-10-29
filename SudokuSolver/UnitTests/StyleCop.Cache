@@ -1,0 +1,30 @@
+<stylecopresultscache>
+  <version>12</version>
+  <sourcecode name="SudokuUnitTests.cs" parser="StyleCop.CSharp.CsParser">
+    <timestamps>
+      <styleCop>2021.05.16 15:51:31.665</styleCop>
+      <settingsFile>2021.10.21 14:40:44.589</settingsFile>
+      <sourceFile>2021.10.24 11:47:00.832</sourceFile>
+      <parser>2021.05.16 15:51:31.665</parser>
+      <StyleCop.CSharp.DocumentationRules>2021.05.16 15:51:31.665</StyleCop.CSharp.DocumentationRules>
+      <StyleCop.CSharp.DocumentationRules.FilesHashCode>1785292655</StyleCop.CSharp.DocumentationRules.FilesHashCode>
+      <StyleCop.CSharp.LayoutRules>2021.05.16 15:51:31.665</StyleCop.CSharp.LayoutRules>
+      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
+      <StyleCop.CSharp.MaintainabilityRules>2021.05.16 15:51:31.665</StyleCop.CSharp.MaintainabilityRules>
+      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
+      <StyleCop.CSharp.NamingRules>2021.05.16 15:51:31.665</StyleCop.CSharp.NamingRules>
+      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
+      <StyleCop.CSharp.OrderingRules>2021.05.16 15:51:31.665</StyleCop.CSharp.OrderingRules>
+      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
+      <StyleCop.CSharp.ReadabilityRules>2021.05.16 15:51:31.665</StyleCop.CSharp.ReadabilityRules>
+      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
+      <StyleCop.CSharp.SpacingRules>2021.05.16 15:51:31.665</StyleCop.CSharp.SpacingRules>
+      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
+    </timestamps>
+    <violations />
+  </sourcecode>
+  <project key="-261132371">
+    <configuration>
+    </configuration>
+  </project>
+</stylecopresultscache>

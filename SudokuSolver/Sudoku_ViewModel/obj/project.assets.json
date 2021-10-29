@@ -1,0 +1,90 @@
+{
+  "version": 3,
+  "targets": {
+    "net5.0": {
+      "Sudoku_Model/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Sudoku_Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Sudoku_Model.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Sudoku_Model/1.0.0": {
+      "type": "project",
+      "path": "../Sudoku_Model/Sudoku_Model.csproj",
+      "msbuildProject": "../Sudoku_Model/Sudoku_Model.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net5.0": [
+      "Sudoku_Model >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "D:\\Users\\Marcel\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "M:\\Visual_Studio\\Semester_3\\SudokuSolver\\Sudoku_ViewModel\\Sudoku_ViewModel.csproj",
+      "projectName": "Sudoku_ViewModel",
+      "projectPath": "M:\\Visual_Studio\\Semester_3\\SudokuSolver\\Sudoku_ViewModel\\Sudoku_ViewModel.csproj",
+      "packagesPath": "D:\\Users\\Marcel\\.nuget\\packages\\",
+      "outputPath": "M:\\Visual_Studio\\Semester_3\\SudokuSolver\\Sudoku_ViewModel\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "D:\\Users\\Marcel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "D:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net5.0"
+      ],
+      "sources": {
+        "D:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "projectReferences": {
+            "M:\\Visual_Studio\\Semester_3\\SudokuSolver\\Sudoku_Model\\Sudoku_Model.csproj": {
+              "projectPath": "M:\\Visual_Studio\\Semester_3\\SudokuSolver\\Sudoku_Model\\Sudoku_Model.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net5.0": {
+        "targetAlias": "net5.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "D:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

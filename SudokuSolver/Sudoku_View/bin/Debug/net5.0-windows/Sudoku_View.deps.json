@@ -1,0 +1,49 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "Sudoku_View/1.0.0": {
+        "dependencies": {
+          "Sudoku_ViewModel": "1.0.0"
+        },
+        "runtime": {
+          "Sudoku_View.dll": {}
+        }
+      },
+      "Sudoku_Model/1.0.0": {
+        "runtime": {
+          "Sudoku_Model.dll": {}
+        }
+      },
+      "Sudoku_ViewModel/1.0.0": {
+        "dependencies": {
+          "Sudoku_Model": "1.0.0"
+        },
+        "runtime": {
+          "Sudoku_ViewModel.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Sudoku_View/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Sudoku_Model/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Sudoku_ViewModel/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

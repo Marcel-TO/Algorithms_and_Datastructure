@@ -1,0 +1,195 @@
+﻿<Window x:Class="Sudoku_View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sudoku_View"
+        xmlns:vm="clr-namespace:Sudoku_ViewModel;assembly=Sudoku_ViewModel"
+        xmlns:converter="clr-namespace:Sudoku_View.Converter"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip"
+        Title="Sudoku" Height="800" Width="1000" Icon="/Pictures/Icon.jpg">
+
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <converter:IsGreaterThanZeroConverter x:Key="IsGreaterThanZeroConverter"/>
+        <converter:IsAccessableConverter x:Key="IsAccessableConverter"/>
+        <converter:IsNumberPossibleConverter x:Key="IsNumberPossibleConverter"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.Background>
+            <ImageBrush ImageSource="/Pictures/Background.png"/>
+        </Grid.Background>
+
+        <Grid Grid.Column="0" Grid.RowSpan="2" Margin="40" Background="Gray" Opacity="0.7">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--Square Borders-->
+            <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Background="Transparent"
+            BorderBrush="#8a6b1c" BorderThickness="6"></Border>
+            <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Background="Transparent"
+            BorderBrush="#8a6b1c" BorderThickness="6"></Border>
+            <Border Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Background="Transparent"
+            BorderBrush="#8a6b1c" BorderThickness="6"></Border>
+            <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Background="Transparent"
+            BorderBrush="#8a6b1c" BorderThickness="6"></Border>
+            <Border Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Background="Transparent"
+            BorderBrush="#8a6b1c" BorderThickness="6"></Border>
+            <Border Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Background="Transparent"
+            BorderBrush="#8a6b1c" BorderThickness="6"></Border>
+
+            <ItemsControl ItemsSource="{Binding Fields}" Grid.Row="0" Grid.RowSpan="9" Grid.Column="0" Grid.ColumnSpan="9">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Background="Transparent"
+                        Columns="9"
+                        Rows="9"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ToggleButton x:Name="TogglePopupButton" FontSize="30" Opacity="100" BorderThickness="2" BorderBrush="#ffe396"
+                                FontWeight="Bold" Background="{Binding Path=IsAllowed, Converter={StaticResource IsNumberPossibleConverter}}">
+                            <StackPanel>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Run Text="{Binding Field.Number, Converter={StaticResource IsGreaterThanZeroConverter}}" Foreground="{Binding Field.IsAccessable, Converter={StaticResource IsAccessableConverter}}"/>
+                                </TextBlock>
+
+                                <Popup x:Name="myPopup" IsOpen="{Binding IsChecked, ElementName=TogglePopupButton}" StaysOpen="False">
+                                    <Border BorderThickness="1">
+                                        <UniformGrid Rows="3" Columns="3" Width="150" Height="150">
+                                            <Button Background="#242021" Foreground="#ffe396"
+                                                    BorderBrush="#c39c69" BorderThickness="1"
+                                                    Command="{Binding Path=ChangeNumber}" CommandParameter="1" Content="1"/>
+                                            <Button Background="#242021" Foreground="#ffe396"
+                                                    BorderBrush="#c39c69" BorderThickness="1"
+                                                    Command="{Binding Path=ChangeNumber}" CommandParameter="2" Content="2"/>
+                                            <Button Background="#242021" Foreground="#ffe396"
+                                                    BorderBrush="#c39c69" BorderThickness="1"
+                                                    Command="{Binding Path=ChangeNumber}" CommandParameter="3" Content="3"/>
+                                            <Button Background="#242021" Foreground="#ffe396"
+                                                    BorderBrush="#c39c69" BorderThickness="1"
+                                                    Command="{Binding Path=ChangeNumber}" CommandParameter="4" Content="4"/>
+                                            <Button Background="#242021" Foreground="#ffe396"
+                                                    BorderBrush="#c39c69" BorderThickness="1"
+                                                    Command="{Binding Path=ChangeNumber}" CommandParameter="5" Content="5"/>
+                                            <Button Background="#242021" Foreground="#ffe396"
+                                                    BorderBrush="#c39c69" BorderThickness="1"
+                                                    Command="{Binding Path=ChangeNumber}" CommandParameter="6" Content="6"/>
+                                            <Button Background="#242021" Foreground="#ffe396"
+                                                    BorderBrush="#c39c69" BorderThickness="1"
+                                                    Command="{Binding Path=ChangeNumber}" CommandParameter="7" Content="7"/>
+                                            <Button Background="#242021" Foreground="#ffe396"
+                                                    BorderBrush="#c39c69" BorderThickness="1"
+                                                    Command="{Binding Path=ChangeNumber}" CommandParameter="8" Content="8"/>
+                                            <Button Background="#242021" Foreground="#ffe396"
+                                                    BorderBrush="#c39c69" BorderThickness="1"
+                                                    Command="{Binding Path=ChangeNumber}" CommandParameter="9" Content="9"/>
+                                        </UniformGrid>
+                                    </Border>
+                                </Popup>
+                            </StackPanel>
+                        </ToggleButton>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+
+        <!-- Top Window Border -->
+        <Border Grid.ColumnSpan="2" BorderBrush="#ffe396" BorderThickness="1"
+                MouseDown="Border_MouseDown">
+            <Border.Background>
+                <ImageBrush ImageSource="/Pictures/Background.png" Stretch="UniformToFill" TileMode="FlipY"/>
+            </Border.Background>
+            <Grid HorizontalAlignment="Stretch">
+                <Label Content="Sudoku Master"
+                       FontFamily="MV Boli"
+                       Foreground="#ffe396"
+                       FontWeight="SemiBold"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button Width="25" Height="25" Margin="0,0,5,0"
+                            Content="X"
+                            Foreground="#ffe396"
+                            BorderBrush="#ffe396"
+                            Background="Transparent"
+                            Command="{Binding Path=ExitApplicationCommand}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <ToggleButton Grid.Column="0" Margin="60, 0, 60, 20"
+                    Background="Gray" Opacity="0.7"
+                    Foreground="#ffe396" FontSize="30" FontFamily="MV Boli" FontStretch="Expanded"
+                    Click="LoadLvl_Click">
+                <StackPanel>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Run Text="Load Level"/>
+                    </TextBlock>
+
+                    <Popup x:Name="loadPopup" IsOpen="{Binding IsFileNotValid}" StaysOpen="False">
+                        <Border BorderBrush="#c39c69" BorderThickness="1" Background="#242021" >
+                            <TextBlock Text="It appears this sudoku is not solveable" 
+                                       Foreground="#ffe396" Margin="5"/>
+                        </Border>
+                    </Popup>
+                </StackPanel>
+            </ToggleButton>
+
+            <Button Grid.Column="1" Margin="60, 0, 60, 20"
+                    Background="Gray" Opacity="0.7"
+                    Foreground="#ffe396" FontSize="30" FontFamily="MV Boli" FontStretch="Expanded"
+                    Command="{Binding Path=CheckCurrentFields}">
+                Check
+            </Button>
+
+            <ToggleButton Grid.Column="2" Margin="60, 0, 60, 20"
+                    Background="Gray" Opacity="0.7"
+                    Foreground="#ffe396" FontSize="30" FontFamily="MV Boli" FontStretch="Expanded" FontWeight="Medium"
+                    Command="{Binding Path=BacktrackingStart}">
+                <StackPanel>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Run Text="Solve Sudoku"/>
+                    </TextBlock>
+
+                    <Popup x:Name="solvePopup" IsOpen="{Binding IsUnsolveable}" StaysOpen="False">
+                        <Border BorderBrush="#c39c69" BorderThickness="1" Background="#242021" >
+                            <TextBlock Text="It appears this sudoku is not solveable" 
+                                       Foreground="#ffe396" Margin="5"/>
+                        </Border>
+                    </Popup>
+                </StackPanel>
+            </ToggleButton>
+        </Grid>
+    </Grid>
+</Window>
