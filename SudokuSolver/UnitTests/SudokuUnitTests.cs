@@ -93,6 +93,46 @@ namespace UnitTests
         }
 
         /// <summary>
+        /// Represents the method for testing if the backtracking solver reacts properly if the current fields are correct.
+        /// </summary>
+        [TestMethod]
+        public void CheckIfNumberIsPossible_Correct_Test()
+        {
+            LevelFactory factory = new LevelFactory(this.amount);
+            Board board = factory.LoadLevel(@"M:\Visual_Studio\Semester_3\SudokuSolver\Lvls\Lvl_1.txt");
+            BacktrackingSolver solver = new BacktrackingSolver(board.Fields);
+
+            for (int i = 0; i < board.Fields.Count; i++)
+            {
+                Assert.IsTrue(solver.CheckIfNumberIsPossible(board.Fields, i));
+            }
+        }
+
+        /// <summary>
+        /// Represents the method for testing if the backtracking solver reacts properly if the current fields are not valid.
+        /// </summary>
+        [TestMethod]
+        public void CheckIfNumberIsPossible_Wrong_Test()
+        {
+            LevelFactory factory = new LevelFactory(this.amount);
+            Board board = factory.LoadLevel(@"M:\Visual_Studio\Semester_3\SudokuSolver\Lvls\Unsolvable.txt");
+            BacktrackingSolver solver = new BacktrackingSolver(board.Fields);
+
+            bool check = true;
+
+            for (int i = 0; i < board.Fields.Count; i++)
+            {
+                check = solver.CheckIfNumberIsPossible(board.Fields, i);
+
+                if (!check)
+                {
+                    Assert.IsFalse(check);
+                    return;
+                }
+            }
+        }
+
+        /// <summary>
         /// Represents the method for testing the solving sequence of a sudoku level.
         /// </summary>
         [TestMethod]

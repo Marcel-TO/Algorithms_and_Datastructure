@@ -78,18 +78,23 @@ namespace Sudoku_Model
         /// <returns>The new created game board.</returns>
         private Board CreateBoard(string content)
         {
-            string test = this.RemoveUnwantedCharacters(content);
+            string numberString = this.RemoveUnwantedCharacters(content);
             int[] numbers = new int[this.amount];
 
             int count = 0;
 
-            for (int i = 0; i < test.Length; i++)
+            for (int i = 0; i < numberString.Length; i++)
             {
+                if (numberString.Length > this.amount)
+                {
+                    throw new BoardNotPossibleException($"The content of the current file is not valid, please only use supported files.");
+                }
+
                 int number;
 
-                bool isNumber = int.TryParse(test[i].ToString(), out number);
+                bool isNumber = int.TryParse(numberString[i].ToString(), out number);
 
-                if (!isNumber)
+                if (!isNumber || number < 0 || number > 9)
                 {
                     throw new BoardNotPossibleException($"The content of the current file is not valid, please only use supported files.");
                 }

@@ -230,10 +230,6 @@
     </timestamps>
     <violations />
   </sourcecode>
-  <project key="-1132468010">
-    <configuration>
-    </configuration>
-  </project>
   <sourcecode name="MainViewModel.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2021.05.16 15:51:31.665</styleCop>
@@ -257,4 +253,8 @@
     </timestamps>
     <violations />
   </sourcecode>
+  <project key="-1132468010">
+    <configuration>
+    </configuration>
+  </project>
 </stylecopresultscache>

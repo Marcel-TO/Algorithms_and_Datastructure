@@ -36,11 +36,6 @@ namespace Sudoku_Model
         }
 
         /// <summary>
-        /// Occurs if the board get solved and synchronized.
-        /// </summary>
-        public event EventHandler<FieldListEventArgs> SynchronizingFields;
-
-        /// <summary>
         /// Occurs if the board is unsolvable.
         /// </summary>
         public event EventHandler<UnsolvableEventArgs> Unsolvable;
@@ -107,30 +102,16 @@ namespace Sudoku_Model
         }
 
         /// <summary>
-        /// Represents the number reset of the current sudoku board.
-        /// </summary>
-        private void ResetFields()
-        {
-            for (int i = 0; i < this.Fields.Count; i++)
-            {
-                if (this.Fields[i].IsAccessable)
-                {
-                    this.Fields[i].Number = 0;
-                }
-            }
-        }
-
-        /// <summary>
         /// Represents a method which checks if a number is possible.
         /// </summary>
         /// <param name="fields">The current list of fields.</param>
         /// <param name="index">The index of the current selected field.</param>
         /// <returns>True if the number is possible, otherwise false.</returns>
-        private bool CheckIfNumberIsPossible(List<Field> fields, int index)
+        public bool CheckIfNumberIsPossible(List<Field> fields, int index)
         {
             for (int i = 0; i < fields.Count; i++)
             {
-                if (i != index)
+                if (i != index && fields[i].Number != 0)
                 {
                     if (fields[i].Column == fields[index].Column && fields[i].Number == fields[index].Number)
                     {
@@ -150,6 +131,20 @@ namespace Sudoku_Model
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Represents the number reset of the current sudoku board.
+        /// </summary>
+        private void ResetFields()
+        {
+            for (int i = 0; i < this.Fields.Count; i++)
+            {
+                if (this.Fields[i].IsAccessable)
+                {
+                    this.Fields[i].Number = 0;
+                }
+            }
         }
 
         /// <summary>
