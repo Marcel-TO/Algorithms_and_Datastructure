@@ -21,12 +21,16 @@
         {
             Console.Clear();
 
-            Console.WriteLine("The ");
+            Console.WriteLine($"Executed Command: {command.Name} command");
+            Console.WriteLine(string.Empty);
         }
 
         public void Visit(RemoveCommand command)
         {
-            throw new NotImplementedException();
+            Console.Clear();
+
+            Console.WriteLine($"Executed Command: {command.Name} command");
+            Console.WriteLine(string.Empty);
         }
 
         public void Visit(ClearCommand command)
@@ -121,7 +125,7 @@
 
         public int GetValueFromUser()
         {
-            Console.WriteLine("Please enter the value of the new node.");
+            Console.WriteLine("Please enter a value.");
 
             while (true)
             {

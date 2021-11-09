@@ -4,11 +4,11 @@ namespace SplayTree.Commands
     using System.Collections.Generic;
     using SplayTree.Interfaces;
     using SplayTree.Logic;
-
+    using SplayTree.Trees;
 
     public class CountCommand : BaseCommand
     {
-        public CountCommand(List<Node> nodes) : base ("count", nodes)
+        public CountCommand(Splaytree splaytree) : base ("count", splaytree)
         {
             
         }

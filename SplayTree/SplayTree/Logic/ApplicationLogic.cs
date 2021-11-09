@@ -5,6 +5,7 @@
     using SplayTree.Commands;
     using SplayTree.Interfaces;
     using SplayTree.KeyboardWatcher;
+    using SplayTree.Trees;
 
     public class ApplicationLogic
     {
@@ -14,9 +15,9 @@
 
         private ILogger logger;
 
-        private BaseCommand[] commands;
-
         private List<Node> nodes;
+
+        private Splaytree splaytree;
 
         private KeyboardWatcher keyboardWatcher;
 
@@ -28,9 +29,9 @@
         {
             this.args = args;
             this.nodes = new List<Node>();
+            this.splaytree = new Splaytree(this.nodes);
             this.logger = new ConsoleLogger();
             this.execute = new Executioner(this.logger);
-            this.commands = this.CreateCommands();
             this.keyboardWatcher = new KeyboardWatcher();
             this.keyboardWatcher.KeyPressed += this.KeyPressed;
             this.index = 0;
@@ -48,10 +49,10 @@
             {
                 if (value < 0)
                 {
-                    this.index = this.commands.Length - 1;
+                    this.index = this.splaytree.Commands.Length - 1;
                 }
 
-                else if (value > this.commands.Length - 1)
+                else if (value > this.splaytree.Commands.Length - 1)
                 {
                     this.index = 0;
                 }
@@ -66,14 +67,14 @@
         public void Start()
         {
             this.logger.WelcomeMessage();
-            this.logger.ShowCommands(this.commands);
-            this.logger.ShowCursor(this.index, this.commands.Length - 1);
+            this.logger.ShowCommands(this.splaytree.Commands);
+            this.logger.ShowCursor(this.index, this.splaytree.Commands.Length - 1);
 
 
             while(this.loop)
             {
                 this.keyboardWatcher.Start();
-                this.logger.ShowCursor(this.index, this.commands.Length - 1);
+                this.logger.ShowCursor(this.index, this.splaytree.Commands.Length - 1);
             }
         }
 
@@ -85,7 +86,7 @@
                     this.loop = false;
                     break;
                 case ConsoleKey.Enter:
-                    this.ExecuteCommand(this.commands, this.index, this.execute);
+                    this.ExecuteCommand(this.splaytree.Commands, this.index, this.execute);
                     break;
                 case ConsoleKey.UpArrow:
                     this.Index--;
@@ -103,19 +104,6 @@
             this.logger.Clear();
             this.logger.ShowCommands(commands);
             this.logger.ShowCursor(index, commands.Length - 1);
-        }
-
-        private BaseCommand[] CreateCommands()
-        {
-            BaseCommand[] commands = new BaseCommand[]
-            {
-                new ClearCommand(this.nodes),
-                new CountCommand(this.nodes),
-                new InsertCommand(this.nodes),
-                new RemoveCommand(this.nodes)
-            };
-
-            return commands;
         }
     }
 }

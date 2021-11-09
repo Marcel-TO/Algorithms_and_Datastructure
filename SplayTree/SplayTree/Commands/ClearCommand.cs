@@ -4,10 +4,11 @@ namespace SplayTree.Commands
     using SplayTree.Logic;
     using SplayTree.Interfaces;
     using System.Collections.Generic;
+    using SplayTree.Trees;
 
     public class ClearCommand : BaseCommand
     {
-        public ClearCommand(List<Node> nodes) : base ("clear", nodes)
+        public ClearCommand(Splaytree splaytree) : base ("clear", splaytree)
         {
         }
         
@@ -18,7 +19,7 @@ namespace SplayTree.Commands
 
         public override void Log(ILogger logger)
         {
-            throw new NotImplementedException();
+            logger.Visit(this);
         }
     }
 }

@@ -1,20 +1,21 @@
 namespace SplayTree.Commands
 {
-    using SplayTree.Logic;
-    using SplayTree.Interfaces;
     using System;
     using System.Collections.Generic;
+    using SplayTree.Logic;
+    using SplayTree.Interfaces;
+    using SplayTree.Trees;
 
     public abstract class BaseCommand : ICommandVisitable, ILogable
     {
         private string name;
 
-        private List<Node> nodes;
+        private Splaytree splaytree;
 
-        public BaseCommand(string commandInitializer, List<Node> nodes)
+        public BaseCommand(string commandInitializer, Splaytree splaytree)
         {
             this.Name = commandInitializer;
-            this.Nodes = nodes;
+            this.SplayTree = splaytree;
         }
 
         public string Initializer
@@ -43,11 +44,29 @@ namespace SplayTree.Commands
             }
         }
 
+        public Splaytree SplayTree
+        {
+            get
+            {
+                return this.splaytree;
+            }
+
+            private set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException($"The {nameof(this.splaytree)} must not be null.");
+                }
+
+                this.splaytree = value;
+            }
+        }
+
         public List<Node> Nodes
         {
             get
             {
-                return this.nodes;
+                return this.SplayTree.Nodes;
             }
 
             set
@@ -57,7 +76,7 @@ namespace SplayTree.Commands
                     throw new ArgumentNullException($"The {nameof(value)} must not be null!");
                 }
 
-                this.nodes = value;
+                this.SplayTree.Nodes = value;
             }
         }
 
