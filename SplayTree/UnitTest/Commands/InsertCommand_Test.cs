@@ -9,8 +9,6 @@
     [TestClass]
     public class InsertCommand_Test
     {
-
-
          [TestMethod]
          public void TestNumberCorrect()
          {
