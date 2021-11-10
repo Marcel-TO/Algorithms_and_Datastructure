@@ -23,7 +23,7 @@ namespace SplayTree.Commands
             logger.Visit(this);
         }
 
-        public void Execute(Executioner execute, ILogger logger, int value)
+        public void Execute(Executioner execute, int value)
         {
             if (this.Nodes.Count == 0)
             {

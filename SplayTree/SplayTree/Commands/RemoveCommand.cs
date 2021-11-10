@@ -24,7 +24,7 @@ namespace SplayTree.Commands
             logger.Visit(this);
         }
 
-        public bool Execute(Executioner execute, ILogger logger, int value)
+        public bool Execute(Executioner execute, int value)
         {
             if (this.Nodes.Count == 0)
             {

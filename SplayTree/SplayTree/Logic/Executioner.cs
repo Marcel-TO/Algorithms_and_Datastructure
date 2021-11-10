@@ -44,7 +44,7 @@
         {
             this.logger.Visit(command);
             int value = this.logger.GetValueFromUser();
-            command.Execute(this, this.logger, value);
+            command.Execute(this, value);
 
             this.logger.Message($"The node {value} got added to the tree.");
             this.logger.Continue();
@@ -62,7 +62,7 @@
             }
 
             int value = this.logger.GetValueFromUser();
-            command.Execute(this, this.logger, value);
+            command.Execute(this, value);
 
             this.logger.Message($"The node {value} got removed from the tree.");
             this.logger.Continue();
