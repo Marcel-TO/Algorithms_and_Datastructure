@@ -40,6 +40,16 @@
             this.logger.Continue();
         }
 
+        public void Visit(CountSpecificCommand command) 
+        {
+            this.logger.Visit(command);
+            int value = this.logger.GetValueFromUser();
+
+            int count = command.Execute(this, value);
+            this.logger.Message($"The tree contains of {count} nodes.");
+            this.logger.Continue();
+        }
+
         public void Visit(InsertCommand command)
         {
             this.logger.Visit(command);
