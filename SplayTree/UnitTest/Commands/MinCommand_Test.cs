@@ -32,7 +32,7 @@ namespace UnitTest.Commands
             Splaytree splaytree = new Splaytree(new List<Node>() {7,9,3,6,5});
             MinCommand command = new MinCommand(splaytree);
 
-            Node min = command.Execute(execute);
+            int min = command.Execute(execute);
 
             for (int i = 0; i < command.Nodes.Count; i++)
             {

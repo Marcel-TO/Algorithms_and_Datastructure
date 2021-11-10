@@ -32,7 +32,7 @@ namespace UnitTest.Commands
             Splaytree splaytree = new Splaytree(new List<Node>() {7,9,3,6,5});
             MaxCommand command = new MaxCommand(splaytree);
 
-            Node max = command.Execute(execute);
+            int max = command.Execute(execute);
 
             for (int i = 0; i < command.Nodes.Count; i++)
             {
