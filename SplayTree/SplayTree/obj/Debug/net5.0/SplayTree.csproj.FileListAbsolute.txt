@@ -1,0 +1,16 @@
+M:\Visual_Studio\Semester_3\SplayTree\SplayTree\obj\Debug\net5.0\SplayTree.csproj.AssemblyReference.cache
+M:\Visual_Studio\Semester_3\SplayTree\SplayTree\obj\Debug\net5.0\SplayTree.GeneratedMSBuildEditorConfig.editorconfig
+M:\Visual_Studio\Semester_3\SplayTree\SplayTree\obj\Debug\net5.0\SplayTree.AssemblyInfoInputs.cache
+M:\Visual_Studio\Semester_3\SplayTree\SplayTree\obj\Debug\net5.0\SplayTree.AssemblyInfo.cs
+M:\Visual_Studio\Semester_3\SplayTree\SplayTree\obj\Debug\net5.0\SplayTree.csproj.CoreCompileInputs.cache
+M:\Visual_Studio\Semester_3\SplayTree\SplayTree\bin\Debug\net5.0\SplayTree.exe
+M:\Visual_Studio\Semester_3\SplayTree\SplayTree\bin\Debug\net5.0\SplayTree.deps.json
+M:\Visual_Studio\Semester_3\SplayTree\SplayTree\bin\Debug\net5.0\SplayTree.runtimeconfig.json
+M:\Visual_Studio\Semester_3\SplayTree\SplayTree\bin\Debug\net5.0\SplayTree.runtimeconfig.dev.json
+M:\Visual_Studio\Semester_3\SplayTree\SplayTree\bin\Debug\net5.0\SplayTree.dll
+M:\Visual_Studio\Semester_3\SplayTree\SplayTree\bin\Debug\net5.0\ref\SplayTree.dll
+M:\Visual_Studio\Semester_3\SplayTree\SplayTree\bin\Debug\net5.0\SplayTree.pdb
+M:\Visual_Studio\Semester_3\SplayTree\SplayTree\obj\Debug\net5.0\SplayTree.dll
+M:\Visual_Studio\Semester_3\SplayTree\SplayTree\obj\Debug\net5.0\ref\SplayTree.dll
+M:\Visual_Studio\Semester_3\SplayTree\SplayTree\obj\Debug\net5.0\SplayTree.pdb
+M:\Visual_Studio\Semester_3\SplayTree\SplayTree\obj\Debug\net5.0\SplayTree.genruntimeconfig.cache
