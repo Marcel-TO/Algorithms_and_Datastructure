@@ -57,6 +57,22 @@
             Console.WriteLine(string.Empty);
         }
 
+        public void Visit(MinCommand command)
+        {
+             Console.Clear();
+
+            Console.WriteLine($"Executed Command: {command.Name} command");
+            Console.WriteLine(string.Empty);
+        }
+
+        public void Visit(MaxCommand command)
+        {
+             Console.Clear();
+
+            Console.WriteLine($"Executed Command: {command.Name} command");
+            Console.WriteLine(string.Empty);
+        }
+
         public void WelcomeMessage()
         {
             Console.WriteLine("Welcome to the amazing Splay-Tree algortihm showcase.");

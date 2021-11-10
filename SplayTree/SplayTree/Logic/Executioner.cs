@@ -50,6 +50,22 @@
             this.logger.Continue();
         }
 
+        public void Visit(MinCommand command)
+        {
+            this.logger.Visit(command);
+            int min = command.Execute(this);
+            this.logger.Message($"The minimum value of the tree is {min}.");
+            this.logger.Continue();
+        }
+
+        public void Visit(MaxCommand command)
+        {
+            this.logger.Visit(command);
+            int max = command.Execute(this);
+            this.logger.Message($"The maximum value of the tree is {max}");
+            this.logger.Continue();
+        }
+
         public void Visit(InsertCommand command)
         {
             this.logger.Visit(command);
