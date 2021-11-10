@@ -23,7 +23,7 @@ namespace SplayTree.Commands
             throw new NotImplementedException();
         }
 
-        public int Execute(IExecute execute, int value) 
+        public int Execute(Executioner execute, int value) 
         {
             throw new NotImplementedException();
         }

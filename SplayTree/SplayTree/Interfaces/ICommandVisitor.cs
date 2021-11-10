@@ -18,5 +18,7 @@ namespace SplayTree.Interfaces
         void Visit(MinCommand command);
 
         void Visit(MaxCommand command);
+
+        void Visit(ContainsCommand command);
     }
 }

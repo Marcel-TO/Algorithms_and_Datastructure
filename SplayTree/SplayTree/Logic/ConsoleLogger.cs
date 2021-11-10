@@ -67,7 +67,15 @@
 
         public void Visit(MaxCommand command)
         {
-             Console.Clear();
+            Console.Clear();
+
+            Console.WriteLine($"Executed Command: {command.Name} command");
+            Console.WriteLine(string.Empty);
+        }
+
+        public void Visit(ContainsCommand command)
+        {
+            Console.Clear();
 
             Console.WriteLine($"Executed Command: {command.Name} command");
             Console.WriteLine(string.Empty);

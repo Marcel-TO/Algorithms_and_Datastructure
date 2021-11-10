@@ -66,6 +66,24 @@
             this.logger.Continue();
         }
 
+        public void Visit(ContainsCommand command)
+        {
+            this.logger.Visit(command);
+            int value = this.logger.GetValueFromUser();
+            bool isExisting = command.Execute(this, value);
+
+            if (isExisting)
+            {
+                this.logger.Message($"The tree does contain the value {value}.");
+            }
+            else
+            {
+                this.logger.Message($"The tree does not contain the value {value}");
+            }
+            
+            this.logger.Continue();
+        }
+
         public void Visit(InsertCommand command)
         {
             this.logger.Visit(command);
