@@ -18,6 +18,8 @@ namespace UnitTest.Commands
         +   post-order
         */
 
+        // Siehe -> https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
+
 
         [TestMethod]
         public void TestIfTreeIsEmpty()
