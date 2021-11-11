@@ -30,14 +30,13 @@ namespace SplayTree.Commands
                 // Exception
             }
 
-            int min = this.Nodes[0].Value;
+            int counter = 0;
+            int min = this.Nodes[counter].Value;
 
-            for (int i = 0; i < this.Nodes.Count; i++)
+            while (this.Nodes[counter].LesserNode != null)
             {
-                if (this.Nodes[i].Value < min)
-                {
-                    min = this.Nodes[i].Value;
-                }
+                min = this.Nodes[counter].LesserNode.Value;
+                counter++;
             }
 
             return min;

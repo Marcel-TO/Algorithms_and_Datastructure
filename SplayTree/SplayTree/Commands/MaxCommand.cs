@@ -30,14 +30,13 @@ namespace SplayTree.Commands
                 // Exception
             }
 
-            int max = this.Nodes[0].Value;
+            int counter = 0;
+            int max = this.Nodes[counter].Value;
 
-            for (int i = 0; i < this.Nodes.Count; i++)
+            while (this.Nodes[counter].BiggerNode != null)
             {
-                if (this.Nodes[i].Value > max)
-                {
-                    max = this.Nodes[i].Value;
-                }
+                max = this.Nodes[counter].BiggerNode.Value;
+                counter++;
             }
 
             return max;
