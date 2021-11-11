@@ -18,5 +18,7 @@
         void Clear();
 
         int GetValueFromUser();
+
+        int ChooseTraverseOrder();
     }
 }

@@ -84,6 +84,27 @@
             this.logger.Continue();
         }
 
+        public void Visit(TraverseCommand command)
+        {
+            this.logger.Visit(command);
+            int orderIndex = this.logger.ChooseTraverseOrder();
+
+            switch (orderIndex)
+            {
+                case 1:
+                command.Execute(this, TraverseOrder.inOrder);
+                break;
+
+                case 2:
+                command.Execute(this, TraverseOrder.preOrder);
+                break;
+
+                case 3:
+                command.Execute(this, TraverseOrder.postOrder);
+                break;
+            }
+        }
+
         public void Visit(InsertCommand command)
         {
             this.logger.Visit(command);

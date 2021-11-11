@@ -20,5 +20,7 @@ namespace SplayTree.Interfaces
         void Visit(MaxCommand command);
 
         void Visit(ContainsCommand command);
+
+        void Visit(TraverseCommand command);
     }
 }

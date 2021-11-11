@@ -81,6 +81,14 @@
             Console.WriteLine(string.Empty);
         }
 
+         public void Visit(TraverseCommand command)
+        {
+            Console.Clear();
+
+            Console.WriteLine($"Executed Command: {command.Name} command");
+            Console.WriteLine(string.Empty);
+        }
+
         public void WelcomeMessage()
         {
             Console.WriteLine("Welcome to the amazing Splay-Tree algortihm showcase.");
@@ -166,6 +174,25 @@
                 bool isNumber = int.TryParse(Console.ReadLine(), out number);
 
                 if (isNumber)
+                {
+                    return number;
+                }
+
+                Console.WriteLine("This is not a number");
+            }
+        }
+
+        public int ChooseTraverseOrder()
+        {
+            Console.WriteLine("Please enter a value.");
+
+            while (true)
+            {
+                int number;
+
+                bool isNumber = int.TryParse(Console.ReadLine(), out number);
+
+                if (isNumber && number >= 1 && number <= 3)
                 {
                     return number;
                 }
