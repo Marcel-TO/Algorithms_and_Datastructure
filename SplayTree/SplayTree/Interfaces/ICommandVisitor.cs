@@ -22,5 +22,7 @@ namespace SplayTree.Interfaces
         void Visit(ContainsCommand command);
 
         void Visit(TraverseCommand command);
+
+        void Visit(DisplayCommand command);
     }
 }

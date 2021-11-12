@@ -22,6 +22,7 @@ namespace SplayTree.Trees
                 new ContainsCommand(this),
                 new CountCommand(this),
                 new CountSpecificCommand(this),
+                new DisplayCommand(this),
                 new InsertCommand(this),
                 new MaxCommand(this),
                 new MinCommand(this),

@@ -96,6 +96,12 @@
             }
         }
 
+        public void Visit(DisplayCommand command)
+        {
+            this.logger.Visit(command);
+
+        }
+
         public void Visit(InsertCommand command)
         {
             this.logger.Visit(command);
@@ -157,9 +163,16 @@
 
             try
             {
-                command.Execute(this, value);
+                int count = command.Execute(this, value);
 
-                this.logger.Message($"The node {value} got removed from the tree.");
+                if (count == 0)
+                {
+                    this.logger.Message($"There is no node with the {value} in the tree.");
+                    this.logger.Continue();
+                    return;
+                }
+
+                this.logger.Message($"The value {value} got removed from the tree {count} times.");
                 this.logger.Continue();
             }
             catch (TreeIsEmptyException e)
@@ -282,51 +295,6 @@
             return allNodes;
         }
 
-        public List<Node> RemoveNode(List<Node> nodes, Node removed)
-        {
-            for (int i = 0; i < nodes.Count; i++)
-            {
-                if (nodes[i].Value == removed.Value)
-                {
-                    nodes.Remove(nodes[i]);
-                }
-
-                if (nodes[i].LesserNode?.Value == removed.Value)
-                {
-                    if (removed.LesserNode != null)
-                    {
-                        nodes[i].LesserNode = removed.LesserNode;
-                        continue;
-                    }
-
-                    if (removed.BiggerNode != null)
-                    {
-                        nodes[i].LesserNode = removed.BiggerNode;
-                        continue;
-                    }
-                }
-
-
-                if (nodes[i].BiggerNode?.Value == removed.Value)
-                {
-
-                    if (removed.LesserNode != null)
-                    {
-                        nodes[i].BiggerNode = removed.LesserNode;
-                        continue;
-                    }
-
-                    if (removed.BiggerNode != null)
-                    {
-                        nodes[i].BiggerNode = removed.BiggerNode;
-                        continue;
-                    }
-                }
-            }
-
-            return nodes;
-        }
-
         public (Node, Node) CreateNode(int value, Node parentNode)
         {
             Node newNode;
@@ -348,52 +316,41 @@
             return (newNode, parentNode);
         }
 
-        public Node FindRemovedNode(List<Node> nodes, int userInput)
+        public int RemoveNodes(List<Node> nodes, int removedValue)
         {
-            bool isDeleted = false;
-            Node removed = null;
-            Node newRoot = null;
+            int count = 0;
 
             for (int i = 0; i < nodes.Count; i++)
             {
-                // Checks if the value is equal to the value of the removed node.
-                if (nodes[i].Value == userInput)
+                if (nodes[i].Value == removedValue)
                 {
-                    // Checks if the current node is at the top.
-                    if (nodes[i].Position.Y == 0)
-                    {
-                        // Checks if the current node has a child node.
-                        if (nodes[i].LesserNode != null)
-                        {
-                            newRoot = new Node(nodes[i].LesserNode.Value) { Position = new Position(0, 0) };
-                        }
-                        else if (nodes[i].BiggerNode != null)
-                        {
-                            newRoot = new Node(nodes[i].BiggerNode.Value) { Position = new Position(0, 0) };
-                        }
-
-                        removed = nodes[i];
-                        nodes = this.RemoveNode(nodes, removed);
-                        isDeleted = true;
-                        break;
-                    }
-
-                    // Sets the parent node of the removed node to the new root node.
-                    newRoot = new Node(nodes[i].ParentNode.Value) { Position = new Position(0, 0) };
-                    removed = nodes[i];
-                    nodes = this.RemoveNode(nodes, removed);
-                    isDeleted = true;
-                    break;
+                    nodes.Remove(nodes[i]);
+                    count++;
+                    i--;
                 }
             }
 
-            if (!isDeleted)
+            return count;
+        }
+
+        public int FindRemovedNode(List<Node> nodes, int userInput)
+        {
+            int removeCount = this.RemoveNodes(nodes, userInput);
+
+            for (int i = 0; i < nodes.Count; i++)
             {
-                this.logger.Message($"Sorry but there is no node with the value {userInput} in the current splay tree.");
-                this.logger.Continue();
+                if (nodes[i].LesserNode?.Value == userInput)
+                {
+                    nodes[i].LesserNode = null;
+                }
+
+                if (nodes[i].BiggerNode?.Value == userInput)
+                {
+                    nodes[i].BiggerNode = null;
+                }
             }
 
-            return newRoot;
+            return removeCount;
         }
 
         public List<Node> GenerateTree(List<int> values)
@@ -411,7 +368,7 @@
             }
 
             List<Node> sortedNodes = new List<Node>();
-            sortedNodes[0] = new Node(tempNodes[0].Value) { Position = new Position(0, 0) };
+            sortedNodes.Add(new Node(tempNodes[0].Value) { Position = new Position(0, 0) });
             
             for (int i = 1; i < tempNodes.Count; i++)
             {
@@ -419,6 +376,18 @@
             }
 
             return sortedNodes;
+        }
+
+        public List<int> ExtractValues(List<Node> nodes)
+        {
+            List<int> values = new List<int>();
+
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                values.Add(nodes[i].Value);
+            }
+
+            return values;
         }
     }
 }

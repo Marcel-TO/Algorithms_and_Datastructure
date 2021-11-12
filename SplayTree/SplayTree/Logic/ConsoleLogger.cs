@@ -17,23 +17,15 @@
             Console.CursorVisible = false;
         }
 
-        public void Visit(InsertCommand command)
-        {
-            Console.Clear();
-
-            Console.WriteLine($"Executed Command: {command.Name} command");
-            Console.WriteLine(string.Empty);
-        }
-
-        public void Visit(RemoveCommand command)
-        {
-            Console.Clear();
-
-            Console.WriteLine($"Executed Command: {command.Name} command");
-            Console.WriteLine(string.Empty);
-        }
-
         public void Visit(ClearCommand command)
+        {
+            Console.Clear();
+
+            Console.WriteLine($"Executed Command: {command.Name} command");
+            Console.WriteLine(string.Empty);
+        }
+
+        public void Visit(ContainsCommand command)
         {
             Console.Clear();
 
@@ -57,9 +49,17 @@
             Console.WriteLine(string.Empty);
         }
 
-        public void Visit(MinCommand command)
+        public void Visit(DisplayCommand command)
         {
-             Console.Clear();
+            Console.Clear();
+
+            Console.WriteLine($"Executed Command: {command.Name} command");
+            Console.WriteLine(string.Empty);
+        }
+
+        public void Visit(InsertCommand command)
+        {
+            Console.Clear();
 
             Console.WriteLine($"Executed Command: {command.Name} command");
             Console.WriteLine(string.Empty);
@@ -73,7 +73,15 @@
             Console.WriteLine(string.Empty);
         }
 
-        public void Visit(ContainsCommand command)
+        public void Visit(MinCommand command)
+        {
+             Console.Clear();
+
+            Console.WriteLine($"Executed Command: {command.Name} command");
+            Console.WriteLine(string.Empty);
+        }
+
+        public void Visit(RemoveCommand command)
         {
             Console.Clear();
 
@@ -81,7 +89,7 @@
             Console.WriteLine(string.Empty);
         }
 
-         public void Visit(TraverseCommand command)
+        public void Visit(TraverseCommand command)
         {
             Console.Clear();
 
@@ -173,12 +181,12 @@
 
                 bool isNumber = int.TryParse(Console.ReadLine(), out number);
 
-                if (isNumber)
+                if (isNumber && number >= 0)
                 {
                     return number;
                 }
 
-                Console.WriteLine("This is not a number");
+                Console.WriteLine("This is not a valid number");
             }
         }
 
