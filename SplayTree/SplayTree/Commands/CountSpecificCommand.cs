@@ -11,7 +11,6 @@ namespace SplayTree.Commands
     {
         public CountSpecificCommand(SplayTree_int splaytree) : base ("count specific", splaytree)
         {
-            
         }
         
         public override void Accept(ICommandVisitor visitor)

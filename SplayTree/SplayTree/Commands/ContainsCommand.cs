@@ -11,7 +11,6 @@ namespace SplayTree.Commands
     {
         public ContainsCommand(SplayTree_int splaytree) : base ("contains", splaytree)
         {
-            
         }
         
         public override void Accept(ICommandVisitor visitor)

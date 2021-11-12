@@ -11,7 +11,6 @@ namespace SplayTree.Commands
     {
         public MaxCommand(SplayTree_int splaytree) : base ("max", splaytree)
         {
-            
         }
         
         public override void Accept(ICommandVisitor visitor)

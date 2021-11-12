@@ -12,7 +12,6 @@ namespace SplayTree.Commands
     {
         public RemoveCommand(SplayTree_int splaytree) : base ("remove", splaytree)
         {
-            
         }
         
         public override void Accept(ICommandVisitor visitor)

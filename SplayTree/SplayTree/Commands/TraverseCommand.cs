@@ -11,7 +11,6 @@ namespace SplayTree.Commands
     {
         public TraverseCommand(SplayTree_int splaytree) : base ("traverse", splaytree)
         {
-            
         }
         
         public override void Accept(ICommandVisitor visitor)

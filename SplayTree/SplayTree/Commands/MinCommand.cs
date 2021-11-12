@@ -11,7 +11,6 @@ namespace SplayTree.Commands
     {
         public MinCommand(SplayTree_int splaytree) : base ("min", splaytree)
         {
-            
         }
         
         public override void Accept(ICommandVisitor visitor)
