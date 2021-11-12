@@ -30,16 +30,17 @@ namespace SplayTree.Commands
                 throw new TreeIsEmptyException("The tree is empty. Please consider to add values to the tree before trying to check what's inside the tree.");
             }
 
-            int counter = 0;
-            int max = this.Nodes[counter].Value;
+            return this.FindMax(this.Nodes[0]);
+        }
 
-            while (this.Nodes[counter].BiggerNode != null)
+        private int FindMax(Node node)
+        {
+            if (node.BiggerNode!= null)
             {
-                max = this.Nodes[counter].BiggerNode.Value;
-                counter++;
+                return this.FindMax(node.BiggerNode);
             }
 
-            return max;
+            return node.Value;
         }
     }
 }
