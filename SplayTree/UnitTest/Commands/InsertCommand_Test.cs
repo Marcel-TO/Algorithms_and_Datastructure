@@ -17,7 +17,7 @@
              ILogger logger = new ConsoleLogger();
              Executioner execute = new Executioner(logger);
 
-             Splaytree splaytree = new Splaytree(new List<Node>());
+             SplayTree_int splaytree = new SplayTree_int(new List<Node>());
              InsertCommand command = new InsertCommand(splaytree);
 
              command.Execute(execute, 3);
@@ -31,7 +31,7 @@
              ConsoleLogger logger = new ConsoleLogger();
              Executioner execute = new Executioner(logger);
 
-             Splaytree splaytree = new Splaytree(new List<Node>());
+             SplayTree_int splaytree = new SplayTree_int(new List<Node>());
              InsertCommand command = new InsertCommand(splaytree);
 
              command.Execute(execute, -5);
@@ -45,7 +45,7 @@
              ConsoleLogger logger = new ConsoleLogger();
              Executioner execute = new Executioner(logger);
 
-             Splaytree splaytree = new Splaytree(new List<Node>());
+             SplayTree_int splaytree = new SplayTree_int(new List<Node>());
              InsertCommand command = new InsertCommand(splaytree);
 
              command.Execute(execute, 10000000);
@@ -59,7 +59,7 @@
              ConsoleLogger logger = new ConsoleLogger();
              Executioner execute = new Executioner(logger);
 
-             Splaytree splaytree = new Splaytree(new List<Node>());
+             SplayTree_int splaytree = new SplayTree_int(new List<Node>());
              InsertCommand command = new InsertCommand(splaytree);
 
              command.Execute(execute, 7);
@@ -86,7 +86,7 @@
              ConsoleLogger logger = new ConsoleLogger();
              Executioner execute = new Executioner(logger);
 
-             Splaytree splaytree = new Splaytree(new List<Node>());
+             SplayTree_int splaytree = new SplayTree_int(new List<Node>());
              InsertCommand command = new InsertCommand(splaytree);
 
              command.Execute(execute, 5);
@@ -110,7 +110,7 @@
              ConsoleLogger logger = new ConsoleLogger();
              Executioner execute = new Executioner(logger);
 
-             Splaytree splaytree = new Splaytree(new List<Node>());
+             SplayTree_int splaytree = new SplayTree_int(new List<Node>());
              InsertCommand command = new InsertCommand(splaytree);
 
              command.Execute(execute, 5);
@@ -128,7 +128,7 @@
              ConsoleLogger logger = new ConsoleLogger();
              Executioner execute = new Executioner(logger);
 
-             Splaytree splaytree = new Splaytree(new List<Node>());
+             SplayTree_int splaytree = new SplayTree_int(new List<Node>());
              InsertCommand command = new InsertCommand(splaytree);
 
              command.Execute(execute, 5);

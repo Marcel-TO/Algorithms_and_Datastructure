@@ -6,22 +6,27 @@ namespace SplayTree.Trees
     using SplayTree.Commands;
     using SplayTree.Logic;
 
-    public class Splaytree
+    public class SplayTree_int
     {
         private List<Node> nodes;
 
         private BaseCommand[] commands;
 
-        public Splaytree(List<Node> nodes)
+        public SplayTree_int(List<Node> nodes)
         {
             this.Nodes = nodes;
 
             this.commands = new BaseCommand[]
             {
                 new ClearCommand(this),
+                new ContainsCommand(this),
                 new CountCommand(this),
+                new CountSpecificCommand(this),
                 new InsertCommand(this),
-                new RemoveCommand(this)
+                new MaxCommand(this),
+                new MinCommand(this),
+                new RemoveCommand(this),
+                new TraverseCommand(this)
             };
         }
 

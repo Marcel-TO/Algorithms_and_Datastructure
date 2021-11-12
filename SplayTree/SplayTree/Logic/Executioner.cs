@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using SplayTree.Commands;
+    using SplayTree.Exceptions;
     using SplayTree.Interfaces;
 
     public class Executioner : ICommandVisitor
@@ -19,15 +20,44 @@
         {
             this.logger.Visit(command);
 
-            if (command.Nodes.Count == 0)
+            try
             {
-                this.logger.Message("The tree is already empty.");
+                command.Execute();
+
+                this.logger.Message("The tree is now cleared.");
                 this.logger.Continue();
-                return;
+            }
+            catch (TreeIsEmptyException e)
+            {
+                this.logger.Message(e.Message);
+                this.logger.Continue();
+            }
+        }
+
+        public void Visit(ContainsCommand command)
+        {
+            this.logger.Visit(command);
+            int value = this.logger.GetValueFromUser();
+            bool isExisting = false;
+
+            try
+            {
+                isExisting = command.Execute(value);
+
+                if (isExisting)
+                {
+                    this.logger.Message($"The tree does contain the value {value}.");
+                }
+                else
+                {
+                    this.logger.Message($"The tree does not contain the value {value}");
+                }
+            }
+            catch (TreeIsEmptyException e)
+            {
+                this.logger.Message(e.Message);
             }
 
-            command.Nodes = new List<Node>();
-            this.logger.Message("The tree is now cleared.");
             this.logger.Continue();
         }
 
@@ -35,9 +65,17 @@
         {
             this.logger.Visit(command);
 
-            int count = command.Nodes.Count;
-            this.logger.Message($"The tree contains of {count} nodes.");
-            this.logger.Continue();
+            try
+            {
+                int count = command.Execute();
+                this.logger.Message($"The tree contains of {count} nodes.");
+                this.logger.Continue();
+            }
+            catch (TreeIsEmptyException e)
+            {
+                this.logger.Message(e.Message);
+                this.logger.Continue();
+            }
         }
 
         public void Visit(CountSpecificCommand command) 
@@ -45,43 +83,90 @@
             this.logger.Visit(command);
             int value = this.logger.GetValueFromUser();
 
-            int count = command.Execute(this, value);
-            this.logger.Message($"The tree contains of {count} nodes.");
-            this.logger.Continue();
+            try
+            {
+                int count = command.Execute(value);
+                this.logger.Message($"The tree contains a node with the value {value} about {count} times.");
+                this.logger.Continue();
+            }
+            catch (TreeIsEmptyException e)
+            {
+                this.logger.Message(e.Message);
+                this.logger.Continue();
+            }
         }
 
-        public void Visit(MinCommand command)
+        public void Visit(InsertCommand command)
         {
             this.logger.Visit(command);
-            int min = command.Execute(this);
-            this.logger.Message($"The minimum value of the tree is {min}.");
+            int value = this.logger.GetValueFromUser();
+
+            command.Execute(this, value);
+
+            this.logger.Message($"The node {value} got added to the tree.");
             this.logger.Continue();
         }
 
         public void Visit(MaxCommand command)
         {
             this.logger.Visit(command);
-            int max = command.Execute(this);
-            this.logger.Message($"The maximum value of the tree is {max}");
-            this.logger.Continue();
+
+            try
+            {
+                int max = command.Execute();
+                this.logger.Message($"The maximum value of the tree is {max}");
+                this.logger.Continue();
+            }
+            catch (TreeIsEmptyException e)
+            {
+                this.logger.Message(e.Message);
+                this.logger.Continue();
+            }
         }
 
-        public void Visit(ContainsCommand command)
+        public void Visit(MinCommand command)
         {
             this.logger.Visit(command);
-            int value = this.logger.GetValueFromUser();
-            bool isExisting = command.Execute(this, value);
 
-            if (isExisting)
+            try
             {
-                this.logger.Message($"The tree does contain the value {value}.");
+                int min = command.Execute();
+                this.logger.Message($"The minimum value of the tree is {min}.");
+                this.logger.Continue();
             }
-            else
+            catch (TreeIsEmptyException e)
             {
-                this.logger.Message($"The tree does not contain the value {value}");
+                this.logger.Message(e.Message);
+                this.logger.Continue();
             }
             
-            this.logger.Continue();
+        }
+
+        public void Visit(RemoveCommand command)
+        {
+            this.logger.Visit(command);
+
+            if (command.Nodes.Count == 0)
+            {
+                this.logger.Message($"I am sorry, but the splay tree is empty. Please consider to add values to the tree before trying to remove them.");
+                this.logger.Continue();
+                return;
+            }
+
+            int value = this.logger.GetValueFromUser();
+
+            try
+            {
+                command.Execute(this, value);
+
+                this.logger.Message($"The node {value} got removed from the tree.");
+                this.logger.Continue();
+            }
+            catch (TreeIsEmptyException e)
+            {
+                this.logger.Message(e.Message);
+                this.logger.Continue();
+            }
         }
 
         public void Visit(TraverseCommand command)
@@ -103,34 +188,6 @@
                 command.Execute(this, TraverseOrder.postOrder);
                 break;
             }
-        }
-
-        public void Visit(InsertCommand command)
-        {
-            this.logger.Visit(command);
-            int value = this.logger.GetValueFromUser();
-            command.Execute(this, value);
-
-            this.logger.Message($"The node {value} got added to the tree.");
-            this.logger.Continue();
-        }
-
-        public void Visit(RemoveCommand command)
-        {
-            this.logger.Visit(command);
-
-            if (command.Nodes.Count == 0)
-            {
-                this.logger.Message($"I am sorry, but the splay tree is empty. Please consider to add values to the tree before trying to remove them.");
-                this.logger.Continue();
-                return;
-            }
-
-            int value = this.logger.GetValueFromUser();
-            command.Execute(this, value);
-
-            this.logger.Message($"The node {value} got removed from the tree.");
-            this.logger.Continue();
         }
 
         public Node FindAttachmentNode(Node node, int value)

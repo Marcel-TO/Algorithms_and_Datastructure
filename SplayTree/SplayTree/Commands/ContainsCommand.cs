@@ -2,13 +2,14 @@ namespace SplayTree.Commands
 {
     using System;
     using System.Collections.Generic;
+    using SplayTree.Exceptions;
     using SplayTree.Interfaces;
     using SplayTree.Logic;
     using SplayTree.Trees;
 
     public class ContainsCommand : BaseCommand
     {
-        public ContainsCommand(Splaytree splaytree) : base ("count", splaytree)
+        public ContainsCommand(SplayTree_int splaytree) : base ("contains", splaytree)
         {
             
         }
@@ -23,11 +24,11 @@ namespace SplayTree.Commands
             throw new NotImplementedException();
         }
 
-        public bool Execute(Executioner execute, int value) 
+        public bool Execute(int value) 
         {
             if (this.Nodes.Count == 0)
             {
-                // Exeption
+                throw new TreeIsEmptyException("The Tree is empty. Please consider to add values to the tree before trying to check what's inside the tree.");
             }
 
             for (int i = 0; i < this.Nodes.Count; i++)

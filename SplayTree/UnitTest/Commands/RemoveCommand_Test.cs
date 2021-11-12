@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SplayTree.Commands;
+    using SplayTree.Exceptions;
     using SplayTree.Interfaces;
     using SplayTree.Logic;
     using SplayTree.Trees;
@@ -17,18 +18,17 @@
          * remove correct
          */
 
-         [TestMethod]
-         public void TestIfListIsEmpty()
+        [TestMethod]
+        [ExpectedException(typeof(TreeIsEmptyException))]
+        public void TestIfListIsEmpty()
          {
             ILogger logger = new ConsoleLogger();
              Executioner execute = new Executioner(logger);
 
-             Splaytree splaytree = new Splaytree(new List<Node>());
+             SplayTree_int splaytree = new SplayTree_int(new List<Node>());
              RemoveCommand command = new RemoveCommand(splaytree);
 
              bool isExecuted = command.Execute(execute, 3);
-
-             Assert.IsFalse(isExecuted);
          }
 
          [TestMethod]
@@ -40,7 +40,7 @@
              List<Node> nodes = execute.GenerateTree(new List<int> {7,9,3,6,5});
              var sample = nodes;
 
-             Splaytree splaytree = new Splaytree(nodes);
+             SplayTree_int splaytree = new SplayTree_int(nodes);
             RemoveCommand command = new RemoveCommand(splaytree);
 
              bool isExecuted = command.Execute(execute, 3);
@@ -57,7 +57,7 @@
              List<Node> nodes = execute.GenerateTree(new List<int> {7,9,3,6,5});
              var sample = nodes;
 
-             Splaytree splaytree = new Splaytree(nodes);
+             SplayTree_int splaytree = new SplayTree_int(nodes);
             RemoveCommand command = new RemoveCommand(splaytree);
 
              bool isExecuted = command.Execute(execute, 10);
@@ -74,7 +74,7 @@
              List<Node> nodes = execute.GenerateTree(new List<int> {7,9,3,6,5});
              var sample = nodes;
 
-             Splaytree splaytree = new Splaytree(nodes);
+             SplayTree_int splaytree = new SplayTree_int(nodes);
             RemoveCommand command = new RemoveCommand(splaytree);
 
              bool isExecuted = command.Execute(execute, 3);
@@ -95,7 +95,7 @@
              List<Node> nodes = execute.GenerateTree(new List<int> {4,4,4,4});
              var sample = nodes;
 
-             Splaytree splaytree = new Splaytree(nodes);
+             SplayTree_int splaytree = new SplayTree_int(nodes);
              RemoveCommand command = new RemoveCommand(splaytree);
 
              bool isExecuted = command.Execute(execute, 4);

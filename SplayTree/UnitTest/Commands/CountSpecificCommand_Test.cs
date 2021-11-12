@@ -15,12 +15,11 @@ namespace UnitTest.Commands
         public  void TestIfTreeIsEmpty()
         {
             ILogger logger = new ConsoleLogger();
-            Executioner execute = new Executioner(logger);
 
-            Splaytree splaytree = new Splaytree(new List<Node>());
+            SplayTree_int splaytree = new SplayTree_int(new List<Node>());
             CountSpecificCommand command = new CountSpecificCommand(splaytree);
 
-            int count = command.Execute(execute, 5);
+            int count = command.Execute(5);
 
             Assert.IsTrue(count == 0);
         }
@@ -31,10 +30,10 @@ namespace UnitTest.Commands
             ConsoleLogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            Splaytree splaytree = new Splaytree(execute.GenerateTree(new List<int> {7,9,3,6,5}));
+            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {7,9,3,6,5}));
             CountSpecificCommand command = new CountSpecificCommand(splaytree);
 
-            int count = command.Execute(execute, 8);
+            int count = command.Execute(8);
 
             Assert.IsTrue(count == 0);
         }
@@ -45,10 +44,10 @@ namespace UnitTest.Commands
             ConsoleLogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            Splaytree splaytree = new Splaytree(execute.GenerateTree(new List<int> {7,9,3,6,5}));
+            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {7,9,3,6,5}));
             CountSpecificCommand command = new CountSpecificCommand(splaytree);
 
-            int count = command.Execute(execute, 7);
+            int count = command.Execute(7);
 
             Assert.IsTrue(count == 1);
         }
@@ -59,10 +58,10 @@ namespace UnitTest.Commands
             ConsoleLogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            Splaytree splaytree = new Splaytree(execute.GenerateTree(new List<int> {7,9,3,6,5}));
+            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {7,9,3,6,5}));
             CountSpecificCommand command = new CountSpecificCommand(splaytree);
 
-            int count = command.Execute(execute, 3);
+            int count = command.Execute(3);
 
             Assert.IsTrue(count == 4);
         }

@@ -3,13 +3,14 @@ namespace SplayTree.Commands
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using SplayTree.Exceptions;
     using SplayTree.Interfaces;
     using SplayTree.Logic;
     using SplayTree.Trees;
 
     public class RemoveCommand : BaseCommand
     {
-        public RemoveCommand(Splaytree splaytree) : base ("remove", splaytree)
+        public RemoveCommand(SplayTree_int splaytree) : base ("remove", splaytree)
         {
             
         }
@@ -28,7 +29,7 @@ namespace SplayTree.Commands
         {
             if (this.Nodes.Count == 0)
             {
-                return false;
+                throw new TreeIsEmptyException("The tree is empty. Please consider to add values to the tree before trying to remove them.");
             }
 
             Node newRoot = execute.FindRemovedNode(this.Nodes, value);

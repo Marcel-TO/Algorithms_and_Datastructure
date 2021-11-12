@@ -17,7 +17,7 @@
 
         private List<Node> nodes;
 
-        private Splaytree splaytree;
+        private SplayTree_int splaytree;
 
         private KeyboardWatcher keyboardWatcher;
 
@@ -29,7 +29,7 @@
         {
             this.args = args;
             this.nodes = new List<Node>();
-            this.splaytree = new Splaytree(this.nodes);
+            this.splaytree = new SplayTree_int(this.nodes);
             this.logger = new ConsoleLogger();
             this.execute = new Executioner(this.logger);
             this.keyboardWatcher = new KeyboardWatcher();

@@ -2,13 +2,14 @@ namespace SplayTree.Commands
 {
     using System;
     using System.Collections.Generic;
+    using SplayTree.Exceptions;
     using SplayTree.Interfaces;
     using SplayTree.Logic;
     using SplayTree.Trees;
 
     public class CountSpecificCommand : BaseCommand
     {
-        public CountSpecificCommand(Splaytree splaytree) : base ("count specific", splaytree)
+        public CountSpecificCommand(SplayTree_int splaytree) : base ("count specific", splaytree)
         {
             
         }
@@ -23,9 +24,24 @@ namespace SplayTree.Commands
             throw new NotImplementedException();
         }
 
-        public int Execute(Executioner execute, int value) 
+        public int Execute(int value) 
         {
-            throw new NotImplementedException();
+            if (this.Nodes.Count == 0)
+            {
+                throw new TreeIsEmptyException("The tree is empty. Please consider to add values to the tree before trying to check what's inside the tree.");
+            }
+
+            int count = 0;
+
+            for (int i = 0; i < this.Nodes.Count; i++)
+            {
+                if (this.Nodes[i].Value == value)
+                {
+                    count++;
+                }
+            }
+
+            return count;
         }
     }
 }

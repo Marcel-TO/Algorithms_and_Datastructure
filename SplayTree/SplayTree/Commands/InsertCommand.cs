@@ -9,7 +9,7 @@ namespace SplayTree.Commands
 
     public class InsertCommand : BaseCommand
     {
-        public InsertCommand(Splaytree splaytree) : base ("insert", splaytree)
+        public InsertCommand(SplayTree_int splaytree) : base ("insert", splaytree)
         {
         }
 

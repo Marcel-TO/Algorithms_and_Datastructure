@@ -4,6 +4,7 @@ namespace UnitTest.Commands
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SplayTree.Commands;
+    using SplayTree.Exceptions;
     using SplayTree.Interfaces;
     using SplayTree.Logic;
     using SplayTree.Trees;
@@ -12,17 +13,15 @@ namespace UnitTest.Commands
     public class ContainsCommand_Test
     {
         [TestMethod]
+        [ExpectedException(typeof(TreeIsEmptyException))]
         public  void TestIfTreeIsEmpty()
         {
             ILogger logger = new ConsoleLogger();
-            Executioner execute = new Executioner(logger);
 
-            Splaytree splaytree = new Splaytree(new List<Node>());
+            SplayTree_int splaytree = new SplayTree_int(new List<Node>());
             ContainsCommand command = new ContainsCommand(splaytree);
 
-            bool contains = command.Execute(execute, 3);
-
-            Assert.IsFalse(contains);
+            bool contains = command.Execute(3);
         }
 
         [TestMethod]
@@ -31,10 +30,10 @@ namespace UnitTest.Commands
             ILogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            Splaytree splaytree = new Splaytree(execute.GenerateTree(new List<int> {7,9,3,6,5}));
+            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {7,9,3,6,5}));
             ContainsCommand command = new ContainsCommand(splaytree);
 
-            bool contains = command.Execute(execute, 3);
+            bool contains = command.Execute(3);
 
             Assert.IsTrue(contains);
         }
@@ -45,10 +44,10 @@ namespace UnitTest.Commands
             ILogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            Splaytree splaytree = new Splaytree(execute.GenerateTree(new List<int> {7,9,3,6,5}));
+            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {7,9,3,6,5}));
             ContainsCommand command = new ContainsCommand(splaytree);
 
-            bool contains = command.Execute(execute, 8);
+            bool contains = command.Execute(8);
 
             Assert.IsFalse(contains);
         }

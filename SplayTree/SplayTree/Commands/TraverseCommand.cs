@@ -2,13 +2,14 @@ namespace SplayTree.Commands
 {
     using System;
     using System.Collections.Generic;
+    using SplayTree.Exceptions;
     using SplayTree.Interfaces;
     using SplayTree.Logic;
     using SplayTree.Trees;
 
     public class TraverseCommand : BaseCommand
     {
-        public TraverseCommand(Splaytree splaytree) : base ("count", splaytree)
+        public TraverseCommand(SplayTree_int splaytree) : base ("traverse", splaytree)
         {
             
         }
@@ -25,6 +26,11 @@ namespace SplayTree.Commands
 
         public List<Node> Execute(Executioner execute, TraverseOrder order) 
         {
+            if (this.Nodes.Count == 0)
+            {
+                throw new TreeIsEmptyException("The tree is empty. Please consider to add values to the tree before trying to check what's inside the tree.");
+            }
+
             switch(order)
             {
                 case TraverseOrder.inOrder:

@@ -10,9 +10,9 @@ namespace SplayTree.Commands
     {
         private string name;
 
-        private Splaytree splaytree;
+        private SplayTree_int splaytree;
 
-        public BaseCommand(string commandInitializer, Splaytree splaytree)
+        public BaseCommand(string commandInitializer, SplayTree_int splaytree)
         {
             this.Name = commandInitializer;
             this.SplayTree = splaytree;
@@ -44,7 +44,7 @@ namespace SplayTree.Commands
             }
         }
 
-        public Splaytree SplayTree
+        public SplayTree_int SplayTree
         {
             get
             {
