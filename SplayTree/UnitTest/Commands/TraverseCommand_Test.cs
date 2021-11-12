@@ -1,9 +1,11 @@
 namespace UnitTest.Commands
 {
     using System;
+    using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SplayTree.Commands;
     using SplayTree.Interfaces;
+    using SplayTree.Logic;
     using SplayTree.Trees;
 
     [TestClass]
@@ -24,112 +26,112 @@ namespace UnitTest.Commands
         [TestMethod]
         public void TestIfTreeIsEmpty()
         {
-            ILogger logger = new ILogger();
+            ILogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
             Splaytree splaytree = new Splaytree(new List<Node>());
             TraverseCommand command = new TraverseCommand(splaytree);
 
-            List<Node> nodes = command.Execute(execute, "in-order");
+            List<Node> nodes = command.Execute(execute, TraverseOrder.inOrder);
 
-            Assert.That(nodes.Count == 0);
+            Assert.IsTrue(nodes.Count == 0);
         }
 
-        [TestMethod]
-        public void TestIfInputIsNull()
-        {
-            ILogger logger = new ILogger();
-            Executioner execute = new Executioner(logger);
+        //[TestMethod]
+        //public void TestIfInputIsNull()
+        //{
+        //    ConsoleLogger logger = new ConsoleLogger();
+        //    Executioner execute = new Executioner(logger);
 
-            Splaytree splaytree = new Splaytree(new List<Node>() {7,9,3,6,5});
-            TraverseCommand command = new TraverseCommand(splaytree);
+        //    Splaytree splaytree = new Splaytree(execute.GenerateTree(new List<int> {7,9,3,6,5}));
+        //    TraverseCommand command = new TraverseCommand(splaytree);
 
-            List<Node> nodes = command.Execute(execute, null);
+        //    List<Node> nodes = command.Execute(execute, null);
 
-            Assert.That(nodes == null);
-        }
+        //    Assert.IsTrue(nodes == null);
+        //}
 
-        [TestMethod]
-        public void TestIfWrongInput()
-        {
-            ILogger logger = new ILogger();
-            Executioner execute = new Executioner(logger);
+        //[TestMethod]
+        //public void TestIfWrongInput()
+        //{
+        //    ConsoleLogger logger = new ConsoleLogger();
+        //    Executioner execute = new Executioner(logger);
 
-            Splaytree splaytree = new Splaytree(new List<Node>() {7,9,3,6,5});
-            TraverseCommand command = new TraverseCommand(splaytree);
+        //    Splaytree splaytree = new Splaytree(execute.GenerateTree(new List<int> {7,9,3,6,5}));
+        //    TraverseCommand command = new TraverseCommand(splaytree);
 
-            List<Node> nodes = command.Execute(execute, "noclue-order");
+        //    List<Node> nodes = command.Execute(execute, "noclue-order");
 
-            Assert.That(nodes.Count == null);
-        }
+        //    Assert.IsTrue(nodes.Count == 0);
+        //}
 
         [TestMethod]
         public void TestIfCorrectInput()
         {
-            ILogger logger = new ILogger();
+            ConsoleLogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            Splaytree splaytree = new Splaytree(new List<Node>() {7,9,3,6,5});
+            Splaytree splaytree = new Splaytree(execute.GenerateTree(new List<int> {7,9,3,6,5}));
             TraverseCommand command = new TraverseCommand(splaytree);
             List<Node> testSample = command.Nodes;
 
-            List<Node> nodes = command.Execute(execute, "in-order");
+            List<Node> nodes = command.Execute(execute, TraverseOrder.inOrder);
 
-            Assert.That(nodes != testSample);
+            Assert.IsTrue(nodes != testSample);
         }
 
         [TestMethod]
         public void TestIfPreOrderIsCorrect()
         {
-            ILogger logger = new ILogger();
+            ConsoleLogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            Splaytree splaytree = new Splaytree(new List<Node>() {7,9,3,6,5});
+            Splaytree splaytree = new Splaytree(execute.GenerateTree(new List<int> {7,9,3,6,5}));
             TraverseCommand command = new TraverseCommand(splaytree);
 
-            List<Node> nodes = command.Execute(execute, "pre-order");
+            List<Node> nodes = command.Execute(execute, TraverseOrder.preOrder);
 
-            Assert.That(nodes[0].Value == 5);
-            Assert.That(nodes[1].Value == 3);
-            Assert.That(nodes[2].Value == 6);
-            Assert.That(nodes[3].Value == 7);
-            Assert.That(nodes[4].Value == 9);
+            Assert.IsTrue(nodes[0].Value == 5);
+            Assert.IsTrue(nodes[1].Value == 3);
+            Assert.IsTrue(nodes[2].Value == 6);
+            Assert.IsTrue(nodes[3].Value == 7);
+            Assert.IsTrue(nodes[4].Value == 9);
         }
 
         [TestMethod]
         public void TestIfInOrderIsCorrect()
         {
-            ILogger logger = new ILogger();
+            ConsoleLogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            Splaytree splaytree = new Splaytree(new List<Node>() {7,9,3,6,5});
+            Splaytree splaytree = new Splaytree(execute.GenerateTree(new List<int> {7,9,3,6,5}));
             TraverseCommand command = new TraverseCommand(splaytree);
 
-            List<Node> nodes = command.Execute(execute, "in-order");
+            List<Node> nodes = command.Execute(execute, TraverseOrder.inOrder);
 
-            Assert.That(nodes[0].Value == 3);
-            Assert.That(nodes[1].Value == 5);
-            Assert.That(nodes[2].Value == 6);
-            Assert.That(nodes[3].Value == 7);
-            Assert.That(nodes[4].Value == 9);
+            Assert.IsTrue(nodes[0].Value == 3);
+            Assert.IsTrue(nodes[1].Value == 5);
+            Assert.IsTrue(nodes[2].Value == 6);
+            Assert.IsTrue(nodes[3].Value == 7);
+            Assert.IsTrue(nodes[4].Value == 9);
         }
 
         [TestMethod]
         public void TestIfPostOrderIsCorrect()
         {
-            ILogger logger = new ILogger();
+            ConsoleLogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            Splaytree splaytree = new Splaytree(new List<Node>() {7,9,3,6,5});
+            Splaytree splaytree = new Splaytree(execute.GenerateTree(new List<int> {7,9,3,6,5}));
             TraverseCommand command = new TraverseCommand(splaytree);
 
-            List<Node> nodes = command.Execute(execute, "post-order");
+            List<Node> nodes = command.Execute(execute, TraverseOrder.postOrder);
 
-            Assert.That(nodes[0].Value == 9);
-            Assert.That(nodes[1].Value == 7);
-            Assert.That(nodes[2].Value == 3);
-            Assert.That(nodes[3].Value == 6);
-            Assert.That(nodes[4].Value == 5);
+            Assert.IsTrue(nodes[0].Value == 9);
+            Assert.IsTrue(nodes[1].Value == 7);
+            Assert.IsTrue(nodes[2].Value == 3);
+            Assert.IsTrue(nodes[3].Value == 6);
+            Assert.IsTrue(nodes[4].Value == 5);
         }
     }
 }

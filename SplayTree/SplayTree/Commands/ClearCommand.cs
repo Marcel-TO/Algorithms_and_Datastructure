@@ -1,9 +1,8 @@
 namespace SplayTree.Commands
 {
     using System;
-    using SplayTree.Logic;
     using SplayTree.Interfaces;
-    using System.Collections.Generic;
+    using SplayTree.Logic;
     using SplayTree.Trees;
 
     public class ClearCommand : BaseCommand
@@ -19,7 +18,12 @@ namespace SplayTree.Commands
 
         public override void Log(ILogger logger)
         {
-            logger.Visit(this);
+            throw new NotImplementedException();
+        }
+
+        public bool Execute(Executioner execute)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -338,5 +338,30 @@
 
             return newRoot;
         }
+
+        public List<Node> GenerateTree(List<int> values)
+        {
+            if (values.Count == 0)
+            {
+                return new List<Node>();
+            }
+
+            List<Node> tempNodes = new List<Node>();
+
+            for (int i = 0; i < values.Count; i++)
+            {
+                tempNodes.Add(new Node(values[i]));
+            }
+
+            List<Node> sortedNodes = new List<Node>();
+            sortedNodes[0] = new Node(tempNodes[0].Value) { Position = new Position(0, 0) };
+            
+            for (int i = 1; i < tempNodes.Count; i++)
+            {
+                sortedNodes = this.AddNode(tempNodes[i], sortedNodes[0], sortedNodes);
+            }
+
+            return sortedNodes;
+        }
     }
 }

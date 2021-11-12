@@ -23,7 +23,7 @@ namespace SplayTree.Commands
             throw new NotImplementedException();
         }
 
-        public void Execute(Executioner execute, TraverseOrder order) 
+        public List<Node> Execute(Executioner execute, TraverseOrder order) 
         {
             switch(order)
             {
@@ -34,6 +34,8 @@ namespace SplayTree.Commands
                 case TraverseOrder.postOrder:
                 break;
             }
+
+            return null;
         }
     }
 }

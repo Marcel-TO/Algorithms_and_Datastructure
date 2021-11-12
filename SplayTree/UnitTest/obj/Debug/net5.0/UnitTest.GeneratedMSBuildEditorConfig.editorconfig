@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = UnitTest
-build_property.ProjectDir = M:\Visual_Studio\Semester_3\SplayTree\UnitTest\
+build_property.ProjectDir = M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SplayTree\UnitTest\

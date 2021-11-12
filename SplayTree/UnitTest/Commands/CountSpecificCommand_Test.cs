@@ -1,9 +1,11 @@
 namespace UnitTest.Commands
 {
     using System;
+    using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SplayTree.Commands;
     using SplayTree.Interfaces;
+    using SplayTree.Logic;
     using SplayTree.Trees;
 
     [TestClass]
@@ -12,7 +14,7 @@ namespace UnitTest.Commands
         [TestMethod]
         public  void TestIfTreeIsEmpty()
         {
-            ILogger logger = new ILogger();
+            ILogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
             Splaytree splaytree = new Splaytree(new List<Node>());
@@ -20,49 +22,49 @@ namespace UnitTest.Commands
 
             int count = command.Execute(execute, 5);
 
-            Assert.That(count == 0);
+            Assert.IsTrue(count == 0);
         }
 
         [TestMethod]
         public  void TestIfNumberDoesNotExist()
         {
-            ILogger logger = new ILogger();
+            ConsoleLogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            Splaytree splaytree = new Splaytree(new List<Node>() {7,9,3,6,5});
+            Splaytree splaytree = new Splaytree(execute.GenerateTree(new List<int> {7,9,3,6,5}));
             CountSpecificCommand command = new CountSpecificCommand(splaytree);
 
             int count = command.Execute(execute, 8);
 
-            Assert.That(count == 0);
+            Assert.IsTrue(count == 0);
         }
 
         [TestMethod]
         public  void TestIfCountingIsCorrect()
         {
-            ILogger logger = new ILogger();
+            ConsoleLogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            Splaytree splaytree = new Splaytree(new List<Node>() {7,9,3,6,5});
+            Splaytree splaytree = new Splaytree(execute.GenerateTree(new List<int> {7,9,3,6,5}));
             CountSpecificCommand command = new CountSpecificCommand(splaytree);
 
             int count = command.Execute(execute, 7);
 
-            Assert.That(count == 1);
+            Assert.IsTrue(count == 1);
         }
 
          [TestMethod]
         public  void TestIfMultipleNumbersCountingIsCorrect()
         {
-            ILogger logger = new ILogger();
+            ConsoleLogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            Splaytree splaytree = new Splaytree(new List<Node>() {7,3,3,3,3});
+            Splaytree splaytree = new Splaytree(execute.GenerateTree(new List<int> {7,9,3,6,5}));
             CountSpecificCommand command = new CountSpecificCommand(splaytree);
 
             int count = command.Execute(execute, 3);
 
-            Assert.That(count == 4);
+            Assert.IsTrue(count == 4);
         }
     }
 }

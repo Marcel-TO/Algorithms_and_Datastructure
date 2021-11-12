@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "M:\\Visual_Studio\\Semester_3\\SplayTree\\SplayTree\\SplayTree.csproj": {}
+    "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SplayTree\\SplayTree\\SplayTree.csproj": {}
   },
   "projects": {
-    "M:\\Visual_Studio\\Semester_3\\SplayTree\\SplayTree\\SplayTree.csproj": {
+    "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SplayTree\\SplayTree\\SplayTree.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "M:\\Visual_Studio\\Semester_3\\SplayTree\\SplayTree\\SplayTree.csproj",
+        "projectUniqueName": "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SplayTree\\SplayTree\\SplayTree.csproj",
         "projectName": "SplayTree",
-        "projectPath": "M:\\Visual_Studio\\Semester_3\\SplayTree\\SplayTree\\SplayTree.csproj",
+        "projectPath": "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SplayTree\\SplayTree\\SplayTree.csproj",
         "packagesPath": "D:\\Users\\Marcel\\.nuget\\packages\\",
-        "outputPath": "M:\\Visual_Studio\\Semester_3\\SplayTree\\SplayTree\\obj\\",
+        "outputPath": "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SplayTree\\SplayTree\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "D:\\Users\\Marcel\\AppData\\Roaming\\NuGet\\NuGet.Config",
