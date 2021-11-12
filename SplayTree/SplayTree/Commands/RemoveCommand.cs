@@ -24,27 +24,18 @@ namespace SplayTree.Commands
             logger.Visit(this);
         }
 
-        public bool Execute(Executioner execute, int value)
+        public int Execute(Executioner execute, int value)
         {
             if (this.Nodes.Count == 0)
             {
                 throw new TreeIsEmptyException("The tree is empty. Please consider to add values to the tree before trying to remove them.");
             }
 
-            Node newRoot = execute.FindRemovedNode(this.Nodes, value);
+            int removeCount = execute.FindRemovedNode(this.Nodes, value);
+            List<int> values = execute.ExtractValues(this.Nodes);
+            this.Nodes = execute.GenerateTree(values);
 
-            if (this.Nodes.Count > 0)
-            {
-                Node attachmentNode = execute.FindAttachmentNode(this.Nodes[0], newRoot.Value);
-
-                // Splits the list of nodes in 2 sides. The Left side containing the smaller nodes and the right side containing the bigger nodes.
-                var sortedL = this.Nodes.OrderBy(n => n.Position.Y).Where(x => x.Value < newRoot.Value).ToList();
-                var sortedR = this.Nodes.OrderBy(n => n.Position.Y).Where(x => x.Value > newRoot.Value).ToList(); // Same Number!
-
-                this.Nodes = execute.SortTree(newRoot, attachmentNode, sortedL, sortedR);
-            }
-
-            return true;
+            return removeCount;
         }
     }
 }
