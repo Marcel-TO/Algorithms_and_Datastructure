@@ -72,6 +72,7 @@
             this.Continue();
 
             Console.SetWindowSize(Console.LargestWindowWidth / 2, Console.LargestWindowHeight / 2);
+            this.SetTextColor();
         }
 
         public void Visit(InsertCommand command)
