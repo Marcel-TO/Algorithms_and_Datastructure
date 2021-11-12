@@ -15,6 +15,12 @@ namespace SplayTree.Commands
         public BaseCommand(string commandInitializer, SplayTree_int splaytree)
         {
             this.Name = commandInitializer;
+
+            if (splaytree == null)
+            {
+                throw new ArgumentNullException($"The {nameof(splaytree)} must not be null.");
+            }
+
             this.SplayTree = splaytree;
         }
 
