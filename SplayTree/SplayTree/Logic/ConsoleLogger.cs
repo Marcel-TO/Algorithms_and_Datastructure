@@ -10,10 +10,19 @@
 
         private static int startCommandListY = 4;
 
+        private static int centerX = Console.LargestWindowWidth / 2;
+
+        private static int centerY = Console.LargestWindowHeight / 2;
+
+        private static char conLeft = '/';
+
+        private static char conRight = '\\';
+
         public ConsoleLogger()
         {
             #pragma warning disable CA1416
             Console.SetWindowSize(Console.LargestWindowWidth / 2, Console.LargestWindowHeight / 2);
+            this.SetTextColor();
             Console.CursorVisible = false;
         }
 
@@ -52,9 +61,17 @@
         public void Visit(DisplayCommand command)
         {
             Console.Clear();
+            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
 
             Console.WriteLine($"Executed Command: {command.Name} command");
+            int maxLayers = command.Nodes[command.Nodes.Count - 1].Position.Y + 1;
+
+            this.PrintNode(command.Nodes[0], maxLayers);
+
             Console.WriteLine(string.Empty);
+            this.Continue();
+
+            Console.SetWindowSize(Console.LargestWindowWidth / 2, Console.LargestWindowHeight / 2);
         }
 
         public void Visit(InsertCommand command)
@@ -209,6 +226,84 @@
             }
         }
 
+        private void PrintNode(Node node, int maxLayer)
+        {
+            int length = node.Value.ToString().Length;
+            int layerSpace = maxLayer - node.Position.Y;
+
+            int currX = centerX - length + node.Position.X;
+            int currY = node.Position.Y;
+
+            Console.SetCursorPosition(currX, currY);
+            this.SetTextColor();
+            Console.Write(node.Value);
+
+            if (node.LesserNode != null)
+            {
+                this.PrintChildNode(node, node.LesserNode, maxLayer, conLeft, false, currX, currY);
+            }
+
+            if (node.BiggerNode != null)
+            {
+                this.PrintChildNode(node, node.BiggerNode, maxLayer, conRight, true, currX, currY);
+            }
+        }
+
+        private void PrintChildNode(Node parent, Node child, int maxLayer, char connection, bool isBigger, int x, int y)
+        {
+            int length = child.Value.ToString().Length;
+            int layerSpace = maxLayer - child.Position.Y;
+
+            int tempX = x;
+            int tempY = y;
+
+            for (int i = 0; i < layerSpace; i++)
+            {
+                if (isBigger)
+                {
+                    tempX += 1;
+                }
+                else
+                {
+                    tempX -= 1;
+                }
+
+                tempY++;
+
+                Console.SetCursorPosition(tempX, tempY); // Out of bounds Testen!!
+                this.SetValueConnectionColor();
+                Console.Write(connection);
+            }
+
+            int currX = tempY;
+            int currY = tempY;
+
+            if (isBigger)
+            {
+                currX = tempX + 1;
+                currY = tempY + 1;
+            }
+            else
+            {
+                currX = tempX - 1;
+                currY = tempY + 1;
+            }
+
+            Console.SetCursorPosition(currX, currY);
+            this.SetTextColor();
+            Console.Write(child.Value);
+
+            if (child.LesserNode != null)
+            {
+                this.PrintChildNode(child, child.LesserNode, maxLayer, conLeft, false, currX, currY);
+            }
+
+            if (child.BiggerNode != null)
+            {
+                this.PrintChildNode(child, child.BiggerNode, maxLayer, conRight, true, currX, currY);
+            }
+        }
+
         private void Borders(string message, BaseCommand[] commands)
         {
             int longestName = message.Length;
@@ -259,6 +354,16 @@
                 Console.SetCursorPosition(seperatePositiionX + longestName, i);
                 Console.WriteLine("|");
             }
+        }
+
+        private void SetTextColor()
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        private void SetValueConnectionColor()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
         }
     }
 }

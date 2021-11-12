@@ -98,8 +98,18 @@
 
         public void Visit(DisplayCommand command)
         {
-            this.logger.Visit(command);
+            try
+            {
+                command.Execute();
+            }
+            catch (TreeIsEmptyException e)
+            {
+                this.logger.Message(e.Message);
+                this.logger.Continue();
+                return;
+            }
 
+            this.logger.Visit(command);
         }
 
         public void Visit(InsertCommand command)

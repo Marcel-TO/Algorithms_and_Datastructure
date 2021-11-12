@@ -27,10 +27,8 @@ namespace SplayTree.Commands
         {
             if (this.Nodes.Count == 0)
             {
-                throw new TreeIsEmptyException("Can't clear an empty tree.");
+                throw new TreeIsEmptyException("Can't display an empty tree.");
             }
-
-            this.Nodes = new List<Node>();
         }
     }
 }
