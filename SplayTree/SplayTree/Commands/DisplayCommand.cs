@@ -20,7 +20,7 @@ namespace SplayTree.Commands
 
         public override void Log(ILogger logger)
         {
-            throw new NotImplementedException();
+            logger.Visit(this);
         }
 
         public void Execute()

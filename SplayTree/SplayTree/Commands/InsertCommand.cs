@@ -25,6 +25,11 @@ namespace SplayTree.Commands
 
         public void Execute(Executioner execute, int value)
         {
+            if (value < 0)
+            {
+                throw new ArgumentOutOfRangeException($"The tree only supports positive numbers.");
+            }
+
             if (this.Nodes.Count == 0)
             {
                 this.Nodes.Add(new Node(value) { Position = new Position(0, 0) });
