@@ -45,7 +45,8 @@ namespace SplayTree.Commands
                 break;
             }
 
-            return traversedNodes;
+            List<int> values = execute.ExtractValues(traversedNodes);
+            return execute.GenerateTree(values);
         }
 
         private List<Node> InOrder(Node currentNode, List<Node> traversedNodes)

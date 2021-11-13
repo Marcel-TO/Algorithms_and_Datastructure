@@ -86,6 +86,10 @@
         public void Visit(TraverseCommand command)
         {
             this.ShowCurrentCommand(command);
+
+            Console.WriteLine("1. In-Order");
+            Console.WriteLine("2. Pre-Order");
+            Console.WriteLine("3. Post-Order");
         }
 
         public void WelcomeMessage()

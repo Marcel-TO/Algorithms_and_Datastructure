@@ -200,15 +200,15 @@
             switch (orderIndex)
             {
                 case 1:
-                command.Execute(this, TraverseOrder.inOrder);
+                command.Nodes = command.Execute(this, TraverseOrder.inOrder);
                 break;
 
                 case 2:
-                command.Execute(this, TraverseOrder.preOrder);
+                command.Nodes = command.Execute(this, TraverseOrder.preOrder);
                 break;
 
                 case 3:
-                command.Execute(this, TraverseOrder.postOrder);
+                command.Nodes = command.Execute(this, TraverseOrder.postOrder);
                 break;
             }
         }
