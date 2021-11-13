@@ -16,8 +16,6 @@ namespace UnitTest.Commands
         [ExpectedException(typeof(TreeIsEmptyException))]
         public  void TestIfTreeIsEmpty()
         {
-            ILogger logger = new ConsoleLogger();
-
             SplayTree_int splaytree = new SplayTree_int(new List<Node>());
             ClearCommand command = new ClearCommand(splaytree);
 
@@ -27,7 +25,7 @@ namespace UnitTest.Commands
         [TestMethod]
         public  void TestIfTreeGetsCleared()
         {
-            ConsoleLogger logger = new ConsoleLogger();
+            ILogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
             SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {7,9,3,6,5}));

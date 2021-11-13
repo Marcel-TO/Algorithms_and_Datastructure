@@ -91,10 +91,10 @@ namespace UnitTest.Commands
 
             List<Node> nodes = command.Execute(execute, TraverseOrder.preOrder);
 
-            Assert.IsTrue(nodes[0].Value == 5);
+            Assert.IsTrue(nodes[0].Value == 7);
             Assert.IsTrue(nodes[1].Value == 3);
             Assert.IsTrue(nodes[2].Value == 6);
-            Assert.IsTrue(nodes[3].Value == 7);
+            Assert.IsTrue(nodes[3].Value == 5);
             Assert.IsTrue(nodes[4].Value == 9);
         }
 
@@ -122,14 +122,14 @@ namespace UnitTest.Commands
             ConsoleLogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {7,9,3,6,5}));
+            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {5,3,6,7,9}));
             TraverseCommand command = new TraverseCommand(splaytree);
 
             List<Node> nodes = command.Execute(execute, TraverseOrder.postOrder);
 
-            Assert.IsTrue(nodes[0].Value == 9);
-            Assert.IsTrue(nodes[1].Value == 7);
-            Assert.IsTrue(nodes[2].Value == 3);
+            Assert.IsTrue(nodes[0].Value == 3);
+            Assert.IsTrue(nodes[1].Value == 9);
+            Assert.IsTrue(nodes[2].Value == 7);
             Assert.IsTrue(nodes[3].Value == 6);
             Assert.IsTrue(nodes[4].Value == 5);
         }

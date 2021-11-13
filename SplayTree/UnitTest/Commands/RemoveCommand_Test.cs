@@ -1,6 +1,5 @@
 ﻿namespace UnitTest.Commands
 {
-    using System;
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SplayTree.Commands;
@@ -12,12 +11,6 @@
     [TestClass]
     public class RemoveCommand_Test
     {
-        /*
-         * remove if list is 0
-         * remove wrong  number
-         * remove correct
-         */
-
         [TestMethod]
         [ExpectedException(typeof(TreeIsEmptyException))]
         public void TestIfListIsEmpty()
@@ -28,7 +21,7 @@
              SplayTree_int splaytree = new SplayTree_int(new List<Node>());
              RemoveCommand command = new RemoveCommand(splaytree);
 
-             bool isExecuted = command.Execute(execute, 3);
+             command.Execute(execute, 3);
          }
 
          [TestMethod]
@@ -38,14 +31,15 @@
              Executioner execute = new Executioner(logger);
 
              List<Node> nodes = execute.GenerateTree(new List<int> {7,9,3,6,5});
-             var sample = nodes;
+             var sample = execute.GenerateTree(new List<int> { 7, 9, 3, 6, 5 });
 
              SplayTree_int splaytree = new SplayTree_int(nodes);
-            RemoveCommand command = new RemoveCommand(splaytree);
+             RemoveCommand command = new RemoveCommand(splaytree);
 
-             bool isExecuted = command.Execute(execute, 3);
+             int count = command.Execute(execute, 3);
 
              Assert.IsTrue(command.Nodes.Count < sample.Count);
+             Assert.IsTrue(count == 1);
          }
 
          [TestMethod]
@@ -55,14 +49,13 @@
              Executioner execute = new Executioner(logger);
 
              List<Node> nodes = execute.GenerateTree(new List<int> {7,9,3,6,5});
-             var sample = nodes;
 
              SplayTree_int splaytree = new SplayTree_int(nodes);
-            RemoveCommand command = new RemoveCommand(splaytree);
+             RemoveCommand command = new RemoveCommand(splaytree);
 
-             bool isExecuted = command.Execute(execute, 10);
+             int count = command.Execute(execute, 10);
 
-             Assert.IsFalse(isExecuted);
+             Assert.IsTrue(count == 0);
          }
 
          [TestMethod]
@@ -72,18 +65,17 @@
              Executioner execute = new Executioner(logger);
 
              List<Node> nodes = execute.GenerateTree(new List<int> {7,9,3,6,5});
-             var sample = nodes;
 
              SplayTree_int splaytree = new SplayTree_int(nodes);
-            RemoveCommand command = new RemoveCommand(splaytree);
+             RemoveCommand command = new RemoveCommand(splaytree);
 
-             bool isExecuted = command.Execute(execute, 3);
+             int count = command.Execute(execute, 3);
 
-             Assert.IsTrue(isExecuted);
-             Assert.IsTrue(command.Nodes[0].Value == 5);
-             Assert.IsTrue(command.Nodes[1].Value == 6);
-             Assert.IsTrue(command.Nodes[2].Value == 7);
-             Assert.IsTrue(command.Nodes[3].Value == 9);
+             Assert.IsTrue(count == 1);
+             Assert.IsTrue(command.Nodes[0].Value == 7);
+             Assert.IsTrue(command.Nodes[1].Value == 9);
+             Assert.IsTrue(command.Nodes[2].Value == 6);
+             Assert.IsTrue(command.Nodes[3].Value == 5);
          }
 
          [TestMethod]
@@ -93,15 +85,14 @@
              Executioner execute = new Executioner(logger);
 
              List<Node> nodes = execute.GenerateTree(new List<int> {4,4,4,4});
-             var sample = nodes;
 
              SplayTree_int splaytree = new SplayTree_int(nodes);
              RemoveCommand command = new RemoveCommand(splaytree);
 
-             bool isExecuted = command.Execute(execute, 4);
+             int count= command.Execute(execute, 4);
 
-             Assert.IsTrue(isExecuted);
-             Assert.IsTrue(command.Nodes.Count == 3);
+             Assert.IsTrue(count == 4);
+             Assert.IsTrue(command.Nodes.Count == 0);
          }
     }
 }

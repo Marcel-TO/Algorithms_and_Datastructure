@@ -4,6 +4,7 @@ namespace UnitTest.Commands
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SplayTree.Commands;
+    using SplayTree.Exceptions;
     using SplayTree.Interfaces;
     using SplayTree.Logic;
     using SplayTree.Trees;
@@ -12,6 +13,7 @@ namespace UnitTest.Commands
     public class CountSpecificCommand_Test
     {
         [TestMethod]
+        [ExpectedException(typeof(TreeIsEmptyException))]
         public  void TestIfTreeIsEmpty()
         {
             ILogger logger = new ConsoleLogger();
@@ -19,9 +21,7 @@ namespace UnitTest.Commands
             SplayTree_int splaytree = new SplayTree_int(new List<Node>());
             CountSpecificCommand command = new CountSpecificCommand(splaytree);
 
-            int count = command.Execute(5);
-
-            Assert.IsTrue(count == 0);
+            command.Execute(5);
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace UnitTest.Commands
             ConsoleLogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {7,9,3,6,5}));
+            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {7,3,3,3,3}));
             CountSpecificCommand command = new CountSpecificCommand(splaytree);
 
             int count = command.Execute(3);

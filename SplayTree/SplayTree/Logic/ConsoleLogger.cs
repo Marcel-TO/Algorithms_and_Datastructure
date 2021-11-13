@@ -20,10 +20,18 @@
 
         public ConsoleLogger()
         {
-            #pragma warning disable CA1416
-            Console.SetWindowSize(Console.LargestWindowWidth / 2, Console.LargestWindowHeight / 2);
-            this.SetTextColor();
-            Console.CursorVisible = false;
+#pragma warning disable CA1416
+            try
+            {
+                Console.SetWindowSize(Console.LargestWindowWidth / 2, Console.LargestWindowHeight / 2);
+                this.SetTextColor();
+                Console.CursorVisible = false;
+            }
+            catch (Exception)
+            {
+                return;
+            }
+           
         }
 
         public void Visit(ClearCommand command)

@@ -117,7 +117,17 @@
             this.logger.Visit(command);
             int value = this.logger.GetValueFromUser();
 
-            command.Execute(this, value);
+            try
+            {
+                command.Execute(this, value);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                this.logger.Message(e.Message);
+                this.logger.Continue();
+                return;
+            }
+           
 
             this.logger.Message($"The node {value} got added to the tree.");
             this.logger.Continue();

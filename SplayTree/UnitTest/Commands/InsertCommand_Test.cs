@@ -26,7 +26,8 @@
          }
 
         [TestMethod]
-         public void TestNegativeInput()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TestNegativeInput()
          {
              ConsoleLogger logger = new ConsoleLogger();
              Executioner execute = new Executioner(logger);
@@ -35,22 +36,6 @@
              InsertCommand command = new InsertCommand(splaytree);
 
              command.Execute(execute, -5);
-
-             Assert.IsTrue(command.Nodes.Count == 0);
-         }
-
-         [TestMethod]
-         public void TestNumberTooBig()
-         {
-             ConsoleLogger logger = new ConsoleLogger();
-             Executioner execute = new Executioner(logger);
-
-             SplayTree_int splaytree = new SplayTree_int(new List<Node>());
-             InsertCommand command = new InsertCommand(splaytree);
-
-             command.Execute(execute, 10000000);
-
-             Assert.IsTrue(command.Nodes.Count == 0);
          }
 
          [TestMethod]
