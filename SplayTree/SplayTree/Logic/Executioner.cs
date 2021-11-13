@@ -13,31 +13,49 @@
 
         public Executioner(ILogger logger)
         {
-            this.logger = logger;
+            this.Logger = logger;
+        }
+
+        public ILogger Logger
+        {
+            get
+            {
+                return this.logger;
+            }
+
+            private set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException($"The {nameof(this.logger)} must not be null.");
+                }
+
+                this.logger = value;
+            }
         }
 
         public void Visit(ClearCommand command)
         {
-            this.logger.Visit(command);
+            this.Logger.Visit(command);
 
             try
             {
                 command.Execute();
 
-                this.logger.Message("The tree is now cleared.");
-                this.logger.Continue();
+                this.Logger.Message("The tree is now cleared.");
+                this.Logger.Continue();
             }
             catch (TreeIsEmptyException e)
             {
-                this.logger.Message(e.Message);
-                this.logger.Continue();
+                this.Logger.Message(e.Message);
+                this.Logger.Continue();
             }
         }
 
         public void Visit(ContainsCommand command)
         {
-            this.logger.Visit(command);
-            int value = this.logger.GetValueFromUser();
+            this.Logger.Visit(command);
+            int value = this.Logger.GetValueFromUser();
             bool isExisting = false;
 
             try
@@ -46,53 +64,53 @@
 
                 if (isExisting)
                 {
-                    this.logger.Message($"The tree does contain the value {value}.");
+                    this.Logger.Message($"The tree does contain the value {value}.");
                 }
                 else
                 {
-                    this.logger.Message($"The tree does not contain the value {value}");
+                    this.Logger.Message($"The tree does not contain the value {value}");
                 }
             }
             catch (TreeIsEmptyException e)
             {
-                this.logger.Message(e.Message);
+                this.Logger.Message(e.Message);
             }
 
-            this.logger.Continue();
+            this.Logger.Continue();
         }
 
         public void Visit(CountCommand command)
         {
-            this.logger.Visit(command);
+            this.Logger.Visit(command);
 
             try
             {
                 int count = command.Execute();
-                this.logger.Message($"The tree contains of {count} nodes.");
-                this.logger.Continue();
+                this.Logger.Message($"The tree contains of {count} nodes.");
+                this.Logger.Continue();
             }
             catch (TreeIsEmptyException e)
             {
-                this.logger.Message(e.Message);
-                this.logger.Continue();
+                this.Logger.Message(e.Message);
+                this.Logger.Continue();
             }
         }
 
         public void Visit(CountSpecificCommand command) 
         {
-            this.logger.Visit(command);
-            int value = this.logger.GetValueFromUser();
+            this.Logger.Visit(command);
+            int value = this.Logger.GetValueFromUser();
 
             try
             {
                 int count = command.Execute(value);
-                this.logger.Message($"The tree contains a node with the value {value} about {count} times.");
-                this.logger.Continue();
+                this.Logger.Message($"The tree contains a node with the value {value} about {count} times.");
+                this.Logger.Continue();
             }
             catch (TreeIsEmptyException e)
             {
-                this.logger.Message(e.Message);
-                this.logger.Continue();
+                this.Logger.Message(e.Message);
+                this.Logger.Continue();
             }
         }
 
@@ -104,18 +122,18 @@
             }
             catch (TreeIsEmptyException e)
             {
-                this.logger.Message(e.Message);
-                this.logger.Continue();
+                this.Logger.Message(e.Message);
+                this.Logger.Continue();
                 return;
             }
 
-            this.logger.Visit(command);
+            this.Logger.Visit(command);
         }
 
         public void Visit(InsertCommand command)
         {
-            this.logger.Visit(command);
-            int value = this.logger.GetValueFromUser();
+            this.Logger.Visit(command);
+            int value = this.Logger.GetValueFromUser();
 
             try
             {
@@ -123,63 +141,63 @@
             }
             catch (ArgumentOutOfRangeException e)
             {
-                this.logger.Message(e.Message);
-                this.logger.Continue();
+                this.Logger.Message(e.Message);
+                this.Logger.Continue();
                 return;
             }
            
 
-            this.logger.Message($"The node {value} got added to the tree.");
-            this.logger.Continue();
+            this.Logger.Message($"The node {value} got added to the tree.");
+            this.Logger.Continue();
         }
 
         public void Visit(MaxCommand command)
         {
-            this.logger.Visit(command);
+            this.Logger.Visit(command);
 
             try
             {
                 int max = command.Execute();
-                this.logger.Message($"The maximum value of the tree is {max}");
-                this.logger.Continue();
+                this.Logger.Message($"The maximum value of the tree is {max}");
+                this.Logger.Continue();
             }
             catch (TreeIsEmptyException e)
             {
-                this.logger.Message(e.Message);
-                this.logger.Continue();
+                this.Logger.Message(e.Message);
+                this.Logger.Continue();
             }
         }
 
         public void Visit(MinCommand command)
         {
-            this.logger.Visit(command);
+            this.Logger.Visit(command);
 
             try
             {
                 int min = command.Execute();
-                this.logger.Message($"The minimum value of the tree is {min}.");
-                this.logger.Continue();
+                this.Logger.Message($"The minimum value of the tree is {min}.");
+                this.Logger.Continue();
             }
             catch (TreeIsEmptyException e)
             {
-                this.logger.Message(e.Message);
-                this.logger.Continue();
+                this.Logger.Message(e.Message);
+                this.Logger.Continue();
             }
             
         }
 
         public void Visit(RemoveCommand command)
         {
-            this.logger.Visit(command);
+            this.Logger.Visit(command);
 
             if (command.Nodes.Count == 0)
             {
-                this.logger.Message($"I am sorry, but the splay tree is empty. Please consider to add values to the tree before trying to remove them.");
-                this.logger.Continue();
+                this.Logger.Message($"I am sorry, but the splay tree is empty. Please consider to add values to the tree before trying to remove them.");
+                this.Logger.Continue();
                 return;
             }
 
-            int value = this.logger.GetValueFromUser();
+            int value = this.Logger.GetValueFromUser();
 
             try
             {
@@ -187,25 +205,25 @@
 
                 if (count == 0)
                 {
-                    this.logger.Message($"There is no node with the {value} in the tree.");
-                    this.logger.Continue();
+                    this.Logger.Message($"There is no node with the {value} in the tree.");
+                    this.Logger.Continue();
                     return;
                 }
 
-                this.logger.Message($"The value {value} got removed from the tree {count} times.");
-                this.logger.Continue();
+                this.Logger.Message($"The value {value} got removed from the tree {count} times.");
+                this.Logger.Continue();
             }
             catch (TreeIsEmptyException e)
             {
-                this.logger.Message(e.Message);
-                this.logger.Continue();
+                this.Logger.Message(e.Message);
+                this.Logger.Continue();
             }
         }
 
         public void Visit(TraverseCommand command)
         {
-            this.logger.Visit(command);
-            int orderIndex = this.logger.ChooseTraverseOrder();
+            this.Logger.Visit(command);
+            int orderIndex = this.Logger.ChooseTraverseOrder();
 
             switch (orderIndex)
             {
@@ -225,6 +243,16 @@
 
         public Node FindAttachmentNode(Node node, int value)
         {
+            if (node == null)
+            {
+                throw new ArgumentNullException($"The {nameof(node)} must not be null.");
+            }
+
+            if (value < 0)
+            {
+                throw new ArgumentOutOfRangeException($"The {nameof(value)} must be a positive number.");
+            }
+
             // checks if value is smaller than the current node.
             if (value < node.Value)
             {
@@ -247,6 +275,11 @@
 
         public List<Node> SortTree(Node newRoot, Node attachmentNode, List<Node> sortedL, List<Node> sortedR)
         {
+            if (newRoot == null || attachmentNode == null || sortedL == null || sortedR == null)
+            {
+                throw new ArgumentNullException("All parameters must not be null.");
+            }
+
             // Creates the new root node.
             List<Node> newList = new List<Node>();
             (Node, Node) root = this.CreateNode(attachmentNode.Value, newRoot);
@@ -280,6 +313,11 @@
 
         public List<Node> AddNode(Node newNode, Node node, List<Node> allNodes)
         {
+            if (newNode == null || node == null || allNodes == null)
+            {
+                throw new ArgumentNullException("All parameters must not be null.");
+            }
+
             // Checks if value is smaller than the comparing node.
             if (newNode.Value < node.Value)
             {
@@ -317,6 +355,16 @@
 
         public (Node, Node) CreateNode(int value, Node parentNode)
         {
+            if (parentNode == null)
+            {
+                throw new ArgumentNullException($"The {nameof(parentNode)} must not be null.");
+            }
+
+            if (value < 0)
+            {
+                throw new ArgumentOutOfRangeException($"The {nameof(value)} must be a positive number.");
+            }
+
             Node newNode;
 
             // Checks if the new node is smaller than the parent node.
@@ -338,6 +386,16 @@
 
         public int RemoveNodes(List<Node> nodes, int removedValue)
         {
+            if (nodes == null)
+            {
+                throw new ArgumentNullException($"The {nameof(nodes)} must not be null.");
+            }
+
+            if (removedValue < 0)
+            {
+                throw new ArgumentOutOfRangeException($"The {nameof(removedValue)} must be a positive number.");
+            }
+
             int count = 0;
 
             for (int i = 0; i < nodes.Count; i++)
@@ -355,6 +413,16 @@
 
         public int FindRemovedNode(List<Node> nodes, int userInput)
         {
+            if (nodes == null)
+            {
+                throw new ArgumentNullException($"The {nameof(nodes)} must not be null.");
+            }
+
+            if (userInput < 0)
+            {
+                throw new ArgumentOutOfRangeException($"The {nameof(userInput)} must be a positive number.");
+            }
+
             int removeCount = this.RemoveNodes(nodes, userInput);
 
             for (int i = 0; i < nodes.Count; i++)
@@ -375,6 +443,11 @@
 
         public List<Node> GenerateTree(List<int> values)
         {
+            if (values == null)
+            {
+                throw new ArgumentNullException($"The {nameof(values)} must not be null.");
+            }
+
             if (values.Count == 0)
             {
                 return new List<Node>();
@@ -400,6 +473,11 @@
 
         public List<int> ExtractValues(List<Node> nodes)
         {
+            if (nodes == null)
+            {
+                throw new ArgumentNullException($"The {nameof(nodes)} must not be null.");
+            }
+
             List<int> values = new List<int>();
 
             for (int i = 0; i < nodes.Count; i++)

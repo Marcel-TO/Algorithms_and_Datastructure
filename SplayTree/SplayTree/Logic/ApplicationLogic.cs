@@ -25,14 +25,105 @@
 
         public ApplicationLogic()
         {
-            this.nodes = new List<Node>();
-            this.splaytree = new SplayTree_int(this.nodes);
-            this.logger = new ConsoleLogger();
-            this.execute = new Executioner(this.logger);
-            this.keyboardWatcher = new KeyboardWatcher();
-            this.keyboardWatcher.KeyPressed += this.KeyPressed;
-            this.index = 0;
+            this.Logger = new ConsoleLogger();
+            this.Execute = new Executioner(this.logger);
+
+            this.Nodes = new List<Node>();
+            this.Splaytree = new SplayTree_int(this.nodes);
+            this.KeyboardWatcher = new KeyboardWatcher();
+            this.KeyboardWatcher.KeyPressed += this.KeyPressed;
+            this.Index = 0;
             this.loop = true;
+        }
+
+        public ICommandVisitor Execute
+        {
+            get
+            {
+                return this.execute;
+            }
+
+            private set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException($"The {nameof(this.execute)} must not be null.");
+                }
+
+                this.execute = value;
+            }
+        }
+
+        public ILogger Logger
+        {
+            get
+            {
+                return this.logger;
+            }
+
+            private set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException($"The {nameof(this.logger)} must not be null.");
+                }
+
+                this.logger = value;
+            }
+        }
+
+        public List<Node> Nodes
+        {
+            get
+            {
+                return this.nodes;
+            }
+
+            private set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException($"The {nameof(this.nodes)} must not be null.");
+                }
+
+                this.nodes = value;
+            }
+        }
+
+        public SplayTree_int Splaytree
+        {
+            get
+            {
+                return this.splaytree;
+            }
+
+            private set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException($"The {nameof(this.splaytree)} must not be null.");
+                }
+
+                this.splaytree = value;
+            }
+        }
+
+        public KeyboardWatcher KeyboardWatcher
+        {
+            get
+            {
+                return this.keyboardWatcher;
+            }
+
+            private set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException($"The {nameof(this.keyboardWatcher)} must not be null.");
+                }
+
+                this.keyboardWatcher = value;
+            }
         }
 
         public int Index
@@ -63,15 +154,14 @@
 
         public void Start()
         {
-            this.logger.WelcomeMessage();
-            this.logger.ShowCommands(this.splaytree.Commands);
-            this.logger.ShowCursor(this.index, this.splaytree.Commands.Length - 1);
-
+            this.Logger.WelcomeMessage();
+            this.Logger.ShowCommands(this.Splaytree.Commands);
+            this.Logger.ShowCursor(this.Index, this.Splaytree.Commands.Length - 1);
 
             while(this.loop)
             {
                 this.keyboardWatcher.Start();
-                this.logger.ShowCursor(this.index, this.splaytree.Commands.Length - 1);
+                this.Logger.ShowCursor(this.Index, this.Splaytree.Commands.Length - 1);
             }
         }
 
@@ -83,7 +173,7 @@
                     this.loop = false;
                     break;
                 case ConsoleKey.Enter:
-                    this.ExecuteCommand(this.splaytree.Commands, this.index, this.execute);
+                    this.ExecuteCommand(this.Splaytree.Commands, this.Index, this.Execute);
                     break;
                 case ConsoleKey.UpArrow:
                     this.Index--;
@@ -98,9 +188,9 @@
         {
             commands[index].Accept(execute);
 
-            this.logger.Clear();
-            this.logger.ShowCommands(commands);
-            this.logger.ShowCursor(index, commands.Length - 1);
+            this.Logger.Clear();
+            this.Logger.ShowCommands(commands);
+            this.Logger.ShowCursor(index, commands.Length - 1);
         }
     }
 }
