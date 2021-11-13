@@ -9,8 +9,6 @@
 
     public class ApplicationLogic
     {
-        private string[] args;
-
         private ICommandVisitor execute;
 
         private ILogger logger;
@@ -25,9 +23,8 @@
 
         private bool loop;
 
-        public ApplicationLogic(string[] args)
+        public ApplicationLogic()
         {
-            this.args = args;
             this.nodes = new List<Node>();
             this.splaytree = new SplayTree_int(this.nodes);
             this.logger = new ConsoleLogger();

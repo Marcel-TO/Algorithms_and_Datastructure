@@ -7,7 +7,7 @@
     {
         static void Main(string[] args)
         {
-            ApplicationLogic application = new ApplicationLogic(args);
+            ApplicationLogic application = new ApplicationLogic();
             application.Start();
         }
     }
