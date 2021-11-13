@@ -28,34 +28,22 @@
 
         public void Visit(ClearCommand command)
         {
-            Console.Clear();
-
-            Console.WriteLine($"Executed Command: {command.Name} command");
-            Console.WriteLine(string.Empty);
+            this.ShowCurrentCommand(command);
         }
 
         public void Visit(ContainsCommand command)
         {
-            Console.Clear();
-
-            Console.WriteLine($"Executed Command: {command.Name} command");
-            Console.WriteLine(string.Empty);
+            this.ShowCurrentCommand(command);
         }
 
         public void Visit(CountCommand command)
         {
-            Console.Clear();
-
-            Console.WriteLine($"Executed Command: {command.Name} command");
-            Console.WriteLine(string.Empty);
+            this.ShowCurrentCommand(command);
         }
 
         public void Visit(CountSpecificCommand command)
         {
-            Console.Clear();
-
-            Console.WriteLine($"Executed Command: {command.Name} command");
-            Console.WriteLine(string.Empty);
+            this.ShowCurrentCommand(command);
         }
 
         public void Visit(DisplayCommand command)
@@ -77,42 +65,27 @@
 
         public void Visit(InsertCommand command)
         {
-            Console.Clear();
-
-            Console.WriteLine($"Executed Command: {command.Name} command");
-            Console.WriteLine(string.Empty);
+            this.ShowCurrentCommand(command);
         }
 
         public void Visit(MaxCommand command)
         {
-            Console.Clear();
-
-            Console.WriteLine($"Executed Command: {command.Name} command");
-            Console.WriteLine(string.Empty);
+            this.ShowCurrentCommand(command);
         }
 
         public void Visit(MinCommand command)
         {
-             Console.Clear();
-
-            Console.WriteLine($"Executed Command: {command.Name} command");
-            Console.WriteLine(string.Empty);
+            this.ShowCurrentCommand(command);
         }
 
         public void Visit(RemoveCommand command)
         {
-            Console.Clear();
-
-            Console.WriteLine($"Executed Command: {command.Name} command");
-            Console.WriteLine(string.Empty);
+            this.ShowCurrentCommand(command);
         }
 
         public void Visit(TraverseCommand command)
         {
-            Console.Clear();
-
-            Console.WriteLine($"Executed Command: {command.Name} command");
-            Console.WriteLine(string.Empty);
+            this.ShowCurrentCommand(command);
         }
 
         public void WelcomeMessage()
@@ -227,6 +200,14 @@
             }
         }
 
+        private void ShowCurrentCommand(BaseCommand command)
+        {
+            Console.Clear();
+
+            Console.WriteLine($"Executed Command: {command.Name} command");
+            Console.WriteLine(string.Empty);
+        }
+
         private void PrintNode(Node node, int maxLayer)
         {
             int length = node.Value.ToString().Length;
@@ -271,7 +252,19 @@
 
                 tempY++;
 
-                Console.SetCursorPosition(tempX, tempY); // Out of bounds Testen!!
+                try
+                {
+                    Console.SetCursorPosition(tempX, tempY);
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.SetCursorPosition(0, 1);
+                    this.SetTextColor();
+                    Console.WriteLine("It appears the tree is bigger than the supported window size.");
+                    Console.WriteLine("If you want to see, whats cut off, I would suggest to traverse the tree.");
+                    return;
+                }
+           
                 this.SetValueConnectionColor();
                 Console.Write(connection);
             }
