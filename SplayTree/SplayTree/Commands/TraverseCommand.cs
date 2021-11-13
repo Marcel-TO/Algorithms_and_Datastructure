@@ -30,17 +30,73 @@ namespace SplayTree.Commands
                 throw new TreeIsEmptyException("The tree is empty. Please consider to add values to the tree before trying to check what's inside the tree.");
             }
 
+            List<Node> traversedNodes = new List<Node>();
+
             switch(order)
             {
                 case TraverseOrder.inOrder:
+                    traversedNodes = this.InOrder(this.Nodes[0], traversedNodes);
                 break;
                 case TraverseOrder.preOrder:
+                    traversedNodes = this.PreOrder(this.Nodes[0], traversedNodes);
                 break;
                 case TraverseOrder.postOrder:
+                    traversedNodes = this.PostOrder(this.Nodes[0], traversedNodes);
                 break;
             }
 
-            return null;
+            return traversedNodes;
+        }
+
+        private List<Node> InOrder(Node currentNode, List<Node> traversedNodes)
+        {
+            if (currentNode.LesserNode != null)
+            {
+                this.InOrder(currentNode.LesserNode, traversedNodes);
+            }
+
+            traversedNodes.Add(currentNode);
+
+            if (currentNode.BiggerNode != null)
+            {
+                this.InOrder(currentNode.BiggerNode, traversedNodes);
+            }
+
+            return traversedNodes;
+        }
+
+        private List<Node> PreOrder(Node currentNode, List<Node> traversedNodes)
+        {
+            traversedNodes.Add(currentNode);
+
+            if (currentNode.LesserNode != null)
+            {
+                this.PreOrder(currentNode.LesserNode, traversedNodes);
+            }
+
+            if (currentNode.BiggerNode != null)
+            {
+                this.PreOrder(currentNode.BiggerNode, traversedNodes);
+            }
+
+            return traversedNodes;
+        }
+
+        private List<Node> PostOrder(Node currentNode, List<Node> traversedNodes)
+        {
+            if (currentNode.LesserNode != null)
+            {
+                this.PostOrder(currentNode.LesserNode, traversedNodes);
+            }
+
+            if (currentNode.BiggerNode != null)
+            {
+                this.PostOrder(currentNode.BiggerNode, traversedNodes);
+            }
+
+            traversedNodes.Add(currentNode);
+
+            return traversedNodes;
         }
     }
 }
