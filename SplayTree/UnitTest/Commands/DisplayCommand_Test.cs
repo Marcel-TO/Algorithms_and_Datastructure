@@ -23,7 +23,7 @@ namespace UnitTest.Commands
         }
 
         [TestMethod]
-        public  void TestIfTreeGetsCleared()
+        public  void TestIfCommandGetsExecuted()
         {
             ILogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
