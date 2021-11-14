@@ -1,3 +1,10 @@
+//-----------------------------------------------------------------------
+// <copyright file="BaseCommand.cs" company="FHWN">
+//     Copyright (c) Marcel Turobin-Ort. All rights reserved.
+// </copyright>
+// <author>Marcel Turobin-Ort</author>
+// <summary>Defines the abstract base command of the splay tree.</summary>
+//-----------------------------------------------------------------------
 namespace SplayTree.Commands
 {
     using System;
@@ -6,12 +13,26 @@ namespace SplayTree.Commands
     using SplayTree.Interfaces;
     using SplayTree.Trees;
 
+    /// <summary>
+    /// Represents the abstract base command class.
+    /// </summary>
     public abstract class BaseCommand : ICommandVisitable, ILogable
     {
+        /// <summary>
+        /// Represents the name of the current command.
+        /// </summary>
         private string name;
 
+        /// <summary>
+        /// Represents the current splay tree.
+        /// </summary>
         private SplayTree_int splaytree;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseCommand"/> class.
+        /// </summary>
+        /// <param name="commandInitializer">Represents the command initializer for the command.</param>
+        /// <param name="splaytree">Represents the current splay tree.</param>
         public BaseCommand(string commandInitializer, SplayTree_int splaytree)
         {
             this.Name = commandInitializer;
@@ -24,6 +45,10 @@ namespace SplayTree.Commands
             this.SplayTree = splaytree;
         }
 
+        /// <summary>
+        /// Gets the initializer of the current command.
+        /// </summary>
+        /// <value>The initializer of the current command.</value>
         public string Initializer
         {
             get
@@ -32,6 +57,10 @@ namespace SplayTree.Commands
             }
         }
 
+        /// <summary>
+        /// Gets the name of the current command.
+        /// </summary>
+        /// <value>The name of the current command.</value>
         public string Name
         {
             get
@@ -50,6 +79,10 @@ namespace SplayTree.Commands
             }
         }
 
+        /// <summary>
+        /// Gets the current used splay tree.
+        /// </summary>
+        /// <value>The current splay tree.</value>
         public SplayTree_int SplayTree
         {
             get
@@ -68,6 +101,10 @@ namespace SplayTree.Commands
             }
         }
 
+        /// <summary>
+        /// Gets or sets the nodes of the current splay tree.
+        /// </summary>
+        /// <value>The nodes of the current splay tree.</value>
         public List<Node> Nodes
         {
             get
@@ -86,8 +123,16 @@ namespace SplayTree.Commands
             }
         }
 
+        /// <summary>
+        /// Represents the visitor pattern for command execution.
+        /// </summary>
+        /// <param name="visitor">The used visitor interface.</param>
         public abstract void Accept(ICommandVisitor visitor);
 
+        /// <summary>
+        /// Represents the visitor pattern for command logging.
+        /// </summary>
+        /// <param name="logger">The used logging interface.</param>
         public abstract void Log(ILogger logger);
     }
 }
