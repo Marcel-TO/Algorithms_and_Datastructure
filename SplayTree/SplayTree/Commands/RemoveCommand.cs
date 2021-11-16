@@ -1,29 +1,55 @@
+//-----------------------------------------------------------------------
+// <copyright file="RemoveCommand.cs" company="FHWN">
+//     Copyright (c) Marcel Turobin-Ort. All rights reserved.
+// </copyright>
+// <author>Marcel Turobin-Ort</author>
+// <summary>Defines the remove command of the splay tree.</summary>
+//-----------------------------------------------------------------------
 namespace SplayTree.Commands
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using SplayTree.Exceptions;
     using SplayTree.Interfaces;
     using SplayTree.Logic;
     using SplayTree.Trees;
 
+    /// <summary>
+    /// Represents the remove command of the splay tree.
+    /// </summary>
     public class RemoveCommand : BaseCommand
     {
-        public RemoveCommand(SplayTree_int splaytree) : base ("remove", splaytree)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RemoveCommand"/> class.
+        /// </summary>
+        /// <param name="splaytree">The current splay tree.</param>
+        public RemoveCommand(SplayTree_int splaytree) : base("remove", splaytree)
         {
         }
-        
+
+        /// <summary>
+        /// Represents the visitor pattern for command execution.
+        /// </summary>
+        /// <param name="visitor">The used visitor interface.</param>
         public override void Accept(ICommandVisitor visitor)
         {
             visitor.Visit(this);
         }
 
+        /// <summary>
+        /// Represents the visitor pattern for command logging.
+        /// </summary>
+        /// <param name="logger">The used logging interface.</param>
         public override void Log(ILogger logger)
         {
             logger.Visit(this);
         }
 
+        /// <summary>
+        /// Represents the execution method of the remove command.
+        /// </summary>
+        /// <param name="execute">The command executioner.</param>
+        /// <param name="value">The value that gets removed.</param>
+        /// <returns>The amount of removed nodes.</returns>
         public int Execute(Executioner execute, int value)
         {
             if (this.Nodes.Count == 0)

@@ -1,28 +1,52 @@
+//-----------------------------------------------------------------------
+// <copyright file="MinCommand.cs" company="FHWN">
+//     Copyright (c) Marcel Turobin-Ort. All rights reserved.
+// </copyright>
+// <author>Marcel Turobin-Ort</author>
+// <summary>Defines the minimum command of the splay tree.</summary>
+//-----------------------------------------------------------------------
 namespace SplayTree.Commands
 {
-    using System;
-    using System.Collections.Generic;
     using SplayTree.Exceptions;
     using SplayTree.Interfaces;
     using SplayTree.Logic;
     using SplayTree.Trees;
 
+    /// <summary>
+    /// Represents the minimum command of the splay tree.
+    /// </summary>
     public class MinCommand : BaseCommand
     {
-        public MinCommand(SplayTree_int splaytree) : base ("min", splaytree)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MinCommand"/> class.
+        /// </summary>
+        /// <param name="splaytree">The current splay tree.</param>
+        public MinCommand(SplayTree_int splaytree) : base("min", splaytree)
         {
         }
-        
+
+        /// <summary>
+        /// Represents the visitor pattern for command execution.
+        /// </summary>
+        /// <param name="visitor">The used visitor interface.</param>
         public override void Accept(ICommandVisitor visitor)
         {
             visitor.Visit(this);
         }
 
+        /// <summary>
+        /// Represents the visitor pattern for command logging.
+        /// </summary>
+        /// <param name="logger">The used logging interface.</param>
         public override void Log(ILogger logger)
         {
             logger.Visit(this);
         }
 
+        /// <summary>
+        /// Represents the execution method of the minimum command.
+        /// </summary>
+        /// <returns>The minimum value of the tree.</returns>
         public int Execute() 
         {
             if (this.Nodes.Count == 0)
@@ -33,6 +57,11 @@ namespace SplayTree.Commands
             return this.FindMin(this.Nodes[0]);
         }
 
+        /// <summary>
+        /// Represents the algorithm for finding the minimum value.
+        /// </summary>
+        /// <param name="node">The current node.</param>
+        /// <returns>The value of the current node.</returns>
         private int FindMin(Node node)
         {
             if (node.LesserNode != null)

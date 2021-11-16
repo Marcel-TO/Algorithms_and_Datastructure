@@ -9,8 +9,8 @@ namespace SplayTree.Commands
 {
     using System;
     using System.Collections.Generic;
-    using SplayTree.Logic;
     using SplayTree.Interfaces;
+    using SplayTree.Logic;
     using SplayTree.Trees;
 
     /// <summary>
