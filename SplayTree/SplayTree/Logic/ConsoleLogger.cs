@@ -1,9 +1,11 @@
 ﻿namespace SplayTree.Logic
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using SplayTree.Commands;
     using SplayTree.Interfaces;
 
+    [ExcludeFromCodeCoverage]
     public class ConsoleLogger : ILogger
     {
         private static int seperatePositiionX = 4;

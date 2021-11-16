@@ -1,13 +1,15 @@
 ﻿namespace SplayTree
 {
-    using SplayTree.Logic;
     using System;
+    using System.Diagnostics.CodeAnalysis;
+    using SplayTree.Logic;
 
+    [ExcludeFromCodeCoverage]
     public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            ApplicationLogic application = new ApplicationLogic();
+            ApplicationLogic application = new ApplicationLogic(new ConsoleLogger(), new KeyboardWatcher.KeyboardWatcher());
             application.Start();
         }
     }
