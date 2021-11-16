@@ -2,10 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SplayTree.Commands;
     using SplayTree.Interfaces;
     using SplayTree.Logic;
+    using SplayTree.Trees;
+    using UnitTest.Replacements;
 
     [TestClass]
     public class Executioner_Test
@@ -316,6 +319,156 @@
             Assert.IsTrue(values[0] == 5);
             Assert.IsTrue(values[1] == 3);
             Assert.IsTrue(values[2] == 9);
+        }
+
+        [TestMethod]
+        public void TestVisitClearCommand()
+        {
+            ILogger logger = new ConsoleLoggerTestInstance();
+            Executioner execute = new Executioner(logger);
+
+            List<int> values = new List<int>() { 5, 3, 6, 7, 9 };
+
+            List<Node> nodes = execute.GenerateTree(values);
+            SplayTree_int splaytree = new SplayTree_int(nodes);
+            ClearCommand command = new ClearCommand(splaytree);
+
+            execute.Visit(command);
+        }
+
+        [TestMethod]
+        public void TestVisitContainsCommand()
+        {
+            ILogger logger = new ConsoleLoggerTestInstance();
+            Executioner execute = new Executioner(logger);
+
+            List<int> values = new List<int>() { 5, 3, 6, 7, 9 };
+
+            List<Node> nodes = execute.GenerateTree(values);
+            SplayTree_int splaytree = new SplayTree_int(nodes);
+            ContainsCommand command = new ContainsCommand(splaytree);
+
+            execute.Visit(command);
+        }
+
+        [TestMethod]
+        public void TestVisitCountCommand()
+        {
+            ILogger logger = new ConsoleLoggerTestInstance();
+            Executioner execute = new Executioner(logger);
+
+            List<int> values = new List<int>() { 5, 3, 6, 7, 9 };
+
+            List<Node> nodes = execute.GenerateTree(values);
+            SplayTree_int splaytree = new SplayTree_int(nodes);
+            CountCommand command = new CountCommand(splaytree);
+
+            execute.Visit(command);
+        }
+
+        [TestMethod]
+        public void TestVisitCountSpecificCommand()
+        {
+            ILogger logger = new ConsoleLoggerTestInstance();
+            Executioner execute = new Executioner(logger);
+
+            List<int> values = new List<int>() { 5, 3, 6, 7, 9 };
+
+            List<Node> nodes = execute.GenerateTree(values);
+            SplayTree_int splaytree = new SplayTree_int(nodes);
+            CountSpecificCommand command = new CountSpecificCommand(splaytree);
+
+            execute.Visit(command);
+        }
+
+        [TestMethod]
+        public void TestVisitDisplayCommand()
+        {
+            ILogger logger = new ConsoleLoggerTestInstance();
+            Executioner execute = new Executioner(logger);
+
+            List<int> values = new List<int>() { 5, 3, 6, 7, 9 };
+
+            List<Node> nodes = execute.GenerateTree(values);
+            SplayTree_int splaytree = new SplayTree_int(nodes);
+            DisplayCommand command = new DisplayCommand(splaytree);
+
+            execute.Visit(command);
+        }
+
+        [TestMethod]
+        public void TestVisitInsertCommand()
+        {
+            ILogger logger = new ConsoleLoggerTestInstance();
+            Executioner execute = new Executioner(logger);
+
+            List<int> values = new List<int>() { 5, 3, 6, 7, 9 };
+
+            List<Node> nodes = execute.GenerateTree(values);
+            SplayTree_int splaytree = new SplayTree_int(nodes);
+            InsertCommand command = new InsertCommand(splaytree);
+
+            execute.Visit(command);
+        }
+
+        [TestMethod]
+        public void TestVisitMaxCommand()
+        {
+            ILogger logger = new ConsoleLoggerTestInstance();
+            Executioner execute = new Executioner(logger);
+
+            List<int> values = new List<int>() { 5, 3, 6, 7, 9 };
+
+            List<Node> nodes = execute.GenerateTree(values);
+            SplayTree_int splaytree = new SplayTree_int(nodes);
+            MaxCommand command = new MaxCommand(splaytree);
+
+            execute.Visit(command);
+        }
+
+        [TestMethod]
+        public void TestVisitMinCommand()
+        {
+            ILogger logger = new ConsoleLoggerTestInstance();
+            Executioner execute = new Executioner(logger);
+
+            List<int> values = new List<int>() { 5, 3, 6, 7, 9 };
+
+            List<Node> nodes = execute.GenerateTree(values);
+            SplayTree_int splaytree = new SplayTree_int(nodes);
+            MinCommand command = new MinCommand(splaytree);
+
+            execute.Visit(command);
+        }
+
+        [TestMethod]
+        public void TestVisitRemoveCommand()
+        {
+            ILogger logger = new ConsoleLoggerTestInstance();
+            Executioner execute = new Executioner(logger);
+
+            List<int> values = new List<int>() { 5, 3, 6, 7, 9 };
+
+            List<Node> nodes = execute.GenerateTree(values);
+            SplayTree_int splaytree = new SplayTree_int(nodes);
+            RemoveCommand command = new RemoveCommand(splaytree);
+
+            execute.Visit(command);
+        }
+
+        [TestMethod]
+        public void TestVisitTraverseCommand()
+        {
+            ILogger logger = new ConsoleLoggerTestInstance();
+            Executioner execute = new Executioner(logger);
+
+            List<int> values = new List<int>() { 5, 3, 6, 7, 9 };
+
+            List<Node> nodes = execute.GenerateTree(values);
+            SplayTree_int splaytree = new SplayTree_int(nodes);
+            TraverseCommand command = new TraverseCommand(splaytree);
+
+            execute.Visit(command);
         }
     }
 }

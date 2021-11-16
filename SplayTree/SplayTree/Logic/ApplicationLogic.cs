@@ -17,20 +17,20 @@
 
         private SplayTree_int splaytree;
 
-        private KeyboardWatcher keyboardWatcher;
+        private IKeyboardWatcher keyboardWatcher;
 
         private int index;
 
         private bool loop;
 
-        public ApplicationLogic()
+        public ApplicationLogic(ILogger logger, IKeyboardWatcher watcher)
         {
-            this.Logger = new ConsoleLogger();
+            this.Logger = logger;
             this.Execute = new Executioner(this.logger);
 
             this.Nodes = new List<Node>();
             this.Splaytree = new SplayTree_int(this.nodes);
-            this.KeyboardWatcher = new KeyboardWatcher();
+            this.KeyboardWatcher = watcher;
             this.KeyboardWatcher.KeyPressed += this.KeyPressed;
             this.Index = 0;
             this.loop = true;
@@ -108,7 +108,7 @@
             }
         }
 
-        public KeyboardWatcher KeyboardWatcher
+        public IKeyboardWatcher KeyboardWatcher
         {
             get
             {
@@ -158,7 +158,7 @@
             this.Logger.ShowCommands(this.Splaytree.Commands);
             this.Logger.ShowCursor(this.Index, this.Splaytree.Commands.Length - 1);
 
-            while(this.loop)
+            while (this.loop)
             {
                 this.keyboardWatcher.Start();
                 this.Logger.ShowCursor(this.Index, this.Splaytree.Commands.Length - 1);

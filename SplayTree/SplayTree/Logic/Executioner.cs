@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using SplayTree.Commands;
     using SplayTree.Exceptions;
@@ -36,7 +37,14 @@
 
         public void Visit(ClearCommand command)
         {
-            this.Logger.Visit(command);
+            try
+            {
+                this.Logger.Visit(command);
+            }
+            catch (IOException)
+            {
+            }
+          
 
             try
             {

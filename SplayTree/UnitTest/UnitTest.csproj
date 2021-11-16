@@ -17,8 +17,4 @@
     <ProjectReference Include="..\SplayTree\SplayTree.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="KeyboardWatcher\" />
-  </ItemGroup>
-
 </Project>
