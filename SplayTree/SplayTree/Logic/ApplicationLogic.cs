@@ -163,6 +163,8 @@
                 this.keyboardWatcher.Start();
                 this.Logger.ShowCursor(this.Index, this.Splaytree.Commands.Length - 1);
             }
+
+            this.logger.Clear();
         }
 
         protected void KeyPressed(object sender, KeyboardWatcherKeyPressedEventArgs e)

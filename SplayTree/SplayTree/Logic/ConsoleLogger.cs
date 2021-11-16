@@ -23,16 +23,9 @@
         public ConsoleLogger()
         {
             #pragma warning disable CA1416
-            try
-            {
-                Console.SetWindowSize(Console.LargestWindowWidth / 2, Console.LargestWindowHeight / 2);
-                this.SetTextColor();
-                Console.CursorVisible = false;
-            }
-            catch (Exception)
-            {
-                return;
-            }
+            Console.SetWindowSize(Console.LargestWindowWidth / 2, Console.LargestWindowHeight / 2);
+            this.SetTextColor();
+            Console.CursorVisible = false;
         }
 
         public void Visit(ClearCommand command)
@@ -57,26 +50,21 @@
 
         public void Visit(DisplayCommand command)
         {
-            try
-            {
-                Console.Clear();
-                Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+            Console.Clear();
+            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
 
-                Console.WriteLine($"Executed Command: {command.Name} command");
-                int maxLayers = command.Nodes[command.Nodes.Count - 1].Position.Y + 1;
+            Console.WriteLine($"Executed Command: {command.Name} command");
+            int maxLayers = command.Nodes[command.Nodes.Count - 1].Position.Y + 1;
 
-                this.PrintNode(command.Nodes[0], maxLayers);
+            this.PrintNode(command.Nodes[0], maxLayers);
 
-                Console.WriteLine(string.Empty);
-                this.Continue();
+            Console.SetCursorPosition(0, 1);
+            this.SetTextColor();
+            Console.WriteLine(string.Empty);
+            this.Continue();
 
-                Console.SetWindowSize(Console.LargestWindowWidth / 2, Console.LargestWindowHeight / 2);
-                this.SetTextColor();
-            }
-            catch (Exception)
-            {
-                return;
-            }
+            Console.SetWindowSize(Console.LargestWindowWidth / 2, Console.LargestWindowHeight / 2);
+            this.SetTextColor();
         }
 
         public void Visit(InsertCommand command)
@@ -123,17 +111,10 @@
 
             for (int i = 0; i < commands.Length; i++)
             {
-                try
+                if (xPos < Console.WindowWidth && yPos < Console.WindowHeight)
                 {
-                    if (xPos < Console.WindowWidth && yPos < Console.WindowHeight)
-                    {
-                        Console.SetCursorPosition(xPos, yPos++);
-                        Console.Write($"| {commands[i].Name}");
-                    }
-                }
-                catch (Exception)
-                {
-                    return;
+                    Console.SetCursorPosition(xPos, yPos++);
+                    Console.Write($"| {commands[i].Name}");
                 }
             }
         }
@@ -146,69 +127,28 @@
             if (xPos < Console.WindowWidth && yPos < Console.WindowHeight)
             {
                 // Current Arrow position.
-                try
-                {
-                    Console.SetCursorPosition(xPos, yPos);
-                }
-                catch (Exception)
-                {
-                    return;
-                }
-                
+                Console.SetCursorPosition(xPos, yPos);
                 Console.Write("->");
 
                 // Clears console above arrow.
-                try
-                {
-                    Console.SetCursorPosition(xPos, yPos - 1);
-                }
-                catch (Exception)
-                {
-                    return;
-                }
-                
+                Console.SetCursorPosition(xPos, yPos - 1);
                 Console.Write("  ");
 
                 // Clears console under arrow.
-                try
-                {
-                    Console.SetCursorPosition(xPos, yPos + 1);
-                }
-                catch (Exception)
-                {
-                    return;
-                }
-                
+                Console.SetCursorPosition(xPos, yPos + 1);
                 Console.Write("  ");
 
                 if (yPos == startCommandListY)
                 {
                     // Current Arrow position.
-                    try
-                    {
-                        Console.SetCursorPosition(xPos, startCommandListY + lengthOfCommandList);
-                    }
-                    catch (Exception)
-                    {
-                        return;
-                    }
-                    
+                    Console.SetCursorPosition(xPos, startCommandListY + lengthOfCommandList);
                     Console.Write("  ");
                 }
 
                 if (yPos == startCommandListY + lengthOfCommandList)
                 {
                     // Current Arrow position.
-                    try
-                    {
-                        Console.SetCursorPosition(xPos, startCommandListY);
-                    }
-                    catch (Exception)
-                    {
-                        return;
-                    }
-
-                 
+                    Console.SetCursorPosition(xPos, startCommandListY);
                     Console.Write("  ");
                 }
             }
@@ -284,15 +224,8 @@
             int currX = centerX - length + node.Position.X;
             int currY = node.Position.Y;
 
-            try
-            {
-                Console.SetCursorPosition(currX, currY);
-            }
-            catch (Exception)
-            {
-                return;
-            }
-        
+            Console.SetCursorPosition(currX, currY);
+
             this.SetTextColor();
             Console.Write(node.Value);
 

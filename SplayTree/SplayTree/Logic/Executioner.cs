@@ -37,14 +37,7 @@
 
         public void Visit(ClearCommand command)
         {
-            try
-            {
-                this.Logger.Visit(command);
-            }
-            catch (IOException)
-            {
-            }
-          
+            this.Logger.Visit(command);
 
             try
             {
@@ -130,6 +123,7 @@
             }
             catch (TreeIsEmptyException e)
             {
+                this.logger.Clear();
                 this.Logger.Message(e.Message);
                 this.Logger.Continue();
                 return;
@@ -233,19 +227,27 @@
             this.Logger.Visit(command);
             int orderIndex = this.Logger.ChooseTraverseOrder();
 
-            switch (orderIndex)
+            try
             {
-                case 1:
-                command.Nodes = command.Execute(this, TraverseOrder.inOrder);
-                break;
+                switch (orderIndex)
+                {
+                    case 1:
+                        command.Nodes = command.Execute(this, TraverseOrder.inOrder);
+                        break;
 
-                case 2:
-                command.Nodes = command.Execute(this, TraverseOrder.preOrder);
-                break;
+                    case 2:
+                        command.Nodes = command.Execute(this, TraverseOrder.preOrder);
+                        break;
 
-                case 3:
-                command.Nodes = command.Execute(this, TraverseOrder.postOrder);
-                break;
+                    case 3:
+                        command.Nodes = command.Execute(this, TraverseOrder.postOrder);
+                        break;
+                }
+            }
+            catch (TreeIsEmptyException e)
+            {
+                this.logger.Message(e.Message);
+                this.logger.Continue();
             }
         }
 
