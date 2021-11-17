@@ -31,7 +31,7 @@ namespace SplayTree.Exceptions
 //     Copyright (c) Marcel Turobin-Ort. All rights reserved.
 // </copyright>
 // <author>Marcel Turobin-Ort</author>
-// <summary>Defines.</summary>
+// <summary>Defines .</summary>
 //-----------------------------------------------------------------------
 
 
