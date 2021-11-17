@@ -1,3 +1,10 @@
+//-----------------------------------------------------------------------
+// <copyright file="CountCommand_Test.cs" company="FHWN">
+//     Copyright (c) Marcel Turobin-Ort. All rights reserved.
+// </copyright>
+// <author>Marcel Turobin-Ort</author>
+// <summary>Defines the test class for the count command class.</summary>
+//-----------------------------------------------------------------------
 namespace UnitTest.Commands
 {
     using System;
@@ -9,9 +16,15 @@ namespace UnitTest.Commands
     using SplayTree.Logic;
     using SplayTree.Trees;
 
+    /// <summary>
+    /// Represents the unit tests for the count command.
+    /// </summary>
     [TestClass]
     public class CountCommand_Test
     {
+        /// <summary>
+        /// Represents a method for testing if the tree is empty.
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(TreeIsEmptyException))]
         public  void TestIfTreeIsEmpty()
@@ -24,6 +37,9 @@ namespace UnitTest.Commands
             int count = command.Execute();
         }
 
+        /// <summary>
+        /// Represents a method for testing if count is correct.
+        /// </summary>
         [TestMethod]
         public  void TestIfCountingIsCorrect()
         {
