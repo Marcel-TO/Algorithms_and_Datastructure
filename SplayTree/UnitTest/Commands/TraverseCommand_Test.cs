@@ -14,6 +14,7 @@ namespace UnitTest.Commands
     using SplayTree.Interfaces;
     using SplayTree.Logic;
     using SplayTree.Trees;
+    using UnitTest.Replacements;
 
     /// <summary>
     /// Represents the unit tests for the traverse command.
@@ -28,7 +29,7 @@ namespace UnitTest.Commands
         [ExpectedException(typeof(TreeIsEmptyException))]
         public void TestIfTreeIsEmpty()
         {
-            ILogger logger = new ConsoleLogger();
+            ILogger logger = new ConsoleLoggerTestInstance();
             Executioner execute = new Executioner(logger);
 
             SplayTree_int splaytree = new SplayTree_int(new List<Node>());
@@ -43,7 +44,7 @@ namespace UnitTest.Commands
         [TestMethod]
         public void TestIfCorrectInput()
         {
-            ConsoleLogger logger = new ConsoleLogger();
+            ILogger logger = new ConsoleLoggerTestInstance();
             Executioner execute = new Executioner(logger);
 
             SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> { 7, 9, 3, 6, 5 }));
@@ -61,7 +62,7 @@ namespace UnitTest.Commands
         [TestMethod]
         public void TestIfPreOrderIsCorrect()
         {
-            ConsoleLogger logger = new ConsoleLogger();
+            ILogger logger = new ConsoleLoggerTestInstance();
             Executioner execute = new Executioner(logger);
 
             SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> { 7, 9, 3, 6, 5 }));
@@ -82,7 +83,7 @@ namespace UnitTest.Commands
         [TestMethod]
         public void TestIfInOrderIsCorrect()
         {
-            ConsoleLogger logger = new ConsoleLogger();
+            ILogger logger = new ConsoleLoggerTestInstance();
             Executioner execute = new Executioner(logger);
 
             SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> { 7, 9, 3, 6, 5 }));
@@ -103,7 +104,7 @@ namespace UnitTest.Commands
         [TestMethod]
         public void TestIfPostOrderIsCorrect()
         {
-            ConsoleLogger logger = new ConsoleLogger();
+            ILogger logger = new ConsoleLoggerTestInstance();
             Executioner execute = new Executioner(logger);
 
             SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> { 5, 3, 6, 7, 9 }));

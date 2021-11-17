@@ -14,6 +14,7 @@ namespace UnitTest.Commands
     using SplayTree.Interfaces;
     using SplayTree.Logic;
     using SplayTree.Trees;
+    using UnitTest.Replacements;
 
     /// <summary>
     /// Represents the unit tests for the maximum command.
@@ -28,7 +29,7 @@ namespace UnitTest.Commands
         [ExpectedException(typeof(TreeIsEmptyException))]
         public void TestIfTreeIsEmpty()
         {
-            ILogger logger = new ConsoleLogger();
+            ILogger logger = new ConsoleLoggerTestInstance();
 
             SplayTree_int splaytree = new SplayTree_int(new List<Node>());
             MaxCommand command = new MaxCommand(splaytree);
@@ -42,7 +43,7 @@ namespace UnitTest.Commands
         [TestMethod]
         public void TestIfMaxCorrect()
         {
-            ConsoleLogger logger = new ConsoleLogger();
+            ILogger logger = new ConsoleLoggerTestInstance();
             Executioner execute = new Executioner(logger);
 
             SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> { 7, 9, 3, 6, 5 }));

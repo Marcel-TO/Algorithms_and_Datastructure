@@ -14,6 +14,7 @@ namespace UnitTest.Commands
     using SplayTree.Interfaces;
     using SplayTree.Logic;
     using SplayTree.Trees;
+    using UnitTest.Replacements;
 
     /// <summary>
     /// Represents the unit tests for the insert command.
@@ -27,7 +28,7 @@ namespace UnitTest.Commands
          [TestMethod]
          public void TestNumberCorrect()
          {
-             ILogger logger = new ConsoleLogger();
+             ILogger logger = new ConsoleLoggerTestInstance();
              Executioner execute = new Executioner(logger);
 
              SplayTree_int splaytree = new SplayTree_int(new List<Node>());
@@ -45,7 +46,7 @@ namespace UnitTest.Commands
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestNegativeInput()
         {
-             ConsoleLogger logger = new ConsoleLogger();
+             ILogger logger = new ConsoleLoggerTestInstance();
              Executioner execute = new Executioner(logger);
 
              SplayTree_int splaytree = new SplayTree_int(new List<Node>());
@@ -60,7 +61,7 @@ namespace UnitTest.Commands
          [TestMethod]
          public void TestCorrectSorting()
          {
-             ConsoleLogger logger = new ConsoleLogger();
+             ILogger logger = new ConsoleLoggerTestInstance();
              Executioner execute = new Executioner(logger);
 
              SplayTree_int splaytree = new SplayTree_int(new List<Node>());
@@ -91,7 +92,7 @@ namespace UnitTest.Commands
          [TestMethod]
          public void TestCorrectPositionsOfNodes()
          {
-             ConsoleLogger logger = new ConsoleLogger();
+             ILogger logger = new ConsoleLoggerTestInstance();
              Executioner execute = new Executioner(logger);
 
              SplayTree_int splaytree = new SplayTree_int(new List<Node>());
@@ -118,8 +119,8 @@ namespace UnitTest.Commands
          [TestMethod]
          public void TestCorrectChildNodes()
          {
-             ConsoleLogger logger = new ConsoleLogger();
-             Executioner execute = new Executioner(logger);
+            ILogger logger = new ConsoleLoggerTestInstance();
+            Executioner execute = new Executioner(logger);
 
              SplayTree_int splaytree = new SplayTree_int(new List<Node>());
              InsertCommand command = new InsertCommand(splaytree);
@@ -139,7 +140,7 @@ namespace UnitTest.Commands
          [TestMethod]
          public void TestCorrectParentNode()
          {
-             ConsoleLogger logger = new ConsoleLogger();
+             ILogger logger = new ConsoleLoggerTestInstance();
              Executioner execute = new Executioner(logger);
 
              SplayTree_int splaytree = new SplayTree_int(new List<Node>());

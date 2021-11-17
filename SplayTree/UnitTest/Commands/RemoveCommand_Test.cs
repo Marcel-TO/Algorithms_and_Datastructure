@@ -14,6 +14,7 @@ namespace UnitTest.Commands
     using SplayTree.Interfaces;
     using SplayTree.Logic;
     using SplayTree.Trees;
+    using UnitTest.Replacements;
 
     /// <summary>
     /// Represents the unit tests for the remove command.
@@ -28,7 +29,7 @@ namespace UnitTest.Commands
         [ExpectedException(typeof(TreeIsEmptyException))]
         public void TestIfListIsEmpty()
         {
-            ILogger logger = new ConsoleLogger();
+            ILogger logger = new ConsoleLoggerTestInstance();
             Executioner execute = new Executioner(logger);
 
             SplayTree_int splaytree = new SplayTree_int(new List<Node>());
@@ -43,7 +44,7 @@ namespace UnitTest.Commands
          [TestMethod]
         public void TestIfNumberExists()
         {
-            ConsoleLogger logger = new ConsoleLogger();
+            ILogger logger = new ConsoleLoggerTestInstance();
             Executioner execute = new Executioner(logger);
 
             List<Node> nodes = execute.GenerateTree(new List<int> { 7, 9, 3, 6, 5 });
@@ -64,8 +65,8 @@ namespace UnitTest.Commands
          [TestMethod]
          public void TestIfNumberDoesNotExist()
          {
-             ConsoleLogger logger = new ConsoleLogger();
-             Executioner execute = new Executioner(logger);
+            ILogger logger = new ConsoleLoggerTestInstance();
+            Executioner execute = new Executioner(logger);
 
             List<Node> nodes = execute.GenerateTree(new List<int> { 7, 9, 3, 6, 5 });
 
@@ -83,7 +84,7 @@ namespace UnitTest.Commands
          [TestMethod]
          public void TestIfSortingCorrect()
          {
-             ConsoleLogger logger = new ConsoleLogger();
+             ILogger logger = new ConsoleLoggerTestInstance();
              Executioner execute = new Executioner(logger);
 
             List<Node> nodes = execute.GenerateTree(new List<int> { 7, 9, 3, 6, 5 });
@@ -106,7 +107,7 @@ namespace UnitTest.Commands
          [TestMethod]
          public void TestIfSameNumbers()
          {
-             ConsoleLogger logger = new ConsoleLogger();
+             ILogger logger = new ConsoleLoggerTestInstance();
              Executioner execute = new Executioner(logger);
 
             List<Node> nodes = execute.GenerateTree(new List<int> { 4, 4, 4, 4 });
