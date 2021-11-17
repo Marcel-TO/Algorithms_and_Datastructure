@@ -15,6 +15,7 @@ namespace SplayTree.Interfaces
         /// <summary>
         /// Represents the accept method for the command.
         /// </summary>
+        /// <param name="visitor">The command visitor.</param>
         void Accept(ICommandVisitor visitor);
     }
 }

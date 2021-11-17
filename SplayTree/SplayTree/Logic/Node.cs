@@ -10,7 +10,7 @@ namespace SplayTree.Logic
     using System;
 
     /// <summary>
-    /// Represents the class of a node instnace.
+    /// Represents the class of a node instance.
     /// </summary>
     public class Node
     {
@@ -125,7 +125,7 @@ namespace SplayTree.Logic
         }
 
         /// <summary>
-        /// Gets or sets the parent node of the current node.
+        /// Gets the parent node of the current node.
         /// </summary>
         /// <value>The parent node of the current node.</value>
         public Node ParentNode

@@ -8,24 +8,26 @@
     "net5.0": []
   },
   "packageFolders": {
-    "/Users/marcel/.nuget/packages/": {}
+    "D:\\Users\\Marcel\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/marcel/Desktop/Studium/3.Semester/AlgoDat/MyGit/SplayTree/SplayTree/SplayTree.csproj",
+      "projectUniqueName": "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SplayTree\\SplayTree\\SplayTree.csproj",
       "projectName": "SplayTree",
-      "projectPath": "/Users/marcel/Desktop/Studium/3.Semester/AlgoDat/MyGit/SplayTree/SplayTree/SplayTree.csproj",
-      "packagesPath": "/Users/marcel/.nuget/packages/",
-      "outputPath": "/Users/marcel/Desktop/Studium/3.Semester/AlgoDat/MyGit/SplayTree/SplayTree/obj/",
+      "projectPath": "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SplayTree\\SplayTree\\SplayTree.csproj",
+      "packagesPath": "D:\\Users\\Marcel\\.nuget\\packages\\",
+      "outputPath": "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SplayTree\\SplayTree\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/marcel/.nuget/NuGet/NuGet.Config"
+        "D:\\Users\\Marcel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "D:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
+        "D:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -58,7 +60,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.103/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "D:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

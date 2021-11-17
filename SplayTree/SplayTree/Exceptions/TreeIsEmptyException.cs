@@ -23,35 +23,3 @@ namespace SplayTree.Exceptions
         }
     }
 }
-
-
-
-//-----------------------------------------------------------------------
-// <copyright file="TreeIsEmptyException.cs" company="FHWN">
-//     Copyright (c) Marcel Turobin-Ort. All rights reserved.
-// </copyright>
-// <author>Marcel Turobin-Ort</author>
-// <summary>Defines .</summary>
-//-----------------------------------------------------------------------
-
-
-/// <summary>
-/// Represents .
-/// </summary>
-
-/// <summary>
-/// Represents .
-/// </summary>
-/// <param name="commandInitializer">Represents .</param>
-
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BaseCommand"/> class.
-        /// </summary>
-        /// <param name="commandInitializer">Represents .</param>
-
-
-        /// <summary>
-        /// Gets the name of the current command.
-        /// </summary>
-        /// <value>The name of the current command.</value>

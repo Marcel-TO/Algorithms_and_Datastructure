@@ -15,7 +15,7 @@ namespace SplayTree.Logic
     using SplayTree.Trees;
 
     /// <summary>
-    /// Represents .
+    /// Represents the logic of the application.
     /// </summary>
     public class ApplicationLogic
     {
@@ -199,12 +199,10 @@ namespace SplayTree.Logic
                 {
                     this.index = this.splaytree.Commands.Length - 1;
                 }
-
                 else if (value > this.splaytree.Commands.Length - 1)
                 {
                     this.index = 0;
                 }
-
                 else 
                 {
                     this.index = value;

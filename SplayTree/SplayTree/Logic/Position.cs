@@ -24,17 +24,17 @@ namespace SplayTree.Logic
         }
 
         /// <summary>
-        /// Gets the x-coordinate of the current node.
+        /// Gets or sets the x-coordinate of the current node.
         /// </summary>
         /// <value>The x-coordinate of the current node.</value>
-        public int X // Check?
+        public int X
         {
             get;
             set;
         }
 
         /// <summary>
-        /// Gets the y-coordinate of the current node.
+        /// Gets or sets the y-coordinate of the current node.
         /// </summary>
         /// <value>The y-coordinate of the current node.</value>
         public int Y

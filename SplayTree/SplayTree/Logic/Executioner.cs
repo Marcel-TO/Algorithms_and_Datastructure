@@ -236,7 +236,6 @@ namespace SplayTree.Logic
                 this.Logger.Message(e.Message);
                 this.Logger.Continue();
             }
-            
         }
 
         /// <summary>
@@ -315,6 +314,7 @@ namespace SplayTree.Logic
         /// </summary>
         /// <param name="node">Represents the current node.</param>
         /// <param name="value">Represents the searching value.</param>
+        /// <returns>The node that is attached to the chosen node.</returns>
         public Node FindAttachmentNode(Node node, int value)
         {
             if (node == null)
@@ -354,6 +354,7 @@ namespace SplayTree.Logic
         /// <param name="attachmentNode">Represents the attachment node of the new root node.</param>
         /// <param name="sortedL">Represents the sorted list of nodes smaller than the new root node.</param>
         /// <param name="sortedR">Represents the sorted list of nodes bigger than the new root node.</param>
+        /// <returns>The list of all sorted nodes.</returns>
         public List<Node> SortTree(Node newRoot, Node attachmentNode, List<Node> sortedL, List<Node> sortedR)
         {
             if (newRoot == null || attachmentNode == null || sortedL == null || sortedR == null)
@@ -398,6 +399,7 @@ namespace SplayTree.Logic
         /// <param name="newNode">Represents the new node.</param>
         /// <param name="node">Represents the current node.</param>
         /// <param name="allNodes">Represents the list of all nodes.</param>
+        /// <returns>List of new added nodes.</returns>
         public List<Node> AddNode(Node newNode, Node node, List<Node> allNodes)
         {
             if (newNode == null || node == null || allNodes == null)
@@ -445,6 +447,7 @@ namespace SplayTree.Logic
         /// </summary>
         /// <param name="value">Represents the value of the new node.</param>
         /// <param name="parentNode">Represents the parent node of the new node.</param>
+        /// <returns>The tuple containing the child and the parent node.</returns>
         public (Node, Node) CreateNode(int value, Node parentNode)
         {
             if (parentNode == null)
@@ -481,6 +484,7 @@ namespace SplayTree.Logic
         /// </summary>
         /// <param name="nodes">Represents the list of all nodes.</param>
         /// <param name="removedValue">Represents the value of the removed node.</param>
+        /// <returns>The amount of returned nodes.</returns>
         public int RemoveNodes(List<Node> nodes, int removedValue)
         {
             if (nodes == null)
@@ -513,6 +517,7 @@ namespace SplayTree.Logic
         /// </summary>
         /// <param name="nodes">Represents the list of all nodes.</param>
         /// <param name="userInput">Represents the removed value from user.</param>
+        /// <returns>The amount of removed nodes.</returns>
         public int FindRemovedNode(List<Node> nodes, int userInput)
         {
             if (nodes == null)
@@ -547,6 +552,7 @@ namespace SplayTree.Logic
         /// Represents the method for generating the new tree.
         /// </summary>
         /// <param name="values">Represents the list of all values from nodes.</param>
+        /// <returns>The list of the new generated nodes.</returns>
         public List<Node> GenerateTree(List<int> values)
         {
             if (values == null)
@@ -581,6 +587,7 @@ namespace SplayTree.Logic
         /// Represents the method for extracting the values from all nodes.
         /// </summary>
         /// <param name="nodes">Represents the list of all nodes.</param>
+        /// <returns>The list of all extracted values.</returns>
         public List<int> ExtractValues(List<Node> nodes)
         {
             if (nodes == null)

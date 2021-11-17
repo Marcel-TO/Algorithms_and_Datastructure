@@ -19,9 +19,9 @@ namespace SplayTree.Logic
     public class ConsoleLogger : ILogger
     {
         /// <summary>
-        /// Represents the seperator between the cursor and the commands.
+        /// Represents the separator between the cursor and the commands.
         /// </summary>
-        private static int seperatePositiionX = 4;
+        private static int separatePositiionX = 4;
 
         /// <summary>
         /// Represents the y start position of the command list.
@@ -115,7 +115,6 @@ namespace SplayTree.Logic
             {
             }
             
-
             Console.WriteLine($"Executed Command: {command.Name} command");
             int maxLayers = command.Nodes[command.Nodes.Count - 1].Position.Y + 1;
 
@@ -203,7 +202,7 @@ namespace SplayTree.Logic
         {
             this.Borders("Supported commands for the splay tree implementation.", commands);
 
-            int xPos = seperatePositiionX;
+            int xPos = separatePositiionX;
             int yPos = startCommandListY;
 
             for (int i = 0; i < commands.Length; i++)
@@ -285,6 +284,7 @@ namespace SplayTree.Logic
         /// <summary>
         /// Represents the method for getting a value from user.
         /// </summary>
+        /// <returns>The value chosen by user.</returns>
         public int GetValueFromUser()
         {
             Console.WriteLine("Please enter a value.");
@@ -307,6 +307,7 @@ namespace SplayTree.Logic
         /// <summary>
         /// Represents the method for getting value from user to choose the traversal order of the tree.
         /// </summary>
+        /// <returns>The chosen traversal order.</returns>
         public int ChooseTraverseOrder()
         {
             Console.WriteLine("Please enter a value.");
@@ -463,14 +464,14 @@ namespace SplayTree.Logic
 
             for (int i = 0; i < commands.Length; i++)
             {
-                if (commands[i].Name.Length + seperatePositiionX > longestName)
+                if (commands[i].Name.Length + separatePositiionX > longestName)
                 {
                     longestName = commands[i].Name.Length;
                 }
             }
 
             // Top Border
-            for (int i = 0; i < seperatePositiionX + longestName; i++)
+            for (int i = 0; i < separatePositiionX + longestName; i++)
             {
                 try
                 {
@@ -497,7 +498,7 @@ namespace SplayTree.Logic
             Console.WriteLine(message);
 
             // Topic Border
-            for (int i = 0; i < seperatePositiionX + longestName; i++)
+            for (int i = 0; i < separatePositiionX + longestName; i++)
             {
                 try
                 {
@@ -527,7 +528,7 @@ namespace SplayTree.Logic
             }
 
             // Bottom Border
-            for (int i = 0; i < seperatePositiionX + longestName; i++)
+            for (int i = 0; i < separatePositiionX + longestName; i++)
             {
                 try
                 {
@@ -546,7 +547,7 @@ namespace SplayTree.Logic
             {
                 try
                 {
-                    Console.SetCursorPosition(seperatePositiionX + longestName, i);
+                    Console.SetCursorPosition(separatePositiionX + longestName, i);
                 }
                 catch (Exception)
                 {

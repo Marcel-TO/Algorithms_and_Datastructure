@@ -17,7 +17,6 @@ namespace SplayTree.Trees
     /// </summary>
     public class SplayTree_int
     {
-
         /// <summary>
         /// Represents the list of all nodes.
         /// </summary>
@@ -59,7 +58,7 @@ namespace SplayTree.Trees
         {
             get
             {
-                return nodes;
+                return this.nodes;
             }
 
             set

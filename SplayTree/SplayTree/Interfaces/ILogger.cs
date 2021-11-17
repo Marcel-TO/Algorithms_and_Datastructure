@@ -51,11 +51,13 @@ namespace SplayTree.Interfaces
         /// <summary>
         /// Represents the method for getting the value from user.
         /// </summary>
+        /// <returns>The value given from user.</returns>
         int GetValueFromUser();
 
         /// <summary>
         /// Represents the method for getting the value of traversal from user.
         /// </summary>
+        /// <returns>The value of the chosen traversal order.</returns>
         int ChooseTraverseOrder();
     }
 }
