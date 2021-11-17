@@ -1,57 +1,120 @@
-﻿namespace SplayTree.Logic
+﻿//-----------------------------------------------------------------------
+// <copyright file="ConsoleLogger.cs" company="FHWN">
+//     Copyright (c) Marcel Turobin-Ort. All rights reserved.
+// </copyright>
+// <author>Marcel Turobin-Ort</author>
+// <summary>Defines a console logger for the application.</summary>
+//-----------------------------------------------------------------------
+namespace SplayTree.Logic
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using SplayTree.Commands;
     using SplayTree.Interfaces;
 
+    /// <summary>
+    /// Represents the console logger of the application.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class ConsoleLogger : ILogger
     {
+        /// <summary>
+        /// Represents the seperator between the cursor and the commands.
+        /// </summary>
         private static int seperatePositiionX = 4;
 
+        /// <summary>
+        /// Represents the y start position of the command list.
+        /// </summary>
         private static int startCommandListY = 4;
 
+        /// <summary>
+        /// Represents the center of the x-coordinate.
+        /// </summary>
         private static int centerX = Console.LargestWindowWidth / 2;
 
-        private static int centerY = Console.LargestWindowHeight / 2;
-
+        /// <summary>
+        /// Represents the connection character for the lesser child node.
+        /// </summary>
         private static char conLeft = '/';
 
+        /// <summary>
+        /// Represents the connection character for the bigger child node.
+        /// </summary>
         private static char conRight = '\\';
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConsoleLogger"/> class.
+        /// </summary>
         public ConsoleLogger()
         {
+            // Disabled the warning that it is only supported by windows.
             #pragma warning disable CA1416
-            Console.SetWindowSize(Console.LargestWindowWidth / 2, Console.LargestWindowHeight / 2);
+
+            // Sets the base window size of the console.
+            try
+            {
+                Console.SetWindowSize(Console.LargestWindowWidth / 2, Console.LargestWindowHeight / 2);
+            }
+            catch (Exception)
+            {
+            }
+            
             this.SetTextColor();
             Console.CursorVisible = false;
         }
 
+        /// <summary>
+        /// Represents the visitor pattern of the clear command.
+        /// </summary>
+        /// <param name="command">Represents the clear command of the splay tree.</param>
         public void Visit(ClearCommand command)
         {
             this.ShowCurrentCommand(command);
         }
 
+        /// <summary>
+        /// Represents the visitor pattern of the contains command.
+        /// </summary>
+        /// <param name="command">Represents the contains command of the splay tree.</param>
         public void Visit(ContainsCommand command)
         {
             this.ShowCurrentCommand(command);
         }
 
+        /// <summary>
+        /// Represents the visitor pattern of the count command.
+        /// </summary>
+        /// <param name="command">Represents the count command of the splay tree.</param>
         public void Visit(CountCommand command)
         {
             this.ShowCurrentCommand(command);
         }
 
+        /// <summary>
+        /// Represents the visitor pattern of the count specific command.
+        /// </summary>
+        /// <param name="command">Represents the count specific command of the splay tree.</param>
         public void Visit(CountSpecificCommand command)
         {
             this.ShowCurrentCommand(command);
         }
 
+        /// <summary>
+        /// Represents the visitor pattern of the display command.
+        /// </summary>
+        /// <param name="command">Represents the display command of the splay tree.</param>
         public void Visit(DisplayCommand command)
         {
             Console.Clear();
-            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+            try
+            {
+                Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+            }
+            catch (Exception)
+            {
+            }
+            
 
             Console.WriteLine($"Executed Command: {command.Name} command");
             int maxLayers = command.Nodes[command.Nodes.Count - 1].Position.Y + 1;
@@ -63,30 +126,57 @@
             Console.WriteLine(string.Empty);
             this.Continue();
 
-            Console.SetWindowSize(Console.LargestWindowWidth / 2, Console.LargestWindowHeight / 2);
+            try
+            {
+                Console.SetWindowSize(Console.LargestWindowWidth / 2, Console.LargestWindowHeight / 2);
+            }
+            catch (Exception)
+            {
+            }
+           
             this.SetTextColor();
         }
 
+        /// <summary>
+        /// Represents the visitor pattern of the insert command.
+        /// </summary>
+        /// <param name="command">Represents the insert command of the splay tree.</param>
         public void Visit(InsertCommand command)
         {
             this.ShowCurrentCommand(command);
         }
 
+        /// <summary>
+        /// Represents the visitor pattern of the maximum command.
+        /// </summary>
+        /// <param name="command">Represents the maximum command of the splay tree.</param>
         public void Visit(MaxCommand command)
         {
             this.ShowCurrentCommand(command);
         }
 
+        /// <summary>
+        /// Represents the visitor pattern of the minimum command.
+        /// </summary>
+        /// <param name="command">Represents the minimum command of the splay tree.</param>
         public void Visit(MinCommand command)
         {
             this.ShowCurrentCommand(command);
         }
 
+        /// <summary>
+        /// Represents the visitor pattern of the remove command.
+        /// </summary>
+        /// <param name="command">Represents the remove command of the splay tree.</param>
         public void Visit(RemoveCommand command)
         {
             this.ShowCurrentCommand(command);
         }
 
+        /// <summary>
+        /// Represents the visitor pattern of the traverse command.
+        /// </summary>
+        /// <param name="command">Represents the traverse command of the splay tree.</param>
         public void Visit(TraverseCommand command)
         {
             this.ShowCurrentCommand(command);
@@ -96,12 +186,19 @@
             Console.WriteLine("3. Post-Order");
         }
 
+        /// <summary>
+        /// Represents the welcome logging.
+        /// </summary>
         public void WelcomeMessage()
         {
             Console.WriteLine("Welcome to the amazing Splay-Tree algortihm showcase.");
             Console.WriteLine(string.Empty);
         }
 
+        /// <summary>
+        /// Represents the showcase of all supported commands.
+        /// </summary>
+        /// <param name="commands">Represents the list of all supported commands.</param>
         public void ShowCommands(BaseCommand[] commands)
         {
             this.Borders("Supported commands for the splay tree implementation.", commands);
@@ -119,6 +216,11 @@
             }
         }
 
+        /// <summary>
+        /// Represents the visualization of the cursor.
+        /// </summary>
+        /// <param name="index">Represents the index of the commands list.</param>
+        /// <param name="lengthOfCommandList">Represents the amount of the supported commands.</param>
         public void ShowCursor(int index, int lengthOfCommandList)
         {
             int xPos = 1;
@@ -154,22 +256,35 @@
             }
         }
 
+        /// <summary>
+        /// Represents the method for logging a message.
+        /// </summary>
+        /// <param name="message">Represents the message for the user.</param>
         public void Message(string message)
         {
             Console.WriteLine(message);
         }
 
+        /// <summary>
+        /// Represents the method for awaiting user input to continue.
+        /// </summary>
         public void Continue()
         {
             Console.WriteLine("Please press any key to continue.");
             Console.ReadKey(true);
         }
 
+        /// <summary>
+        /// Represents the method for clearing the console.
+        /// </summary>
         public void Clear()
         {
             Console.Clear();
         }
 
+        /// <summary>
+        /// Represents the method for getting a value from user.
+        /// </summary>
         public int GetValueFromUser()
         {
             Console.WriteLine("Please enter a value.");
@@ -189,6 +304,9 @@
             }
         }
 
+        /// <summary>
+        /// Represents the method for getting value from user to choose the traversal order of the tree.
+        /// </summary>
         public int ChooseTraverseOrder()
         {
             Console.WriteLine("Please enter a value.");
@@ -208,6 +326,10 @@
             }
         }
 
+        /// <summary>
+        /// Represents the visualization of the current command.
+        /// </summary>
+        /// <param name="command">Represents the current command of the splay tree.</param>
         private void ShowCurrentCommand(BaseCommand command)
         {
             Console.Clear();
@@ -216,6 +338,11 @@
             Console.WriteLine(string.Empty);
         }
 
+        /// <summary>
+        /// Represents the method for logging the current node.
+        /// </summary>
+        /// <param name="node">Represents the current node of the splay tree.</param>
+        /// <param name="maxLayer">Represents the amount of layers from the splay tree.</param>
         private void PrintNode(Node node, int maxLayer)
         {
             int length = node.Value.ToString().Length;
@@ -240,6 +367,16 @@
             }
         }
 
+        /// <summary>
+        /// Represents the method for printing the child node.
+        /// </summary>
+        /// <param name="parent">Represents the parent node of the current node.</param>
+        /// <param name="child">Represents the current node of the splay tree.</param>
+        /// <param name="maxLayer">Represents the amount of layers of the splay tree.</param>
+        /// <param name="connection">Represents the connection visualization of the nodes.</param>
+        /// <param name="isBigger">Represents a value indicating whether the child bigger than the parent node, otherwise false.</param>
+        /// <param name="x">Represents the x position of the parent node.</param>
+        /// <param name="y">Represents the y position of the parent tree.</param>
         private void PrintChildNode(Node parent, Node child, int maxLayer, char connection, bool isBigger, int x, int y)
         {
             int length = child.Value.ToString().Length;
@@ -315,6 +452,11 @@
             }
         }
 
+        /// <summary>
+        /// Represents the visitor pattern of the clear command.
+        /// </summary>
+        /// <param name="message">Represents the message of the application.</param>
+        /// <param name="commands">Represents the list of commands.</param>
         private void Borders(string message, BaseCommand[] commands)
         {
             int longestName = message.Length;
@@ -415,11 +557,17 @@
             }
         }
 
+        /// <summary>
+        /// Represents the method for changing the color of the text.
+        /// </summary>
         private void SetTextColor()
         {
             Console.ForegroundColor = ConsoleColor.White;
         }
 
+        /// <summary>
+        /// Represents the method for changing the color of the connection lines.
+        /// </summary>
         private void SetValueConnectionColor()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;

@@ -1,4 +1,11 @@
-﻿namespace SplayTree.Logic
+﻿//-----------------------------------------------------------------------
+// <copyright file="ApplicationLogic.cs" company="FHWN">
+//     Copyright (c) Marcel Turobin-Ort. All rights reserved.
+// </copyright>
+// <author>Marcel Turobin-Ort</author>
+// <summary>Defines the logic of the application.</summary>
+//-----------------------------------------------------------------------
+namespace SplayTree.Logic
 {
     using System;
     using System.Collections.Generic;
@@ -7,22 +14,51 @@
     using SplayTree.KeyboardWatcher;
     using SplayTree.Trees;
 
+    /// <summary>
+    /// Represents .
+    /// </summary>
     public class ApplicationLogic
     {
+        /// <summary>
+        /// Represents the command visitor pattern for execution.
+        /// </summary>
         private ICommandVisitor execute;
 
+        /// <summary>
+        /// Represents the logger of the application.
+        /// </summary>
         private ILogger logger;
 
+        /// <summary>
+        /// Represents the list of nodes from the splay tree.
+        /// </summary>
         private List<Node> nodes;
 
+        /// <summary>
+        /// Represents the splay tree of the application.
+        /// </summary>
         private SplayTree_int splaytree;
 
+        /// <summary>
+        /// Represents the keyboard watcher for user input purpose.
+        /// </summary>
         private IKeyboardWatcher keyboardWatcher;
 
+        /// <summary>
+        /// Represents the index of the command list.
+        /// </summary>
         private int index;
 
+        /// <summary>
+        /// Represents the duration of the interaction with the application.
+        /// </summary>
         private bool loop;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplicationLogic"/> class.
+        /// </summary>
+        /// <param name="logger">Represents the logger for the application.</param>
+        /// <param name="watcher">Represents the keyboard watcher for user input.</param>
         public ApplicationLogic(ILogger logger, IKeyboardWatcher watcher)
         {
             this.Logger = logger;
@@ -36,6 +72,10 @@
             this.loop = true;
         }
 
+        /// <summary>
+        /// Gets the execute visitor for the commands.
+        /// </summary>
+        /// <value>The execute visitor for the commands.</value>
         public ICommandVisitor Execute
         {
             get
@@ -54,6 +94,10 @@
             }
         }
 
+        /// <summary>
+        /// Gets the logger for the application.
+        /// </summary>
+        /// <value>The logger for the application.</value>
         public ILogger Logger
         {
             get
@@ -72,6 +116,10 @@
             }
         }
 
+        /// <summary>
+        /// Gets the list of nodes from the splay tree.
+        /// </summary>
+        /// <value>The list of nodes from the splay tree.</value>
         public List<Node> Nodes
         {
             get
@@ -90,6 +138,10 @@
             }
         }
 
+        /// <summary>
+        /// Gets the current splay tree of the application.
+        /// </summary>
+        /// <value>The current splay tree.</value>
         public SplayTree_int Splaytree
         {
             get
@@ -108,6 +160,10 @@
             }
         }
 
+        /// <summary>
+        /// Gets the keyboard watcher of the application.
+        /// </summary>
+        /// <value>The keyboard watcher for user input.</value>
         public IKeyboardWatcher KeyboardWatcher
         {
             get
@@ -126,6 +182,10 @@
             }
         }
 
+        /// <summary>
+        /// Gets the index of the current command list.
+        /// </summary>
+        /// <value>The index of the current command list.</value>
         public int Index
         {
             get
@@ -152,6 +212,9 @@
             }
         }
 
+        /// <summary>
+        /// Represents start of the application.
+        /// </summary>
         public void Start()
         {
             this.Logger.WelcomeMessage();
@@ -167,6 +230,11 @@
             this.logger.Clear();
         }
 
+        /// <summary>
+        /// Occurs if the user pressed a key.
+        /// </summary>
+        /// <param name="sender">Represents the sender of the event.</param>
+        /// <param name="e">Represents the arguments of the event.</param>
         protected void KeyPressed(object sender, KeyboardWatcherKeyPressedEventArgs e)
         {
             switch (e.Key)
@@ -186,6 +254,12 @@
             }
         }
 
+        /// <summary>
+        /// Represents the method for executing the selected command.
+        /// </summary>
+        /// <param name="commands">Represents the list of all supported commands.</param>
+        /// <param name="index">Represents the index of the current command list.</param>
+        /// <param name="execute">Represents the execute visitor pattern of the current command.</param>
         private void ExecuteCommand(BaseCommand[] commands, int index, ICommandVisitor execute)
         {
             commands[index].Accept(execute);

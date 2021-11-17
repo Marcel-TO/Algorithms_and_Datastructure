@@ -45,7 +45,13 @@ namespace SplayTree.Exceptions
 /// <param name="commandInitializer">Represents .</param>
 
 
-/// <summary>
-/// Initializes a new instance of the <see cref="BaseCommand"/> class.
-/// </summary>
-/// <param name="commandInitializer">Represents .</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseCommand"/> class.
+        /// </summary>
+        /// <param name="commandInitializer">Represents .</param>
+
+
+        /// <summary>
+        /// Gets the name of the current command.
+        /// </summary>
+        /// <value>The name of the current command.</value>

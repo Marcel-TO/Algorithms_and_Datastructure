@@ -1,4 +1,11 @@
-﻿namespace SplayTree.Logic
+﻿//-----------------------------------------------------------------------
+// <copyright file="Executioner.cs" company="FHWN">
+//     Copyright (c) Marcel Turobin-Ort. All rights reserved.
+// </copyright>
+// <author>Marcel Turobin-Ort</author>
+// <summary>Defines the class for executing the commands.</summary>
+//-----------------------------------------------------------------------
+namespace SplayTree.Logic
 {
     using System;
     using System.Collections.Generic;
@@ -7,15 +14,29 @@
     using SplayTree.Exceptions;
     using SplayTree.Interfaces;
 
+    /// <summary>
+    /// Represents the class for executing commands.
+    /// </summary>
     public class Executioner : ICommandVisitor
     {
+        /// <summary>
+        /// Represents the logger of the application.
+        /// </summary>
         private ILogger logger;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Executioner"/> class.
+        /// </summary>
+        /// <param name="logger">Represents the logger of the application.</param>
         public Executioner(ILogger logger)
         {
             this.Logger = logger;
         }
 
+        /// <summary>
+        /// Gets the LOGGER of the application.
+        /// </summary>
+        /// <value>The logger of the application.</value>
         public ILogger Logger
         {
             get
@@ -34,6 +55,10 @@
             }
         }
 
+        /// <summary>
+        /// Represents the visitor pattern for the clear command.
+        /// </summary>
+        /// <param name="command">Represents the clear command of the current splay tree.</param>
         public void Visit(ClearCommand command)
         {
             this.Logger.Visit(command);
@@ -51,7 +76,11 @@
                 this.Logger.Continue();
             }
         }
-
+        
+        /// <summary>
+        /// Represents the visitor pattern for the contains command.
+        /// </summary>
+        /// <param name="command">Represents the contains command of the current splay tree.</param>
         public void Visit(ContainsCommand command)
         {
             this.Logger.Visit(command);
@@ -79,6 +108,10 @@
             this.Logger.Continue();
         }
 
+        /// <summary>
+        /// Represents the visitor pattern for the count command.
+        /// </summary>
+        /// <param name="command">Represents the count command of the current splay tree.</param>
         public void Visit(CountCommand command)
         {
             this.Logger.Visit(command);
@@ -96,6 +129,10 @@
             }
         }
 
+        /// <summary>
+        /// Represents the visitor pattern for the count specific command.
+        /// </summary>
+        /// <param name="command">Represents the count specific command of the current splay tree.</param>
         public void Visit(CountSpecificCommand command) 
         {
             this.Logger.Visit(command);
@@ -114,6 +151,10 @@
             }
         }
 
+        /// <summary>
+        /// Represents the visitor pattern for the display command.
+        /// </summary>
+        /// <param name="command">Represents the display command of the current splay tree.</param>
         public void Visit(DisplayCommand command)
         {
             try
@@ -131,6 +172,10 @@
             this.Logger.Visit(command);
         }
 
+        /// <summary>
+        /// Represents the visitor pattern for the insert command.
+        /// </summary>
+        /// <param name="command">Represents the insert command of the current splay tree.</param>
         public void Visit(InsertCommand command)
         {
             this.Logger.Visit(command);
@@ -146,12 +191,15 @@
                 this.Logger.Continue();
                 return;
             }
-           
 
             this.Logger.Message($"The node {value} got added to the tree.");
             this.Logger.Continue();
         }
 
+        /// <summary>
+        /// Represents the visitor pattern for the maximum command.
+        /// </summary>
+        /// <param name="command">Represents the maximum command of the current splay tree.</param>
         public void Visit(MaxCommand command)
         {
             this.Logger.Visit(command);
@@ -169,6 +217,10 @@
             }
         }
 
+        /// <summary>
+        /// Represents the visitor pattern for the minimum command.
+        /// </summary>
+        /// <param name="command">Represents the minimum command of the current splay tree.</param>
         public void Visit(MinCommand command)
         {
             this.Logger.Visit(command);
@@ -187,6 +239,10 @@
             
         }
 
+        /// <summary>
+        /// Represents the visitor pattern for the remove command.
+        /// </summary>
+        /// <param name="command">Represents the remove command of the current splay tree.</param>
         public void Visit(RemoveCommand command)
         {
             this.Logger.Visit(command);
@@ -221,6 +277,10 @@
             }
         }
 
+        /// <summary>
+        /// Represents the visitor pattern for the traverse command.
+        /// </summary>
+        /// <param name="command">Represents the traverse command of the current splay tree.</param>
         public void Visit(TraverseCommand command)
         {
             this.Logger.Visit(command);
@@ -250,6 +310,11 @@
             }
         }
 
+        /// <summary>
+        /// Represents the method for finding the attachment node for the new node.
+        /// </summary>
+        /// <param name="node">Represents the current node.</param>
+        /// <param name="value">Represents the searching value.</param>
         public Node FindAttachmentNode(Node node, int value)
         {
             if (node == null)
@@ -282,6 +347,13 @@
             return node;
         }
 
+        /// <summary>
+        /// Represents the method for sorting the new tree.
+        /// </summary>
+        /// <param name="newRoot">Represents the new root node.</param>
+        /// <param name="attachmentNode">Represents the attachment node of the new root node.</param>
+        /// <param name="sortedL">Represents the sorted list of nodes smaller than the new root node.</param>
+        /// <param name="sortedR">Represents the sorted list of nodes bigger than the new root node.</param>
         public List<Node> SortTree(Node newRoot, Node attachmentNode, List<Node> sortedL, List<Node> sortedR)
         {
             if (newRoot == null || attachmentNode == null || sortedL == null || sortedR == null)
@@ -320,6 +392,12 @@
             return newList;
         }
 
+        /// <summary>
+        /// Represents the method for adding a new node.
+        /// </summary>
+        /// <param name="newNode">Represents the new node.</param>
+        /// <param name="node">Represents the current node.</param>
+        /// <param name="allNodes">Represents the list of all nodes.</param>
         public List<Node> AddNode(Node newNode, Node node, List<Node> allNodes)
         {
             if (newNode == null || node == null || allNodes == null)
@@ -362,6 +440,11 @@
             return allNodes;
         }
 
+        /// <summary>
+        /// Represents the method for creating a node.
+        /// </summary>
+        /// <param name="value">Represents the value of the new node.</param>
+        /// <param name="parentNode">Represents the parent node of the new node.</param>
         public (Node, Node) CreateNode(int value, Node parentNode)
         {
             if (parentNode == null)
@@ -393,6 +476,11 @@
             return (newNode, parentNode);
         }
 
+        /// <summary>
+        /// Represents the method for removing a node.
+        /// </summary>
+        /// <param name="nodes">Represents the list of all nodes.</param>
+        /// <param name="removedValue">Represents the value of the removed node.</param>
         public int RemoveNodes(List<Node> nodes, int removedValue)
         {
             if (nodes == null)
@@ -420,6 +508,11 @@
             return count;
         }
 
+        /// <summary>
+        /// Represents the method for removing all connections with removed node.
+        /// </summary>
+        /// <param name="nodes">Represents the list of all nodes.</param>
+        /// <param name="userInput">Represents the removed value from user.</param>
         public int FindRemovedNode(List<Node> nodes, int userInput)
         {
             if (nodes == null)
@@ -450,6 +543,10 @@
             return removeCount;
         }
 
+        /// <summary>
+        /// Represents the method for generating the new tree.
+        /// </summary>
+        /// <param name="values">Represents the list of all values from nodes.</param>
         public List<Node> GenerateTree(List<int> values)
         {
             if (values == null)
@@ -480,6 +577,10 @@
             return sortedNodes;
         }
 
+        /// <summary>
+        /// Represents the method for extracting the values from all nodes.
+        /// </summary>
+        /// <param name="nodes">Represents the list of all nodes.</param>
         public List<int> ExtractValues(List<Node> nodes)
         {
             if (nodes == null)
