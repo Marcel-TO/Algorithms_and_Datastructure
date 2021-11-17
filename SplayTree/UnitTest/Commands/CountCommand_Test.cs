@@ -3,11 +3,10 @@
 //     Copyright (c) Marcel Turobin-Ort. All rights reserved.
 // </copyright>
 // <author>Marcel Turobin-Ort</author>
-// <summary>Defines the test class for the count command class.</summary>
+// <summary>Defines the test class for the count command.</summary>
 //-----------------------------------------------------------------------
 namespace UnitTest.Commands
 {
-    using System;
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SplayTree.Commands;
@@ -27,7 +26,7 @@ namespace UnitTest.Commands
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(TreeIsEmptyException))]
-        public  void TestIfTreeIsEmpty()
+        public void TestIfTreeIsEmpty()
         {
             ILogger logger = new ConsoleLogger();
 
@@ -41,12 +40,12 @@ namespace UnitTest.Commands
         /// Represents a method for testing if count is correct.
         /// </summary>
         [TestMethod]
-        public  void TestIfCountingIsCorrect()
+        public void TestIfCountingIsCorrect()
         {
             ILogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {7,9,3,6,5}));
+            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> { 7, 9, 3, 6, 5 }));
             CountCommand command = new CountCommand(splaytree);
 
             int count = command.Execute();

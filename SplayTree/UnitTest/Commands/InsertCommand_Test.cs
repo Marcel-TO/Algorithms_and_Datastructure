@@ -1,4 +1,11 @@
-﻿namespace UnitTest.Commands
+﻿//-----------------------------------------------------------------------
+// <copyright file="InsertCommand_Test.cs" company="FHWN">
+//     Copyright (c) Marcel Turobin-Ort. All rights reserved.
+// </copyright>
+// <author>Marcel Turobin-Ort</author>
+// <summary>Defines the test class for the display command.</summary>
+//-----------------------------------------------------------------------
+namespace UnitTest.Commands
 {
     using System;
     using System.Collections.Generic;
@@ -8,9 +15,15 @@
     using SplayTree.Logic;
     using SplayTree.Trees;
 
+    /// <summary>
+    /// Represents the unit tests for the insert command.
+    /// </summary>
     [TestClass]
     public class InsertCommand_Test
     {
+        /// <summary>
+        /// Represents a method for testing if the number is correct.
+        /// </summary>
          [TestMethod]
          public void TestNumberCorrect()
          {
@@ -25,10 +38,13 @@
              Assert.IsTrue(command.Nodes.Count != 0);
          }
 
+        /// <summary>
+        /// Represents a method for testing if the command reacts properly to negative input.
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestNegativeInput()
-         {
+        {
              ConsoleLogger logger = new ConsoleLogger();
              Executioner execute = new Executioner(logger);
 
@@ -36,8 +52,11 @@
              InsertCommand command = new InsertCommand(splaytree);
 
              command.Execute(execute, -5);
-         }
+        }
 
+        /// <summary>
+        /// Represents a method for testing if the command sorts correctly.
+        /// </summary>
          [TestMethod]
          public void TestCorrectSorting()
          {
@@ -58,6 +77,7 @@
 
              // Check if root node is last insert.
              Assert.IsTrue(command.Nodes[0].Value == 5);
+
              // Check other nodes of correct sorting.
              Assert.IsTrue(command.Nodes[1].Value == 3);
              Assert.IsTrue(command.Nodes[2].Value == 6);
@@ -65,6 +85,9 @@
              Assert.IsTrue(command.Nodes[4].Value == 9);
          }
 
+        /// <summary>
+        /// Represents a method for testing if the position of nodes is correct.
+        /// </summary>
          [TestMethod]
          public void TestCorrectPositionsOfNodes()
          {
@@ -89,6 +112,9 @@
              Assert.IsTrue(command.Nodes[2].Position.Y == 1);
          }
 
+        /// <summary>
+        /// Represents a method for testing if the child node is correct.
+        /// </summary>
          [TestMethod]
          public void TestCorrectChildNodes()
          {
@@ -107,6 +133,9 @@
              Assert.IsTrue(command.Nodes[0].BiggerNode == command.Nodes[2]);
          }
 
+         /// <summary>
+         /// Represents a method for testing if the parent node is correct.
+         /// </summary>
          [TestMethod]
          public void TestCorrectParentNode()
          {

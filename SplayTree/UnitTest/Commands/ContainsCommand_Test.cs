@@ -3,11 +3,10 @@
 //     Copyright (c) Marcel Turobin-Ort. All rights reserved.
 // </copyright>
 // <author>Marcel Turobin-Ort</author>
-// <summary>Defines the test class for the contians command class.</summary>
+// <summary>Defines the test class for the contians command.</summary>
 //-----------------------------------------------------------------------
 namespace UnitTest.Commands
 {
-    using System;
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SplayTree.Commands;
@@ -27,7 +26,7 @@ namespace UnitTest.Commands
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(TreeIsEmptyException))]
-        public  void TestIfTreeIsEmpty()
+        public void TestIfTreeIsEmpty()
         {
             ILogger logger = new ConsoleLogger();
 
@@ -41,12 +40,12 @@ namespace UnitTest.Commands
         /// Represents a method for testing if the tree contains the number is correct.
         /// </summary>
         [TestMethod]
-        public  void TestIfTreeContainsNumber()
+        public void TestIfTreeContainsNumber()
         {
             ILogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {7,9,3,6,5}));
+            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> { 7, 9, 3, 6, 5 }));
             ContainsCommand command = new ContainsCommand(splaytree);
 
             bool contains = command.Execute(3);
@@ -58,12 +57,12 @@ namespace UnitTest.Commands
         /// Represents a method for testing if the command works correct when the number does not exist in the tree.
         /// </summary>
         [TestMethod]
-        public  void TestIfNumberDoesNotExist()
+        public void TestIfNumberDoesNotExist()
         {
             ILogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {7,9,3,6,5}));
+            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> { 7, 9, 3, 6, 5 }));
             ContainsCommand command = new ContainsCommand(splaytree);
 
             bool contains = command.Execute(8);

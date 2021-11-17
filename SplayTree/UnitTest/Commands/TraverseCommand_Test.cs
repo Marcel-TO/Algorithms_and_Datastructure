@@ -1,6 +1,12 @@
+//-----------------------------------------------------------------------
+// <copyright file="TraverseCommand_Test.cs" company="FHWN">
+//     Copyright (c) Marcel Turobin-Ort. All rights reserved.
+// </copyright>
+// <author>Marcel Turobin-Ort</author>
+// <summary>Defines the test class for the traverse command.</summary>
+//-----------------------------------------------------------------------
 namespace UnitTest.Commands
 {
-    using System;
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SplayTree.Commands;
@@ -9,21 +15,15 @@ namespace UnitTest.Commands
     using SplayTree.Logic;
     using SplayTree.Trees;
 
+    /// <summary>
+    /// Represents the unit tests for the traverse command.
+    /// </summary>
     [TestClass]
     public class TraverseCommand_Test
     {
-        /*
-        *   Null input
-        *   wrong input
-        *   correct input
-        *   pre-order
-        *   in-order
-        +   post-order
-        */
-
-        // Siehe ->https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
-
-
+        /// <summary>
+        /// Represents a method for testing if the tree is empty.
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(TreeIsEmptyException))]
         public void TestIfTreeIsEmpty()
@@ -34,44 +34,19 @@ namespace UnitTest.Commands
             SplayTree_int splaytree = new SplayTree_int(new List<Node>());
             TraverseCommand command = new TraverseCommand(splaytree);
 
-            List<Node> nodes = command.Execute(execute, TraverseOrder.inOrder);
+            command.Execute(execute, TraverseOrder.inOrder);
         }
 
-        //[TestMethod]
-        //public void TestIfInputIsNull()
-        //{
-        //    ConsoleLogger logger = new ConsoleLogger();
-        //    Executioner execute = new Executioner(logger);
-
-        //    Splaytree splaytree = new Splaytree(execute.GenerateTree(new List<int> {7,9,3,6,5}));
-        //    TraverseCommand command = new TraverseCommand(splaytree);
-
-        //    List<Node> nodes = command.Execute(execute, null);
-
-        //    Assert.IsTrue(nodes == null);
-        //}
-
-        //[TestMethod]
-        //public void TestIfWrongInput()
-        //{
-        //    ConsoleLogger logger = new ConsoleLogger();
-        //    Executioner execute = new Executioner(logger);
-
-        //    Splaytree splaytree = new Splaytree(execute.GenerateTree(new List<int> {7,9,3,6,5}));
-        //    TraverseCommand command = new TraverseCommand(splaytree);
-
-        //    List<Node> nodes = command.Execute(execute, "noclue-order");
-
-        //    Assert.IsTrue(nodes.Count == 0);
-        //}
-
+        /// <summary>
+        /// Represents a method for testing if the traversal of nodes is correct.
+        /// </summary>
         [TestMethod]
         public void TestIfCorrectInput()
         {
             ConsoleLogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {7,9,3,6,5}));
+            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> { 7, 9, 3, 6, 5 }));
             TraverseCommand command = new TraverseCommand(splaytree);
             List<Node> testSample = command.Nodes;
 
@@ -80,13 +55,16 @@ namespace UnitTest.Commands
             Assert.IsTrue(nodes != testSample);
         }
 
+        /// <summary>
+        /// Represents a method for testing if the pre-order traversal is correct.
+        /// </summary>
         [TestMethod]
         public void TestIfPreOrderIsCorrect()
         {
             ConsoleLogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {7,9,3,6,5}));
+            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> { 7, 9, 3, 6, 5 }));
             TraverseCommand command = new TraverseCommand(splaytree);
 
             List<Node> nodes = command.Execute(execute, TraverseOrder.preOrder);
@@ -98,13 +76,16 @@ namespace UnitTest.Commands
             Assert.IsTrue(nodes[4].Value == 9);
         }
 
+        /// <summary>
+        /// Represents a method for testing if the in-order traversal is correct.
+        /// </summary>
         [TestMethod]
         public void TestIfInOrderIsCorrect()
         {
             ConsoleLogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {7,9,3,6,5}));
+            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> { 7, 9, 3, 6, 5 }));
             TraverseCommand command = new TraverseCommand(splaytree);
 
             List<Node> nodes = command.Execute(execute, TraverseOrder.inOrder);
@@ -116,13 +97,16 @@ namespace UnitTest.Commands
             Assert.IsTrue(nodes[4].Value == 9);
         }
 
+        /// <summary>
+        /// Represents a method for testing if the post-order traversal is correct.
+        /// </summary>
         [TestMethod]
         public void TestIfPostOrderIsCorrect()
         {
             ConsoleLogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {5,3,6,7,9}));
+            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> { 5, 3, 6, 7, 9 }));
             TraverseCommand command = new TraverseCommand(splaytree);
 
             List<Node> nodes = command.Execute(execute, TraverseOrder.postOrder);

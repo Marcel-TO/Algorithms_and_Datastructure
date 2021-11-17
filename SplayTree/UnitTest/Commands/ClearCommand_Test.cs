@@ -3,11 +3,10 @@
 //     Copyright (c) Marcel Turobin-Ort. All rights reserved.
 // </copyright>
 // <author>Marcel Turobin-Ort</author>
-// <summary>Defines the test class for the clear command class.</summary>
+// <summary>Defines the test class for the clear command.</summary>
 //-----------------------------------------------------------------------
 namespace UnitTest.Commands
 {
-    using System;
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SplayTree.Commands;
@@ -27,7 +26,7 @@ namespace UnitTest.Commands
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(TreeIsEmptyException))]
-        public  void TestIfTreeIsEmpty()
+        public void TestIfTreeIsEmpty()
         {
             SplayTree_int splaytree = new SplayTree_int(new List<Node>());
             ClearCommand command = new ClearCommand(splaytree);
@@ -39,12 +38,12 @@ namespace UnitTest.Commands
         /// Represents a method for testing if the tree gets cleared.
         /// </summary>
         [TestMethod]
-        public  void TestIfTreeGetsCleared()
+        public void TestIfTreeGetsCleared()
         {
             ILogger logger = new ConsoleLogger();
             Executioner execute = new Executioner(logger);
 
-            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> {7,9,3,6,5}));
+            SplayTree_int splaytree = new SplayTree_int(execute.GenerateTree(new List<int> { 7, 9, 3, 6, 5 }));
             ClearCommand command = new ClearCommand(splaytree);
 
             command.Execute();

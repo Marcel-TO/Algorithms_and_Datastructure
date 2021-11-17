@@ -11,7 +11,6 @@ namespace UnitTest.Commands
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SplayTree.Commands;
-    using SplayTree.Interfaces;
     using SplayTree.Logic;
     using SplayTree.Trees;
 
@@ -66,7 +65,7 @@ namespace UnitTest.Commands
         }
 
         /// <summary>
-        /// Represents a method for testig if set nodes is correct.
+        /// Represents a method for testing if set nodes is correct.
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
