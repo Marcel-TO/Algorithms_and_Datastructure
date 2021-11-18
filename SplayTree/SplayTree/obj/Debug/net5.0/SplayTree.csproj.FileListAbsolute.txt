@@ -44,3 +44,4 @@ M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SplayTree\SplayTree\obj\Debug
 M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SplayTree\SplayTree\obj\Debug\net5.0\ref\SplayTree.dll
 M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SplayTree\SplayTree\obj\Debug\net5.0\SplayTree.pdb
 M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SplayTree\SplayTree\obj\Debug\net5.0\SplayTree.genruntimeconfig.cache
+M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SplayTree\SplayTree\obj\Debug\net5.0\SplayTree.csproj.AssemblyReference.cache

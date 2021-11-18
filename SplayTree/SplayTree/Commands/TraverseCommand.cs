@@ -58,22 +58,26 @@ namespace SplayTree.Commands
                 throw new TreeIsEmptyException("The tree is empty. Please consider to add values to the tree before trying to check what's inside the tree.");
             }
 
-            List<Node> traversedNodes = new List<Node>();
+            //List<Node> rekursive = new List<Node>();
+            List<Node> iterative = new List<Node>();
 
             switch (order)
             {
                 case TraverseOrder.inOrder:
-                    traversedNodes = this.InOrder(this.Nodes[0], traversedNodes);
+                    iterative = this.InOrder_Iterativ(this.Nodes[0]);
+                    //rekursive = this.InOrder(this.Nodes[0], rekursive);
                 break;
                 case TraverseOrder.preOrder:
-                    traversedNodes = this.PreOrder(this.Nodes[0], traversedNodes);
+                    iterative = this.PreOrder_Iterativ(this.Nodes[0]);
+                    //rekursive = this.PreOrder(this.Nodes[0], rekursive);
                 break;
                 case TraverseOrder.postOrder:
-                    traversedNodes = this.PostOrder(this.Nodes[0], traversedNodes);
+                    iterative = this.PostOrder_Iterativ(this.Nodes[0]);
+                    //rekursive = this.PostOrder(this.Nodes[0], rekursive);
                 break;
             }
 
-            List<int> values = execute.ExtractValues(traversedNodes);
+            List<int> values = execute.ExtractValues(iterative);
             return execute.GenerateTree(values);
         }
 
@@ -146,33 +150,48 @@ namespace SplayTree.Commands
             return traversedNodes;
         }
 
+        /// <summary>
+        /// Represents the in-order traversal.
+        /// </summary>
+        /// <param name="root">The root node.</param>
+        /// <returns>The complete traversed nodes.</returns>
         private List<Node> InOrder_Iterativ(Node root)
         {
             List<Node> traversedNodes = new List<Node>();
 
-            var sortedL = this.Nodes.OrderBy(n => n.Value).Where(n => n.Value < root.Value).Reverse().ToList();
-            var sortedR = this.Nodes.OrderBy(n => n.Value).Where(n => n.Value >= root.Value).Where(n => n != root).Reverse().ToList();
+            var sortedL = this.Nodes.OrderBy(n => n.Value).Where(n => n.Value < root.Value).ToList();
+            var sortedR = this.Nodes.OrderBy(n => n.Value).Where(n => n.Value >= root.Value).Where(n => n != root).ToList();
 
             traversedNodes = traversedNodes.Concat(sortedL).Concat(new List<Node> {root}).Concat(sortedR).ToList();
             return traversedNodes;
         }
 
+        /// <summary>
+        /// Represents the pre-order traversal.
+        /// </summary>
+        /// <param name="root">The root node.</param>
+        /// <returns>The complete traversed nodes.</returns>
         private List<Node> PreOrder_Iterativ(Node root)
         {
             List<Node> traversedNodes = new List<Node>();
 
-            var sortedL = this.Nodes.OrderBy(n => n.Position.Y).OrderBy(n => n.Position.X).Where(n => n.Value < root.Value).ToList();
-            var sortedR = this.Nodes.OrderBy(n => n.Position.Y).OrderBy(n => n.Position.X).Where(n => n.Value >= root.Value).Where(n => n != root).ToList();
+            var sortedL = this.Nodes.OrderBy(n => n.Position.Y).ThenBy(n => n.Position.X).Where(n => n.Value < root.Value).ToList();
+            var sortedR = this.Nodes.OrderBy(n => n.Position.Y).ThenBy(n => n.Position.X).Where(n => n.Value >= root.Value).Where(n => n != root).ToList();
 
             traversedNodes = traversedNodes.Concat(new List<Node> {root}).Concat(sortedL).Concat(sortedR).ToList();
             return traversedNodes;
         }
 
+        /// <summary>
+        /// Represents the post-order traversal.
+        /// </summary>
+        /// <param name="root">The root node.</param>
+        /// <returns>The complete traversed nodes.</returns>
         private List<Node> PostOrder_Iterativ(Node root)
         {
             List<Node> traversedNodes = new List<Node>();
 
-            var extracted = this.Nodes.OrderBy(n => n.Position.Y).OrderBy(n => n.Position.X).Where(n => n != root).Reverse().ToList();
+            var extracted = this.Nodes.OrderBy(n => n.Position.Y).Where(n => n != root).Reverse().ToList();
 
             traversedNodes = traversedNodes.Concat(extracted).Concat(new List<Node> {root}).ToList();
             return traversedNodes;
