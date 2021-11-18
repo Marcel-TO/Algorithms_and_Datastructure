@@ -8,6 +8,7 @@
 namespace SplayTree.Commands
 {
     using System.Collections.Generic;
+    using System.Linq;
     using SplayTree.Exceptions;
     using SplayTree.Interfaces;
     using SplayTree.Logic;
@@ -143,6 +144,39 @@ namespace SplayTree.Commands
             traversedNodes.Add(currentNode);
 
             return traversedNodes;
+        }
+
+        private List<Node> InOrder_Iterativ(Node root)
+        {
+            List<Node> traversedNodes = new List<Node>();
+
+            var sortedL = this.Nodes.OrderBy(n => n.Position.Y).OrderBy(n => n.Position.X).Where(x => x.Value < root.Value).ToList();
+            var sortedR = this.Nodes.OrderBy(n => n.Position.Y).OrderBy(n => n.Position.X).Where(x => x.Value > root.Value).ToList();
+
+            traversedNodes = traversedNodes.Concat(sortedL).Concat(new List<Node> {root}).Concat(sortedR).ToList();
+            return sortedL;
+        }
+
+        private List<Node> PreOrder_Iterativ(Node root)
+        {
+            List<Node> traversedNodes = new List<Node>();
+
+            var sortedL = this.Nodes.OrderBy(n => n.Position.Y).OrderBy(n => n.Position.X).Where(x => x.Value < root.Value).ToList();
+            var sortedR = this.Nodes.OrderBy(n => n.Position.Y).OrderBy(n => n.Position.X).Where(x => x.Value > root.Value).ToList();
+
+            traversedNodes = traversedNodes.Concat(new List<Node> {root}).Concat(sortedL).Concat(sortedR).ToList();
+            return sortedL;
+        }
+
+        private List<Node> PostOrder_Iterativ(Node root)
+        {
+            List<Node> traversedNodes = new List<Node>();
+
+            var sortedL = this.Nodes.OrderBy(n => n.Position.Y).OrderBy(n => n.Position.X).Where(x => x.Value < root.Value).ToList();
+            var sortedR = this.Nodes.OrderBy(n => n.Position.Y).OrderBy(n => n.Position.X).Where(x => x.Value > root.Value).ToList();
+
+            traversedNodes = traversedNodes.Concat(sortedL).Concat(sortedR).Concat(new List<Node> {root}).ToList();
+            return sortedL;
         }
     }
 }
