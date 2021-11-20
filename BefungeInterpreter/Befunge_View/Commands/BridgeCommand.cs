@@ -1,0 +1,18 @@
+﻿namespace BefungeInterpreter.Commands
+{
+    using BefungeInterpreter.Interfaces;
+    using BefungeInterpreter.Logic;
+    using System;
+
+    public class BridgeCommand : BaseCommand
+    {
+        public BridgeCommand(BefungeProgram program) : base("#", "bridge", program)
+        {
+        }
+
+        public override void Accept(ICommandVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
+}
