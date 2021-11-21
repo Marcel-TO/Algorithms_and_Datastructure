@@ -9,6 +9,10 @@
     {
         private Stack<int> stack;
 
+        private List<string> outputStack;
+
+        private List<int> valueList;
+
         private string[] content;
 
         private Position position;
@@ -18,8 +22,13 @@
         public BefungeProgram(Stack<int> stack, string[] content, Position position)
         {
             this.Stack = stack;
+            this.ValueList = new List<int>();
+            this.Output = new List<string>();
             this.Content = content;
             this.Position = position;
+            this.Direction = Direction.Right;
+            this.IsInterpreted = false;
+            this.IsStringFormat = false;
 
             this.commands = new BaseCommand[]
             {
@@ -70,6 +79,42 @@
             }
         }
 
+        public List<string> Output
+        {
+            get
+            {
+                return this.outputStack;
+            }
+
+            private set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException($"The {nameof(this.outputStack)} must not be null.");
+                }
+
+                this.outputStack = value;
+            }
+        }
+
+        public List<int> ValueList
+        {
+            get
+            {
+                return this.valueList;
+            }
+
+            private set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException($"The {nameof(this.valueList)} must not be null.");
+                }
+
+                this.valueList = value;
+            }
+        }
+
         public string[] Content
         {
             get
@@ -77,7 +122,7 @@
                 return this.content;
             }
 
-            private set
+            set
             {
                 if (value == null)
                 {
@@ -112,6 +157,24 @@
             {
                 return this.commands;
             }
+        }
+
+        public bool IsInterpreted
+        {
+            get;
+            set;
+        }
+
+        public bool IsStringFormat
+        {
+            get;
+            set;
+        }
+
+        public Direction Direction
+        {
+            get;
+            set;
         }
     }
 }

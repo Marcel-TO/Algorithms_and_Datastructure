@@ -14,5 +14,10 @@
         {
             visitor.Visit(this);
         }
+
+        public void Execute(BefungeProgram program)
+        {
+            program.Direction = Direction.Right;
+        }
     }
 }

@@ -3,6 +3,7 @@
     using BefungeInterpreter.Interfaces;
     using BefungeInterpreter.Logic;
     using System;
+    using System.Text;
 
     public class OutCommand_Int : BaseCommand
     {
@@ -13,6 +14,14 @@
         public override void Accept(ICommandVisitor visitor)
         {
             visitor.Visit(this);
+        }
+
+        public void Execute(BefungeProgram program)
+        {
+            int value = program.Stack.Pop();
+            program.ValueList.RemoveAt(program.ValueList.Count - 1);
+
+            program.Output.Add(value.ToString());
         }
     }
 }

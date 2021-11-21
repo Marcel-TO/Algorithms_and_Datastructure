@@ -14,5 +14,11 @@
         {
             visitor.Visit(this);
         }
+
+        public void Execute(BefungeProgram program)
+        {
+            program.Stack.Pop();
+            program.ValueList.RemoveAt(program.ValueList.Count - 1);
+        }
     }
 }

@@ -14,5 +14,18 @@
         {
             visitor.Visit(this);
         }
+
+        public void Execute(BefungeProgram program)
+        {
+            int boolValue = program.Stack.Pop();
+
+            if (boolValue == 1)
+            {
+                program.Direction = Direction.Up;
+                return;
+            }
+
+            program.Direction = Direction.Down;
+        }
     }
 }

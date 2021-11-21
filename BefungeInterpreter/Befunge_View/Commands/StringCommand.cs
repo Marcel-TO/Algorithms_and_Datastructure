@@ -14,5 +14,16 @@
         {
             visitor.Visit(this);
         }
+
+        public void Execute(BefungeProgram program)
+        {
+            if (program.IsStringFormat)
+            {
+                program.IsStringFormat = false;
+                return;
+            }
+
+            program.IsStringFormat = true;
+        }
     }
 }

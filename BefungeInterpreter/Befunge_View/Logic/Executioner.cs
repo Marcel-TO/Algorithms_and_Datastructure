@@ -15,52 +15,52 @@
 
         public void Visit(AddCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(BridgeCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(DivideCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(DownCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(DuplicationCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(EndCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(GetCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(GreaterCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(IfCommand_H command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(IfCommand_V command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(InputCommand_Char command)
@@ -75,37 +75,37 @@
 
         public void Visit(LeftCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(ModuloCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(MultiplyCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(NotCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(OutCommand_Char command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(OutCommand_Int command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(PopCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(PutCommand command)
@@ -115,32 +115,32 @@
 
         public void Visit(RandomCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(RightCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(StringCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(SubtractCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(SwapCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
 
         public void Visit(UpCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program);
         }
     }
 }

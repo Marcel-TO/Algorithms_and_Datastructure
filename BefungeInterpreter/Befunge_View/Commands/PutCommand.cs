@@ -14,5 +14,15 @@
         {
             visitor.Visit(this);
         }
+
+        public void Execute(BefungeProgram program)
+        {
+            int y = program.Stack.Pop();
+            int x = program.Stack.Pop();
+            int value = program.Stack.Pop();
+            program.ValueList.RemoveRange(program.ValueList.Count - 3, 3);
+
+            //?
+        }
     }
 }

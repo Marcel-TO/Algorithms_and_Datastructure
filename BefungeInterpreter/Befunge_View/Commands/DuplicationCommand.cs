@@ -14,5 +14,12 @@
         {
             visitor.Visit(this);
         }
+
+        public void Execute(BefungeProgram program)
+        {
+            int value = program.Stack.Peek();
+            program.Stack.Push(value);
+            program.ValueList.Add(value);
+        }
     }
 }

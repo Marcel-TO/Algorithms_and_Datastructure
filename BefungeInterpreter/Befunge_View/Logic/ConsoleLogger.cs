@@ -26,6 +26,7 @@
             #pragma warning disable CA1416
 
             Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.CursorVisible = false;
         }
 
@@ -36,6 +37,7 @@
 
         public void ShowBefungePrograms(string[] befungeProgramPaths)
         {
+            Console.CursorVisible = false;
             this.Borders("Provided Befunge example programs.", befungeProgramPaths);
 
             int xPos = separatePositiionX;
@@ -86,8 +88,9 @@
             }
         }
 
-        public void ShowProgramContent(string[] content, Position position)
+        public void ShowProgramContent(string[] content, Position position, List<int> values, List<string> output)
         {
+            Console.CursorVisible = false;
             this.Clear();
 
             this.Borders("The selected befunge program.", content);
@@ -101,18 +104,73 @@
                         Console.BackgroundColor = ConsoleColor.Blue;
                         Console.SetCursorPosition(x + 1, y + startNameListY);
                         Console.Write(content[y][x]);
+                        Console.BackgroundColor = ConsoleColor.Black;
                     }
                     else
                     {
-                        Console.BackgroundColor = ConsoleColor.Black;
                         Console.SetCursorPosition(x + 1, y + startNameListY);
                         Console.Write(content[y][x]);
                     }
                 }
             }
 
+            this.MoreInformation(this.rightBorder, this.bottomBorder, values, output);
+        }
 
-            this.MoreInformation(this.rightBorder, this.bottomBorder);
+        public void CursorOutOfRange()
+        {
+            int offset = 2;
+
+            string message = "It appears the cursor is out of range. Please press any key to continue";
+
+            int width = this.rightBorder + message.Length + offset + offset;
+            int w = Console.WindowWidth;
+            int l = Console.LargestWindowWidth;
+
+            if (width > Console.WindowWidth && width < Console.LargestWindowWidth)
+            {
+                Console.SetWindowSize(width, Console.WindowHeight);
+            }
+
+            Console.SetCursorPosition(this.rightBorder + offset, 2);
+            Console.WriteLine(message);
+
+            this.Continue();
+        }
+
+        public void Finished()
+        {
+            int offset = 2;
+
+            string message = "It appears the program is finished.";
+
+            int width = this.rightBorder + message.Length + offset + offset;
+            int w = Console.WindowWidth;
+            int l = Console.LargestWindowWidth;
+
+            if (width > Console.WindowWidth && width < Console.LargestWindowWidth)
+            {
+                Console.SetWindowSize(width, Console.WindowHeight);
+            }
+
+            Console.SetCursorPosition(this.rightBorder + offset, 2);
+
+            for (int i = 0; i < Console.WindowWidth - this.rightBorder - offset; i++)
+            {
+                Console.Write(" ");
+            }
+
+            Console.SetCursorPosition(this.rightBorder + offset, 3);
+
+            for (int i = 0; i < Console.WindowWidth - this.rightBorder - offset; i++)
+            {
+                Console.Write(" ");
+            }
+
+            Console.SetCursorPosition(this.rightBorder + offset, 2);
+            Console.WriteLine(message);
+
+            this.Continue();
         }
 
         public void Clear()
@@ -120,7 +178,12 @@
             Console.Clear();
         }
 
-        private void MoreInformation(int right, int bottom)
+        public void Continue()
+        {
+            Console.ReadKey(true);
+        }
+
+        private void MoreInformation(int right, int bottom, List<int> values, List<string> output)
         {
             int offset = 2;
 
@@ -140,6 +203,51 @@
             Console.WriteLine(messageEscape);
             Console.SetCursorPosition(right + offset, 3);
             Console.WriteLine(messageContinue);
+
+            int currY = this.ShowStack(values, "Current Stack", this.bottomBorder + 2);
+            this.ShowOutput(output, "Output", currY + 1);
+        }
+
+        private int ShowStack(List<int> values, string Name, int y)
+        {
+            Console.SetCursorPosition(0, y);
+
+            for (int i = 0; i < Console.WindowWidth; i++)
+            {
+                Console.Write("-");
+            }
+
+            Console.WriteLine(Name + ":");
+
+            Console.WriteLine(string.Empty);
+
+            for (int i = 0; i < values.Count; i++)
+            {
+                Console.Write(values[i].ToString() + " ");
+            }
+
+            return Console.CursorTop;
+        }
+
+        private int ShowOutput(List<string> values, string Name, int y)
+        {
+            Console.SetCursorPosition(0, y);
+
+            for (int i = 0; i < Console.WindowWidth; i++)
+            {
+                Console.Write("-");
+            }
+
+            Console.WriteLine(Name + ":");
+
+            Console.WriteLine(string.Empty);
+
+            for (int i = 0; i < values.Count; i++)
+            {
+                Console.Write(values[i].ToString() + " ");
+            }
+
+            return Console.CursorTop;
         }
 
         /// <summary>

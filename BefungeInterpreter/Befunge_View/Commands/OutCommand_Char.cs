@@ -3,6 +3,7 @@
     using BefungeInterpreter.Interfaces;
     using BefungeInterpreter.Logic;
     using System;
+    using System.Text;
 
     public class OutCommand_Char : BaseCommand
     {
@@ -13,6 +14,15 @@
         public override void Accept(ICommandVisitor visitor)
         {
             visitor.Visit(this);
+        }
+
+        public void Execute(BefungeProgram program)
+        {
+            int value = program.Stack.Pop();
+            program.ValueList.RemoveAt(program.ValueList.Count - 1);
+
+            byte[] byteValue = new byte[] { Convert.ToByte(value) };
+            program.Output.Add(Encoding.ASCII.GetString(byteValue));
         }
     }
 }

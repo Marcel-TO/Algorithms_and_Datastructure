@@ -14,5 +14,24 @@
         {
             visitor.Visit(this);
         }
+
+        public void Execute(BefungeProgram program)
+        {
+            switch (program.Direction)
+            {
+                case Direction.Up:
+                    program.Position.Y--;
+                    break;
+                case Direction.Right:
+                    program.Position.X++;
+                    break;
+                case Direction.Down:
+                    program.Position.Y++;
+                    break;
+                case Direction.Left:
+                    program.Position.X--;
+                    break;
+            }
+        }
     }
 }
