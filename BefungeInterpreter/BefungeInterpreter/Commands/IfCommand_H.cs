@@ -18,6 +18,7 @@
         public void Execute(BefungeProgram program)
         {
             int boolValue = program.Stack.Pop();
+            program.ValueList.RemoveAt(program.ValueList.Count - 1);
 
             if (boolValue != 0)
             {
