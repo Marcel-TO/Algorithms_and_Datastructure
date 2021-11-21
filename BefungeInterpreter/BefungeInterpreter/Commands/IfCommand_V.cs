@@ -20,7 +20,7 @@
             int boolValue = program.Stack.Pop();
             program.ValueList.RemoveAt(program.ValueList.Count - 1);
 
-            if (boolValue == 1)
+            if (boolValue != 0)
             {
                 program.Direction = Direction.Up;
                 return;
