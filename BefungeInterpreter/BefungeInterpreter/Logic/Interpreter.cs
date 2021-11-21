@@ -126,21 +126,25 @@
 
         private void MovePosition(BefungeProgram program)
         {
+            Position newPosition = new Position(program.Position.X, program.Position.Y);
+
             switch (program.Direction)
             {
                 case Direction.Up:
-                    program.Position.Y--;
+                    newPosition = new Position(program.Position.X, program.Position.Y - 1);
                     break;
                 case Direction.Right:
-                    program.Position.X++;
+                    newPosition = new Position(program.Position.X + 1, program.Position.Y);
                     break;
                 case Direction.Down:
-                    program.Position.Y++;
+                    newPosition = new Position(program.Position.X, program.Position.Y + 1);
                     break;
                 case Direction.Left:
-                    program.Position.X--;
+                    newPosition = new Position(program.Position.X - 1, program.Position.Y);
                     break;
             }
+
+            program.Position = newPosition;
         }
     }
 }

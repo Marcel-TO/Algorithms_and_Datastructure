@@ -195,22 +195,41 @@
             switch (direction)
             {
                 case Direction.Up:
-                    Console.SetCursorPosition(position.X + 1, position.Y + startNameListY + 1);
-                    Console.Write(content[position.Y + 1][position.X]);
+                    this.PrintChar(content, position.X, position.Y + 1, 1, startNameListY);
                     break;
                 case Direction.Right:
-                    Console.SetCursorPosition(position.X, position.Y + startNameListY);
-                    Console.Write(content[position.Y][position.X - 1]);
+                    this.PrintChar(content, position.X - 1, position.Y, 1, startNameListY);
                     break;
                 case Direction.Down:
-                    Console.SetCursorPosition(position.X + 1, position.Y + startNameListY - 1);
-                    Console.Write(content[position.Y - 1][position.X]);
+                    this.PrintChar(content, position.X, position.Y - 1, 1, startNameListY);
                     break;
                 case Direction.Left:
-                    Console.SetCursorPosition(position.X + 2, position.Y + startNameListY);
-                    Console.Write(content[position.Y][position.X + 1]);
+                    this.PrintChar(content, position.X + 1, position.Y, 1, startNameListY);
                     break;
             }
+        }
+
+        private void PrintChar(string[] content, int contentX, int contentY, int cursorXOffset, int cursorYOffset)
+        {
+            if (contentY > content.Length - 1)
+            {
+                contentY = 0;
+            }
+            else if (contentY < 0)
+            {
+                contentY = content.Length - 1;
+            }
+            else if (contentX > content[contentY].Length - 1)
+            {
+                contentX = 0;
+            }
+            else if (contentX < 0)
+            {
+                contentX = content[contentY].Length - 1;
+            }
+
+            Console.SetCursorPosition(contentX + cursorXOffset, contentY + cursorYOffset);
+            Console.Write(content[contentY][contentX]);
         }
 
         private void MoreInformation(int right, int bottom, List<int> values, List<string> output)

@@ -140,11 +140,27 @@
                 return this.position;
             }
 
-            private set
+            set
             {
                 if (value == null)
                 {
                     throw new ArgumentNullException($"The {nameof(this.position)} must not be null.");
+                }
+                else if (value.Y < 0)
+                {
+                    value.Y = this.Content.Length - 1;
+                }
+                else if (value.Y > this.Content.Length - 1)
+                {
+                    value.Y = 0;
+                }
+                else if (value.X < 0)
+                {
+                    value.X = this.Content[value.Y].Length - 1;
+                }
+                else if (value.X > this.Content[value.Y].Length - 1)
+                {
+                    value.X = 0;
                 }
 
                 this.position = value;
