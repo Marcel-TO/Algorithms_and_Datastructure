@@ -21,6 +21,18 @@
 
         private int bottomBorder;
 
+        private int stackDisplayX;
+
+        private int stackDisplayY;
+
+        private int stackCounter;
+
+        private int outDisplayX;
+
+        private int outDisplayY;
+
+        private int outCounter;
+
         public ConsoleLogger()
         {
             #pragma warning disable CA1416
@@ -28,6 +40,9 @@
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
             Console.CursorVisible = false;
+
+            this.stackCounter = 0;
+            this.outCounter = 0;
         }
 
         public void Log(string message)
@@ -117,27 +132,6 @@
             this.MoreInformation(this.rightBorder, this.bottomBorder, values, output);
         }
 
-        public void CursorOutOfRange()
-        {
-            int offset = 2;
-
-            string message = "It appears the cursor is out of range. Please press any key to continue";
-
-            int width = this.rightBorder + message.Length + offset + offset;
-            int w = Console.WindowWidth;
-            int l = Console.LargestWindowWidth;
-
-            if (width > Console.WindowWidth && width < Console.LargestWindowWidth)
-            {
-                Console.SetWindowSize(width, Console.WindowHeight);
-            }
-
-            Console.SetCursorPosition(this.rightBorder + offset, 2);
-            Console.WriteLine(message);
-
-            this.Continue();
-        }
-
         public void Finished()
         {
             int offset = 2;
@@ -173,6 +167,14 @@
             this.Continue();
         }
 
+        public void UpdateContent(BefungeProgram program ,List<int> stackValues, List<string> output)
+        {
+            this.UpdateCursor(program.Content, program.Position, program.Direction);
+
+            this.ShowStack(stackValues, this.stackDisplayX, this.stackDisplayY);
+            this.ShowOutput(output, this.outDisplayX, this.outDisplayY);
+        }
+
         public void Clear()
         {
             Console.Clear();
@@ -181,6 +183,34 @@
         public void Continue()
         {
             Console.ReadKey(true);
+        }
+
+        private void UpdateCursor(string[] content, Position position, Direction direction)
+        {
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.SetCursorPosition(position.X + 1, position.Y + startNameListY);
+            Console.Write(content[position.Y][position.X]);
+            Console.BackgroundColor = ConsoleColor.Black;
+
+            switch (direction)
+            {
+                case Direction.Up:
+                    Console.SetCursorPosition(position.X + 1, position.Y + startNameListY + 1);
+                    Console.Write(content[position.Y + 1][position.X]);
+                    break;
+                case Direction.Right:
+                    Console.SetCursorPosition(position.X, position.Y + startNameListY);
+                    Console.Write(content[position.Y][position.X - 1]);
+                    break;
+                case Direction.Down:
+                    Console.SetCursorPosition(position.X + 1, position.Y + startNameListY - 1);
+                    Console.Write(content[position.Y - 1][position.X]);
+                    break;
+                case Direction.Left:
+                    Console.SetCursorPosition(position.X + 2, position.Y + startNameListY);
+                    Console.Write(content[position.Y][position.X + 1]);
+                    break;
+            }
         }
 
         private void MoreInformation(int right, int bottom, List<int> values, List<string> output)
@@ -204,11 +234,90 @@
             Console.SetCursorPosition(right + offset, 3);
             Console.WriteLine(messageContinue);
 
-            int currY = this.ShowStack(values, "Current Stack", this.bottomBorder + 2);
-            this.ShowOutput(output, "Output", currY + 1);
+            this.StackBorders(this.bottomBorder + 2);
+            this.Topic("Current Stack", this.bottomBorder + 3);
+            this.stackDisplayX = 1;
+            this.stackDisplayY = this.bottomBorder + 4;
+            int currY = this.ShowStack(values, this.stackDisplayX, this.stackDisplayY);
+            this.StackBorders(++currY);
+            this.Topic("Output", ++currY);
+            this.outDisplayX = 1;
+            this.outDisplayY = ++currY;
+            this.ShowOutput(output, this.outDisplayX, this.outDisplayY);
         }
 
-        private int ShowStack(List<int> values, string Name, int y)
+        private void Topic(string name, int y)
+        {
+            Console.SetCursorPosition(0, y);
+            Console.WriteLine(name + ":");
+        }
+
+        private int ShowStack(List<int> values, int x, int y)
+        {
+            int start = 0;
+
+            if (values.Count > this.stackCounter)
+            {
+                Console.SetCursorPosition(this.stackDisplayX, this.stackDisplayY);
+                start = this.stackCounter;
+            }
+            else
+            {
+                this.ClearLine(this.stackDisplayY);
+                Console.SetCursorPosition(1, this.stackDisplayY);
+                this.stackCounter = 0;
+            }
+
+            for (int i = start; i < values.Count; i++)
+            {
+                Console.Write(values[i].ToString() + " ");
+                this.stackCounter++;
+            }
+
+            this.stackDisplayX = Console.CursorLeft;
+            this.stackDisplayY = Console.CursorTop;
+
+
+            return Console.CursorTop;
+        }
+
+        private void ClearLine(int y)
+        {
+            Console.SetCursorPosition(0, y);
+
+            for (int i = 0; i < Console.WindowWidth; i++)
+            {
+                Console.Write(" ");
+            }
+        }
+
+        private void ShowOutput(List<string> values, int x, int y)
+        {
+            int start = 0;
+
+            if (values.Count > this.outCounter)
+            {
+                Console.SetCursorPosition(this.outDisplayX, this.outDisplayY);
+                start = this.outCounter;
+            }
+            else
+            {
+                this.ClearLine(this.outDisplayY);
+                Console.SetCursorPosition(1, this.stackDisplayY + 3);
+                this.outCounter = 0;
+            }
+
+            for (int i = start; i < values.Count; i++)
+            {
+                Console.Write(values[i].ToString());
+                this.outCounter++;
+            }
+
+            this.outDisplayX = Console.CursorLeft;
+            this.outDisplayY = Console.CursorTop;
+        }
+
+        private void StackBorders(int y)
         {
             Console.SetCursorPosition(0, y);
 
@@ -216,38 +325,6 @@
             {
                 Console.Write("-");
             }
-
-            Console.WriteLine(Name + ":");
-
-            Console.WriteLine(string.Empty);
-
-            for (int i = 0; i < values.Count; i++)
-            {
-                Console.Write(values[i].ToString() + " ");
-            }
-
-            return Console.CursorTop;
-        }
-
-        private int ShowOutput(List<string> values, string Name, int y)
-        {
-            Console.SetCursorPosition(0, y);
-
-            for (int i = 0; i < Console.WindowWidth; i++)
-            {
-                Console.Write("-");
-            }
-
-            Console.WriteLine(Name + ":");
-
-            Console.WriteLine(string.Empty);
-
-            for (int i = 0; i < values.Count; i++)
-            {
-                Console.Write(values[i].ToString() + " ");
-            }
-
-            return Console.CursorTop;
         }
 
         /// <summary>
@@ -364,6 +441,11 @@
 
                 Console.WriteLine("|");
             }
+        }
+
+        public void CursorOutOfRange()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -14,6 +14,8 @@
 
         void ShowProgramContent(string[] content, Position position, List<int> values, List<string> output);
 
+        void UpdateContent(BefungeProgram program, List<int> values, List<string> output);
+
         void Clear();
 
         void Continue();

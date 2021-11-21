@@ -45,7 +45,7 @@
                 }
 
                 this.GoThroughCode(program);
-                this.logger.ShowProgramContent(program.Content, program.Position, program.ValueList, program.Output);
+                this.logger.UpdateContent(program, program.ValueList, program.Output);
             }
         }
 
@@ -94,6 +94,7 @@
                     {
                         this.loop = false;
                         this.logger.Finished();
+                        return;
                     }
 
                     this.MovePosition(program);
