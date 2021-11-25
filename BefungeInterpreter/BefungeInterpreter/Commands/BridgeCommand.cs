@@ -15,7 +15,7 @@
             visitor.Visit(this);
         }
 
-        public void Execute(BefungeProgram program)
+        public void Execute(BefungeProgram program, ILogger logger)
         {
             switch (program.Direction)
             {
@@ -32,6 +32,8 @@
                     program.Position.X--;
                     break;
             }
+
+            logger.UpdateContent(this.Program, this.Program.ValueList, this.Program.Output);
         }
     }
 }

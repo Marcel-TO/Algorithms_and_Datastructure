@@ -20,7 +20,7 @@
 
         public void Visit(BridgeCommand command)
         {
-            command.Execute(command.Program);
+            command.Execute(command.Program, this.logger);
         }
 
         public void Visit(DivideCommand command)
