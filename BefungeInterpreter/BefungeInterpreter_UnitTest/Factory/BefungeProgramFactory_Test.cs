@@ -6,14 +6,17 @@ namespace BefungeInterpreter_UnitTests.Factory
     using BefungeInterpreter.Factory;
     using BefungeInterpreter.Logic;
 
+    [TestClass]
     public class BefungeProgramFactory_Test
     {
+        [TestMethod]
         public void Constructor_Test()
         {
             BefungeProgramFactory factory = new BefungeProgramFactory();
             Assert.IsNotNull(factory);
         }
 
+        [TestMethod]
         public void CreateBefungeProgram()
         {
             string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\ExamplePrograms\test.txt"));
