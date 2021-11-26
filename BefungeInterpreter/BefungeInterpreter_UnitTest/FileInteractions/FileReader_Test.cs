@@ -6,7 +6,7 @@ namespace BefungeInterpreter_UnitTests.FileInteractions
     using BefungeInterpreter.FileInteractions;
 
     [TestClass]
-    public class FileReader_Test
+    public class FileReader_Tests
     {
         [TestMethod]
         public void Constructor_Test()

@@ -27,16 +27,52 @@
 
         private bool loop;
 
-        public ApplicationLogic()
+        public ApplicationLogic(ILogger logger, IKeyboardWatcher watcher)
         {
-            this.logger = new ConsoleLogger();
-            this.keyboardWatcher = new KeyboardWatcher();
-            this.keyboardWatcher.KeyPressed += this.KeyPressed;
+            this.Logger = logger;
+            this.KeyboardWatcher = watcher;
+            this.KeyboardWatcher.KeyPressed += this.KeyPressed;
             this.visitor = new Executioner(this.logger);
 
             this.fileCollector = new FileCollector(this.logger);
             this.factory = new BefungeProgramFactory();
             this.loop = true;
+        }
+
+        public ILogger Logger
+        {
+            get
+            {
+                return this.logger;
+            }
+
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException($"The {nameof(this.logger)} must not be null.");
+                }
+
+                this.logger = value;
+            }
+        }
+
+        public IKeyboardWatcher KeyboardWatcher
+        {
+            get
+            {
+                return this.keyboardWatcher;
+            }
+
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException($"The {nameof(this.logger)} must not be null.");
+                }
+
+                this.keyboardWatcher = value;
+            }
         }
 
         /// <summary>
@@ -72,13 +108,13 @@
             this.filepaths = this.fileCollector.GetFiles();
             this.Index = 0;
 
-            this.logger.ShowBefungePrograms(this.filepaths);
-            this.logger.ShowCursor(this.Index, this.filepaths.Length - 1);
+            this.Logger.ShowBefungePrograms(this.filepaths);
+            this.Logger.ShowCursor(this.Index, this.filepaths.Length - 1);
 
             while (loop)
             {
-                this.keyboardWatcher.Start();
-                this.logger.ShowCursor(this.Index, this.filepaths.Length - 1);
+                this.KeyboardWatcher.Start();
+                this.Logger.ShowCursor(this.Index, this.filepaths.Length - 1);
             }
         }
 
@@ -105,11 +141,11 @@
         {
             this.program = this.factory.CreateBefungeProgram(path);
 
-            Interpreter interpreter = new Interpreter(this.logger, this.visitor);
+            Interpreter interpreter = new Interpreter(this.Logger, this.visitor);
             interpreter.RunBefungeProgram(this.program);
 
-            this.logger.Clear();
-            this.logger.ShowBefungePrograms(this.filepaths);
+            this.Logger.Clear();
+            this.Logger.ShowBefungePrograms(this.filepaths);
         }
     }
 }

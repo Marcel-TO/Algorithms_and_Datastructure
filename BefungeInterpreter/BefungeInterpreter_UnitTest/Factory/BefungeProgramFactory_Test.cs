@@ -7,7 +7,7 @@ namespace BefungeInterpreter_UnitTests.Factory
     using BefungeInterpreter.Logic;
 
     [TestClass]
-    public class BefungeProgramFactory_Test
+    public class BefungeProgramFactory_Tests
     {
         [TestMethod]
         public void Constructor_Test()
