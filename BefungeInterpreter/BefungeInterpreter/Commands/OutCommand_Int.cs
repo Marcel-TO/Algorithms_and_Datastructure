@@ -18,8 +18,7 @@
 
         public void Execute(BefungeProgram program)
         {
-            int value = program.Stack.Pop();
-            program.ValueList.RemoveAt(program.ValueList.Count - 1);
+            int value = program.StackPop();
 
             program.Output.Add(value.ToString());
         }

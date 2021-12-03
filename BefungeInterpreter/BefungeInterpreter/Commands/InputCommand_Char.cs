@@ -19,8 +19,7 @@
         public void Execute(BefungeProgram program, char character, ILogger logger)
         {
             byte[] byteValue = Encoding.ASCII.GetBytes(character.ToString());
-            program.Stack.Push(byteValue[0]);
-            program.ValueList.Add(byteValue[0]);
+            program.StackPush(byteValue[0]);
 
             logger.ShowProgramContent(program.Content, program.Position, program.ValueList, program.Output);
         }

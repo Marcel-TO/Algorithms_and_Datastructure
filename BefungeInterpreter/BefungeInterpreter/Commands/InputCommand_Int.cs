@@ -22,8 +22,7 @@
                 throw new ArgumentNullException("The number must be between the range of 0 and 9.");
             }
 
-            program.Stack.Push(number);
-            program.ValueList.Add(number);
+            program.StackPush(number);
 
             logger.ShowProgramContent(program.Content, program.Position, program.ValueList, program.Output);
         }

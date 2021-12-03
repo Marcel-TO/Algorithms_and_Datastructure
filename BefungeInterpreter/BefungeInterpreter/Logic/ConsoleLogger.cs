@@ -210,7 +210,7 @@
         {
             this.Clear();
             Console.SetCursorPosition(1, 1);
-            Console.WriteLine("Please enter a character.");
+            Console.WriteLine("Please enter a number between 0 and 9.");
 
             while (true)
             {
@@ -222,7 +222,7 @@
                 }
 
                 Console.WriteLine(string.Empty);
-                Console.WriteLine("This is not a valid character.");
+                Console.WriteLine("This is not a valid number.");
             }
         }
 

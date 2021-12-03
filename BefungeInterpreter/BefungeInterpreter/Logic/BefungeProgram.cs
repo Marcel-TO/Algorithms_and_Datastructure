@@ -192,5 +192,24 @@
             get;
             set;
         }
+
+        public int StackPop()
+        {
+            if (this.Stack.Count == 0)
+            {
+                return 0;
+            }
+
+            int value = this.Stack.Pop();
+            this.ValueList.RemoveAt(this.ValueList.Count - 1);
+
+            return value;
+        }
+
+        public void StackPush(int value)
+        {
+            this.Stack.Push(value);
+            this.ValueList.Add(value);
+        }
     }
 }

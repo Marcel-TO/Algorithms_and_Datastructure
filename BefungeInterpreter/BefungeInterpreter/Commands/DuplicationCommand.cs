@@ -19,13 +19,11 @@
         {
             if (program.Stack.Count == 0)
             {
-                program.Stack.Push(0);
-                program.ValueList.Add(0);
+                program.StackPush(0);
             }
 
             int value = program.Stack.Peek();
-            program.Stack.Push(value);
-            program.ValueList.Add(value);
+            program.StackPush(value);
         }
     }
 }

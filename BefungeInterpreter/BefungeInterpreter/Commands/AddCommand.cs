@@ -17,15 +17,12 @@
 
         public void Execute(BefungeProgram program)
         {
-            int value2 = program.Stack.Pop();
-            int value1 = program.Stack.Pop();
-            program.ValueList.RemoveAt(program.ValueList.Count - 1);
-            program.ValueList.RemoveAt(program.ValueList.Count - 1);
+            int value2 = program.StackPop();
+            int value1 = program.StackPop();
 
 
             int res = value1 + value2;
-            program.Stack.Push(res);
-            program.ValueList.Add(res);
+            program.StackPush(res);
         }
     }
 }

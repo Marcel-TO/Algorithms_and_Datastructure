@@ -17,17 +17,14 @@
 
         public void Execute(BefungeProgram program)
         {
-            int y = program.Stack.Pop();
-            int x = program.Stack.Pop();
-            program.ValueList.RemoveAt(program.ValueList.Count - 1);
-            program.ValueList.RemoveAt(program.ValueList.Count - 1);
+            int y = program.StackPop();
+            int x = program.StackPop();
 
             bool isNumber = int.TryParse(program.Content[y][x].ToString(), out int number);
 
             if (isNumber)
             {
-                program.Stack.Push(number);
-                program.ValueList.Add(number);
+                program.StackPush(number);
             }
         }
     }

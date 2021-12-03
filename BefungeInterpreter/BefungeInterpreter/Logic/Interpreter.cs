@@ -46,8 +46,6 @@
             }
 
             this.stopThread = new Thread(this.ListenForStop);
-            this.stopThread.Name = "Listener";
-            this.stopThread.Start(this.threadArguments);
 
             while (true)
             {
@@ -75,9 +73,18 @@
                     this.loop = false;
                     break;
                 case ConsoleKey.Enter:
-                    this.isInputDesired = false;
+                    this.SetUpRun();
+                    
                     break;
             }
+        }
+
+        private void SetUpRun()
+        {
+            this.isInputDesired = false;
+            this.stopThread = new Thread(this.ListenForStop);
+            this.threadArguments.IsExit = false;
+            this.stopThread.Start(this.threadArguments);
         }
 
         private void ListenForStop(object data)
@@ -93,9 +100,17 @@
             {
                 ConsoleKeyInfo cki = Console.ReadKey(true);
 
+                // stops looping the program.
                 if (cki.Key == ConsoleKey.Escape)
                 {
                     this.loop = false;
+                    this.StopExitThread();
+                }
+                // Stops running the program and waits for user to step further as before.
+                else if (cki.Key == ConsoleKey.Enter)
+                {
+                    this.isInputDesired = true;
+                    this.StopExitThread();
                 }
             }
         }
@@ -154,16 +169,14 @@
             if (program.IsStringFormat)
             {
                 byte[] byteValue = Encoding.ASCII.GetBytes(program.Content[program.Position.Y][program.Position.X].ToString());
-                program.Stack.Push(byteValue[0]);
-                program.ValueList.Add(byteValue[0]);
+                program.StackPush(byteValue[0]);
             }
 
             bool isNumber = int.TryParse(program.Content[program.Position.Y][program.Position.X].ToString(), out int number);
 
             if (isNumber && number >= 0 && number <= 9)
             {
-                program.Stack.Push(number);
-                program.ValueList.Add(number);
+                program.StackPush(number);
             }
         }
 

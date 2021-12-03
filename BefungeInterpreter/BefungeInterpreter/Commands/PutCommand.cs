@@ -18,12 +18,11 @@
 
         public void Execute(BefungeProgram program, ILogger logger)
         {
-            int y = program.Stack.Pop();
-            int x = program.Stack.Pop();
-            int value = program.Stack.Pop();
-            program.ValueList.RemoveRange(program.ValueList.Count - 3, 3);
+            int y = program.StackPop();
+            int x = program.StackPop();
+            int value = program.StackPop();
 
-            if (y > program.Content.Length)
+            if (y > program.Content.Length - 1)
             {
                 throw new ArgumentOutOfRangeException($"The {y} position is out of range.");
             }
@@ -32,8 +31,11 @@
                 throw new ArgumentOutOfRangeException($"The {x} position is out of range.");
             }
 
+            var valueChars = Encoding.ASCII.GetChars(new byte[] { Convert.ToByte(value) }); // Für Ascii passt
+                                                                                            // Dürfen Zahlen auch?
+
             char[] lineChars = program.Content[y].ToCharArray();
-            lineChars[x] = Convert.ToChar(value.ToString());
+            lineChars[x] = valueChars[0];
             program.Content[y] = new string(lineChars);
 
             logger.ShowProgramContent(program.Content, program.Position, program.ValueList, program.Output);
