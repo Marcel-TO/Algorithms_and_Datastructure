@@ -23,5 +23,9 @@
         void CursorOutOfRange();
 
         void Finished();
+
+        char GetUserCharInput();
+
+        int GetUserIntInput();
     }
 }

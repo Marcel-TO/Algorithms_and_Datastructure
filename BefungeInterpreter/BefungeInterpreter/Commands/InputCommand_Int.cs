@@ -14,5 +14,18 @@
         {
             visitor.Visit(this);
         }
+
+        public void Execute(BefungeProgram program, int number, ILogger logger)
+        {
+            if (number < 0 || number > 9)
+            {
+                throw new ArgumentNullException("The number must be between the range of 0 and 9.");
+            }
+
+            program.Stack.Push(number);
+            program.ValueList.Add(number);
+
+            logger.ShowProgramContent(program.Content, program.Position, program.ValueList, program.Output);
+        }
     }
 }

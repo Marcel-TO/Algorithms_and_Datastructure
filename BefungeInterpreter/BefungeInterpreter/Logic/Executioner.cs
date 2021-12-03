@@ -65,12 +65,16 @@
 
         public void Visit(InputCommand_Char command)
         {
-            throw new NotImplementedException();
+            char character = this.logger.GetUserCharInput();
+
+            command.Execute(command.Program, character, this.logger);
         }
 
         public void Visit(InputCommand_Int command)
         {
-            throw new NotImplementedException();
+            int number = this.logger.GetUserIntInput();
+
+            command.Execute(command.Program, number, this.logger);
         }
 
         public void Visit(LeftCommand command)
@@ -110,7 +114,7 @@
 
         public void Visit(PutCommand command)
         {
-            throw new NotImplementedException();
+            command.Execute(command.Program, this.logger);
         }
 
         public void Visit(RandomCommand command)

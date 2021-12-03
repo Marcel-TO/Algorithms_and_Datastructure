@@ -69,6 +69,8 @@ namespace SplayTree.Commands
                 return this.FindMax(node.BiggerNode);
             }
 
+
+
             return node.Value;
         }
     }

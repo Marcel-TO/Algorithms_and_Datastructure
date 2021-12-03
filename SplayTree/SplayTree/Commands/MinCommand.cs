@@ -11,6 +11,8 @@ namespace SplayTree.Commands
     using SplayTree.Interfaces;
     using SplayTree.Logic;
     using SplayTree.Trees;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Represents the minimum command of the splay tree.
@@ -47,14 +49,18 @@ namespace SplayTree.Commands
         /// Represents the execution method of the minimum command.
         /// </summary>
         /// <returns>The minimum value of the tree.</returns>
-        public int Execute() 
+        public int Execute(Executioner execute) 
         {
             if (this.Nodes.Count == 0)
             {
                 throw new TreeIsEmptyException("The tree is empty. Please consider to add values to the tree before trying to check what's inside the tree.");
             }
 
-            return this.FindMin(this.Nodes[0]);
+            int min = this.FindMin(this.Nodes[0]);
+
+            //List<int> values = execute.ExtractValues(this.Nodes);
+            //this.Nodes = execute.GenerateTree(values);
+            return min;
         }
 
         /// <summary>

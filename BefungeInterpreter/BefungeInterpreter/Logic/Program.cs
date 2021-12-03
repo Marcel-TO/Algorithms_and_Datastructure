@@ -1,6 +1,7 @@
 ﻿namespace BefungeInterpreter.Logic
 {
     using System;
+    using BefungeInterpreter.Interfaces;
     using BefungeInterpreter.KeyboardWatcher;
 
     public class Program

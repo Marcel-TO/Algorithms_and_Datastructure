@@ -213,6 +213,8 @@ namespace SplayTree.Logic
                     Console.Write($"| {commands[i].Name}");
                 }
             }
+
+            Console.CursorVisible = false;
         }
 
         /// <summary>

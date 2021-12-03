@@ -185,6 +185,47 @@
             Console.ReadKey(true);
         }
 
+        public char GetUserCharInput()
+        {
+            this.Clear();
+            Console.SetCursorPosition(1, 1);
+            Console.WriteLine("Please enter a character.");
+
+            while (true)
+            {
+                char character = Console.ReadKey().KeyChar;
+                
+                // The range from 33 to 126 defines the supported ascii values for character inputs.
+                if (character > 32 && character < 127)
+                {
+                    return character;
+                }
+
+                Console.WriteLine(string.Empty);
+                Console.WriteLine("This is not a valid character.");
+            }
+        }
+
+        public int GetUserIntInput()
+        {
+            this.Clear();
+            Console.SetCursorPosition(1, 1);
+            Console.WriteLine("Please enter a character.");
+
+            while (true)
+            {
+                char character = Console.ReadKey().KeyChar;
+
+                if (char.IsDigit(character))
+                {
+                    return int.Parse(character.ToString());
+                }
+
+                Console.WriteLine(string.Empty);
+                Console.WriteLine("This is not a valid character.");
+            }
+        }
+
         private void UpdateCursor(string[] content, Position position, Direction direction)
         {
             Console.BackgroundColor = ConsoleColor.Blue;
@@ -237,7 +278,7 @@
             int offset = 2;
 
             string messageEscape = "Press Escape to go back to the befunge example program list.";
-            string messageContinue = "Press any key to to step forward or press enter to skip to the end.";
+            string messageContinue = "Press any key to to step forward or press enter to run through the program.";
 
             int width = right + messageContinue.Length + offset + offset;
             int w = Console.WindowWidth;

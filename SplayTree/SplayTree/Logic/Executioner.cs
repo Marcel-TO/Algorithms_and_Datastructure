@@ -227,7 +227,7 @@ namespace SplayTree.Logic
 
             try
             {
-                int min = command.Execute();
+                int min = command.Execute(this);
                 this.Logger.Message($"The minimum value of the tree is {min}.");
                 this.Logger.Continue();
             }

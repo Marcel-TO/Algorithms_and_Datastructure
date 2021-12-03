@@ -1,9 +1,11 @@
 ﻿namespace BefungeInterpreter.Logic
 {
+    using BefungeInterpreter.EventArgs;
     using BefungeInterpreter.Interfaces;
     using BefungeInterpreter.KeyboardWatcher;
     using System;
     using System.Text;
+    using System.Threading;
 
     public class Interpreter
     {
@@ -12,6 +14,10 @@
         private IKeyboardWatcher keyboardWatcher;
 
         private ICommandVisitor visitor;
+
+        private Thread stopThread;
+
+        private ExitThreadArguments threadArguments;
 
         private bool loop;
 
@@ -26,11 +32,22 @@
 
             this.loop = true;
             this.isInputDesired = true;
+
+            this.threadArguments = new ExitThreadArguments();
         }
 
         public void RunBefungeProgram(BefungeProgram program)
         {
             this.logger.ShowProgramContent(program.Content, program.Position, program.ValueList, program.Output);
+
+            if (this.stopThread != null && this.stopThread.IsAlive)
+            {
+                throw new InvalidOperationException($"The {nameof(this.stopThread)} is already running!");
+            }
+
+            this.stopThread = new Thread(this.ListenForStop);
+            this.stopThread.Name = "Listener";
+            this.stopThread.Start(this.threadArguments);
 
             while (true)
             {
@@ -41,6 +58,7 @@
 
                 if (!this.loop)
                 {
+                    this.StopExitThread();
                     return;
                 }
 
@@ -60,6 +78,31 @@
                     this.isInputDesired = false;
                     break;
             }
+        }
+
+        private void ListenForStop(object data)
+        {
+            if (!(data is ExitThreadArguments))
+            {
+                throw new ArgumentOutOfRangeException(nameof(data), $"The specified arguments must be of the type {nameof(ExitThreadArguments)}");
+            }
+
+            ExitThreadArguments args = (ExitThreadArguments)data;
+
+            while (!args.IsExit)
+            {
+                ConsoleKeyInfo cki = Console.ReadKey(true);
+
+                if (cki.Key == ConsoleKey.Escape)
+                {
+                    this.loop = false;
+                }
+            }
+        }
+
+        private void StopExitThread()
+        {
+            this.threadArguments.IsExit = true;
         }
 
         private void GoThroughCode(BefungeProgram program)

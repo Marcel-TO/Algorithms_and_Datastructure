@@ -3,6 +3,7 @@
     using BefungeInterpreter.Interfaces;
     using BefungeInterpreter.Logic;
     using System;
+    using System.Text;
 
     public class InputCommand_Char : BaseCommand
     {
@@ -15,9 +16,13 @@
             visitor.Visit(this);
         }
 
-        public void Execute(BefungeProgram program, char character)
+        public void Execute(BefungeProgram program, char character, ILogger logger)
         {
-            //?
+            byte[] byteValue = Encoding.ASCII.GetBytes(character.ToString());
+            program.Stack.Push(byteValue[0]);
+            program.ValueList.Add(byteValue[0]);
+
+            logger.ShowProgramContent(program.Content, program.Position, program.ValueList, program.Output);
         }
     }
 }
