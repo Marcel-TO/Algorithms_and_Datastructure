@@ -3,6 +3,7 @@
     using BefungeInterpreter.Interfaces;
     using BefungeInterpreter.Logic;
     using System;
+    using System.Text;
 
     public class GetCommand : BaseCommand
     {
@@ -22,10 +23,15 @@
 
             bool isNumber = int.TryParse(program.Content[y][x].ToString(), out int number);
 
+            // Checks if character is a number.
             if (isNumber)
             {
                 program.StackPush(number);
             }
+
+            // If its not a number converts the ascii value of the character and pushes.
+            byte[] byteValue = Encoding.ASCII.GetBytes(new char[] { program.Content[y][x] });
+            program.StackPush(byteValue[0]);
         }
     }
 }

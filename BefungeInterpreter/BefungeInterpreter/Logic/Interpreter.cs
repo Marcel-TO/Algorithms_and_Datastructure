@@ -122,6 +122,7 @@
 
         private void GoThroughCode(BefungeProgram program)
         {
+            // Checks if the cursor is out of bounds.
             if (program.Position.Y > program.Content.Length || program.Position.X >= program.Content[program.Position.Y].Length)
             {
                 this.logger.CursorOutOfRange();
@@ -134,8 +135,10 @@
                 // Checks if the current character is equal to any supported command initializer.
                 if (program.Content[program.Position.Y][program.Position.X].ToString() == program.Commands[i].CommandInitializer)
                 {
+                    // Checks if the string format is activated, so no unwanted commands will get executed.
                     if (program.IsStringFormat)
                     {
+                        // Checks if the current character is the same as the string format command, to end the string format.
                         if (program.Content[program.Position.Y][program.Position.X].ToString() == "\"")
                         {
                             program.Commands[i].Accept(this.visitor);
@@ -146,8 +149,10 @@
                         break;
                     }
 
+                    // If the string format is not activated the current command gets executed.
                     program.Commands[i].Accept(this.visitor);
 
+                    // Checks if the befunge program is finished.
                     if (program.IsInterpreted)
                     {
                         this.loop = false;
@@ -155,17 +160,20 @@
                         return;
                     }
 
+                    // Moves the position of the cursor.
                     this.MovePosition(program);
                     return;
                 }
             }
 
+            // If current character is no command, the number gets pushed on the stack.
             this.PushNumber(program);
             this.MovePosition(program);
         }
 
         private void PushNumber(BefungeProgram program)
         {
+            // Checks if the string format is activated and pushes the ascii value on the stack.
             if (program.IsStringFormat)
             {
                 byte[] byteValue = Encoding.ASCII.GetBytes(program.Content[program.Position.Y][program.Position.X].ToString());
@@ -174,10 +182,18 @@
 
             bool isNumber = int.TryParse(program.Content[program.Position.Y][program.Position.X].ToString(), out int number);
 
+            // Checks if the character is a number and pushes it on the stack.
             if (isNumber && number >= 0 && number <= 9)
             {
                 program.StackPush(number);
             }
+
+            //// Checks if the character is hexadecimal and pushes it on the stack.
+            //if ((program.Content[program.Position.Y][program.Position.X] >= 'a' && program.Content[program.Position.Y][program.Position.X] <= 'f') ||
+            //    (program.Content[program.Position.Y][program.Position.X] >= 'A' && program.Content[program.Position.Y][program.Position.X] <= 'F'))
+            //{
+            //    program.StackPush(Convert.ToInt32(program.Content[program.Position.Y][program.Position.X].ToString(), 16));
+            //}
         }
 
         private void MovePosition(BefungeProgram program)

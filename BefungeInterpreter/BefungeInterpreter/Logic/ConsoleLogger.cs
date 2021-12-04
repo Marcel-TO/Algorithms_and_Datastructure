@@ -25,11 +25,15 @@
 
         private int stackDisplayY;
 
+        private int stackDisplayStart;
+
         private int stackCounter;
 
         private int outDisplayX;
 
         private int outDisplayY;
+
+        private int outDisplayStart;
 
         private int outCounter;
 
@@ -53,7 +57,8 @@
         public void ShowBefungePrograms(string[] befungeProgramPaths)
         {
             Console.CursorVisible = false;
-            this.Borders("Provided Befunge example programs.", befungeProgramPaths);
+            int[] lengths = this.GetPathLengths(befungeProgramPaths);
+            this.Borders("Provided Befunge example programs.", lengths);
 
             int xPos = separatePositiionX;
             int yPos = startNameListY;
@@ -108,7 +113,8 @@
             Console.CursorVisible = false;
             this.Clear();
 
-            this.Borders("The selected befunge program.", content);
+            int[] lengths = this.GetLength(content);
+            this.Borders("The selected befunge program.", lengths);
 
             for (int y = 0; y < content.Length; y++)
             {
@@ -171,7 +177,12 @@
         {
             this.UpdateCursor(program.Content, program.Position, program.Direction);
 
-            this.ShowStack(stackValues, this.stackDisplayX, this.stackDisplayY);
+            int currY = this.ShowStack(stackValues, this.stackDisplayX, this.stackDisplayY);
+            this.StackBorders(++currY);
+            this.Topic("Output", ++currY);
+            this.outDisplayX = 1;
+            this.outDisplayY = ++currY;
+            this.outDisplayStart = currY;
             this.ShowOutput(output, this.outDisplayX, this.outDisplayY);
         }
 
@@ -296,13 +307,15 @@
 
             this.StackBorders(this.bottomBorder + 2);
             this.Topic("Current Stack", this.bottomBorder + 3);
-            this.stackDisplayX = 1;
+            this.stackDisplayX = 0;
             this.stackDisplayY = this.bottomBorder + 4;
+            this.stackDisplayStart = this.bottomBorder + 4;
             int currY = this.ShowStack(values, this.stackDisplayX, this.stackDisplayY);
             this.StackBorders(++currY);
             this.Topic("Output", ++currY);
-            this.outDisplayX = 1;
+            this.outDisplayX = 0;
             this.outDisplayY = ++currY;
+            this.outDisplayStart = currY;
             this.ShowOutput(output, this.outDisplayX, this.outDisplayY);
         }
 
@@ -314,31 +327,47 @@
 
         private int ShowStack(List<int> values, int x, int y)
         {
+            int xPos = x;
+            int yPos = y;
+
             int start = 0;
 
-            if (values.Count > this.stackCounter)
+            if (values.Count >= this.stackCounter)
             {
-                Console.SetCursorPosition(this.stackDisplayX, this.stackDisplayY);
                 start = this.stackCounter;
             }
             else
             {
-                this.ClearLine(this.stackDisplayY);
-                Console.SetCursorPosition(1, this.stackDisplayY);
+                for (int i = this.stackDisplayStart; i <= this.stackDisplayY; i++)
+                {
+                    this.ClearLine(i);
+                }
+               
+                xPos = 0;
+                yPos = this.stackDisplayStart;
+                start = 0;
                 this.stackCounter = 0;
             }
 
             for (int i = start; i < values.Count; i++)
             {
+                if (xPos >= Console.WindowWidth - 1)
+                {
+                    xPos = 0;
+                    yPos++;
+                    this.ClearLine(yPos);
+                }
+
+                Console.SetCursorPosition(xPos, yPos);
                 Console.Write(values[i].ToString() + " ");
                 this.stackCounter++;
+                xPos = Console.CursorLeft;
             }
 
-            this.stackDisplayX = Console.CursorLeft;
-            this.stackDisplayY = Console.CursorTop;
+            this.stackDisplayX = xPos;
+            this.stackDisplayY = yPos;
 
-
-            return Console.CursorTop;
+            return yPos;
         }
 
         private void ClearLine(int y)
@@ -392,23 +421,23 @@
         /// </summary>
         /// <param name="message">Represents the message of the application.</param>
         /// <param name="commands">Represents the list of commands.</param>
-        private void Borders(string message, string[] paths)
+        private void Borders(string message, int[] lengthsOfContents)
         {
             int longestName = message.Length;
 
-            for (int i = 0; i < paths.Length; i++)
+            for (int i = 0; i < lengthsOfContents.Length; i++)
             {
-                string name = Path.GetFileNameWithoutExtension(paths[i]);
+                int length = lengthsOfContents[i];
 
-                if (name.Length + separatePositiionX > longestName)
+                if (length + separatePositiionX > longestName)
                 {
-                    longestName = name.Length;
+                    longestName = length;
                 }
             }
 
             if (separatePositiionX + longestName > Console.WindowWidth)
             {
-                Console.SetWindowSize(separatePositiionX + longestName + 6, paths.Length + 6);
+                Console.SetWindowSize(separatePositiionX + longestName + 6, lengthsOfContents.Length + 6);
             }
 
             // Top Border
@@ -454,7 +483,7 @@
             }
 
             // Left Border
-            for (int i = 1; i < paths.Length + 5; i++)
+            for (int i = 1; i < lengthsOfContents.Length + 5; i++)
             {
                 try
                 {
@@ -471,7 +500,7 @@
             // Bottom Border
             for (int i = 0; i < separatePositiionX + longestName; i++)
             {
-                this.bottomBorder = paths.Length + 5;
+                this.bottomBorder = lengthsOfContents.Length + 5;
 
                 try
                 {
@@ -486,7 +515,7 @@
             }
 
             // Right Border
-            for (int i = 1; i < paths.Length + 5; i++)
+            for (int i = 1; i < lengthsOfContents.Length + 5; i++)
             {
                 this.rightBorder = separatePositiionX + longestName;
 
@@ -501,6 +530,30 @@
 
                 Console.WriteLine("|");
             }
+        }
+
+        private int[] GetLength(string[] content)
+        {
+            int[] lengths = new int[content.Length];
+
+            for (int i = 0; i < content.Length; i++)
+            {
+                lengths[i] = content[i].Length;
+            }
+
+            return lengths;
+        }
+
+        private int[] GetPathLengths(string[] paths)
+        {
+            int[] lengths = new int[paths.Length];
+
+            for (int i = 0; i < paths.Length; i++)
+            {
+                lengths[i] = Path.GetFileNameWithoutExtension(paths[i]).Length;
+            }
+
+            return lengths;
         }
 
         public void CursorOutOfRange()
