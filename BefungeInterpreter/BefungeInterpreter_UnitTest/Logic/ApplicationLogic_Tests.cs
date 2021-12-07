@@ -6,26 +6,29 @@ namespace BefungeInterpreter_UnitTests.Logic
     using BefungeInterpreter.FileInteractions;
     using BefungeInterpreter.Interfaces;
     using BefungeInterpreter.KeyboardWatcher;
+    using BefungeInterpreter.Logic;
+    using BefungeInterpreter_UnitTests.TestInstances;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ApplicationLogic_Tests
     {
         [TestMethod]
-        [ExpectedException(ArgumentNullException)]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void TestIfLoggerIsNull()
         {
             ApplicationLogic logic = new ApplicationLogic(null, new KeyboardWatcherReplacement());
         }
 
         [TestMethod]
-        [ExpectedException(ArgumentNullException)]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void TestIfKeyboardWatcherIsNull()
         {
             ApplicationLogic logic = new ApplicationLogic(new LoggerReplacementInstance(), null);
         }
 
         [TestMethod]
-        [ExpectedException(ArgumentNullException)]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void TestIfConstructorIsNull()
         {
             ApplicationLogic logic = new ApplicationLogic(null, null);

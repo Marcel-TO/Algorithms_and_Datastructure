@@ -3,6 +3,7 @@ namespace BefungeInterpreter_UnitTests.TestInstances
     using System;
     using System.Collections.Generic;
     using BefungeInterpreter.Interfaces;
+    using BefungeInterpreter.Logic;
 
     public class LoggerReplacementInstance : ILogger
     {
@@ -51,9 +52,24 @@ namespace BefungeInterpreter_UnitTests.TestInstances
             return;
         }
 
-        public void Finished()
+        public void ShowProgramContent(string[] content, Position position, List<int> values, List<string> output)
         {
-            return;
+            throw new NotImplementedException();
+        }
+
+        public void Continue()
+        {
+            throw new NotImplementedException();
+        }
+
+        public char GetUserCharInput()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetUserIntInput()
+        {
+            throw new NotImplementedException();
         }
     }
 }

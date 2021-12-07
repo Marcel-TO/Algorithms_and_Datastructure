@@ -4,12 +4,13 @@ namespace BefungeInterpreter_UnitTests.FileInteractions
     using System.IO;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using BefungeInterpreter.FileInteractions;
+    using BefungeInterpreter_UnitTests.TestInstances;
 
     [TestClass]
     public class FileCollector_Tests
     {
         [TestMethod]
-        [ExpectedException(ArgumentNullException)]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_Test_Null()
         {
             FileCollector collector = new FileCollector(null);
@@ -25,7 +26,7 @@ namespace BefungeInterpreter_UnitTests.FileInteractions
             Assert.IsNotNull(collector);
         }
 
-        [Testmethod]
+        [TestMethod]
         public void GetFiles_Test()
         {
             LoggerReplacementInstance logger = new LoggerReplacementInstance();
