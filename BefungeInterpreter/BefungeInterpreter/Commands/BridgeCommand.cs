@@ -63,6 +63,8 @@ namespace BefungeInterpreter.Commands
                     break;
             }
 
+            program.Position = program.Position.ValidatePosition(program.Position, program.Content);
+
             logger.UpdateContent(this.Program, this.Program.ValueList, this.Program.Output);
         }
     }

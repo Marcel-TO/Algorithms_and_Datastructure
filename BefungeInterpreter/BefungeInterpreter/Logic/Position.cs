@@ -15,16 +15,6 @@ namespace BefungeInterpreter.Logic
     public class Position
     {
         /// <summary>
-        /// Represents the x coordinate of the cursor.
-        /// </summary>
-        private int x;
-
-        /// <summary>
-        /// Represents the y coordinate of the cursor.
-        /// </summary>
-        private int y;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="Position"/> class.
         /// </summary>
         /// <param name="x">The x coordinate of the cursor.</param>
@@ -41,20 +31,8 @@ namespace BefungeInterpreter.Logic
         /// <value>The x coordinate of the cursor.</value>
         public int X
         {
-            get
-            {
-                return this.x;
-            }
-
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentOutOfRangeException($"The {nameof(this.x)} must not be negative.");
-                }
-
-                this.x = value;
-            }
+            get;
+            set;
         }
 
         /// <summary>
@@ -63,20 +41,34 @@ namespace BefungeInterpreter.Logic
         /// <value>The y coordinate of the cursor.</value>
         public int Y
         {
-            get
+            get;
+            set;
+        }
+
+        public Position ValidatePosition(Position position, string[] content)
+        {
+            if (content == null)
             {
-                return this.y;
+                throw new ArgumentNullException($"The {nameof(content)} must not be null.");
+            }
+            else if (position.Y < 0)
+            {
+                position.Y = content.Length - 1;
+            }
+            else if (position.Y > content.Length - 1)
+            {
+                position.Y = 0;
+            }
+            else if (position.X < 0)
+            {
+                position.X = content[position.Y].Length - 1;
+            }
+            else if (position.X > content[position.Y].Length - 1)
+            {
+                position.X = 0;
             }
 
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentOutOfRangeException($"The {nameof(this.y)} must not be negative.");
-                }
-
-                this.y = value;
-            }
+            return position;
         }
     }
 }
