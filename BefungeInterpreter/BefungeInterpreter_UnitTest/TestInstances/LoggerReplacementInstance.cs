@@ -110,7 +110,7 @@ namespace BefungeInterpreter_UnitTests.TestInstances
         /// <returns>The character from the user input.</returns>
         public char GetUserCharInput()
         {
-            return 'f';
+            return 'h';
         }
 
         /// <summary>

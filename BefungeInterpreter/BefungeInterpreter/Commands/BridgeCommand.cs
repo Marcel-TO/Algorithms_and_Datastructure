@@ -45,6 +45,10 @@ namespace BefungeInterpreter.Commands
             {
                 throw new ArgumentNullException($"The {nameof(program)} must not be null.");
             }
+            else if (logger == null)
+            {
+                throw new ArgumentNullException($"The {nameof(logger)} must not be null.");
+            }
 
             // Jumps over the next character.
             switch (program.Direction)

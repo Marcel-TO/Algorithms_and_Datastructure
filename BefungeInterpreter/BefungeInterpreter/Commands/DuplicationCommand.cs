@@ -49,7 +49,6 @@ namespace BefungeInterpreter.Commands
             if (program.Stack.Count == 0)
             {
                 program.StackPush(0);
-                return;
             }
 
             // Checks the value on top of the stack and pushes the same value again.

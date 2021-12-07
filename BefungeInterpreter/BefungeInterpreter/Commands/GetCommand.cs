@@ -61,6 +61,17 @@ namespace BefungeInterpreter.Commands
                 // Pops the values from the stack.
                 y = program.StackPop();
                 x = program.StackPop();
+
+                if (y > program.Content.Length)
+                {
+                    program.StackPush(32);
+                    return;
+                }
+                else if (x > program.Content[y].Length)
+                {
+                    program.StackPush(32);
+                    return;
+                }
             }
 
             // Checks if character is a number.
