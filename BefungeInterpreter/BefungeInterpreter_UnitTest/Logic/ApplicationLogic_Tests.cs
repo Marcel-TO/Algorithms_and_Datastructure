@@ -55,6 +55,7 @@ namespace BefungeInterpreter_UnitTests.Logic
         public void Start()
         {
             ApplicationLogic logic = new ApplicationLogic(new LoggerReplacementInstance(), new KeyboardWatcherReplacement());
+            logic.Interpreter.KeyboardWatcher = new KeyboardWatcherReplacement();
             logic.Run();
         }
     }

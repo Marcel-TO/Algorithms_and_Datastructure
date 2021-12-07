@@ -49,6 +49,11 @@ namespace BefungeInterpreter.Logic
         private BefungeProgram program;
 
         /// <summary>
+        /// Represents the interpreter of the current program.
+        /// </summary>
+        private Interpreter interpreter;
+
+        /// <summary>
         /// Represents the array of all possible file paths.
         /// </summary>
         private string[] filepaths;
@@ -74,6 +79,7 @@ namespace BefungeInterpreter.Logic
             this.KeyboardWatcher = watcher;
             this.KeyboardWatcher.KeyPressed += this.KeyPressed;
             this.visitor = new Executioner(this.logger);
+            this.Interpreter = new Interpreter(this.logger, this.visitor);
 
             this.fileCollector = new FileCollector(this.logger);
             this.factory = new BefungeProgramFactory();
@@ -121,6 +127,28 @@ namespace BefungeInterpreter.Logic
                 }
 
                 this.keyboardWatcher = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the interpreter of the <see cref="BefungeProgram"/>.
+        /// </summary>
+        /// <value>The interpreter of the current program.</value>
+        public Interpreter Interpreter
+        {
+            get
+            {
+                return this.interpreter;
+            }
+
+            private set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException($"The {nameof(this.interpreter)} must not be null.");
+                }
+
+                this.interpreter = value;
             }
         }
 
@@ -204,8 +232,7 @@ namespace BefungeInterpreter.Logic
         {
             this.program = this.factory.CreateBefungeProgram(path);
 
-            Interpreter interpreter = new Interpreter(this.Logger, this.visitor);
-            interpreter.RunBefungeProgram(this.program);
+            this.Interpreter.RunBefungeProgram(this.program);
 
             this.Logger.Clear();
             this.Logger.ShowBefungePrograms(this.filepaths);

@@ -46,12 +46,13 @@ namespace BefungeInterpreter_UnitTests.FileInteractions
         /// Represents a method for testing if the path is null.
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ReadFile_Test_Null()
         {
             FileReader reader = new FileReader();
 
             string[] content = reader.ReadFile(null);
+
+            Assert.IsNull(content);
         }
 
         /// <summary>

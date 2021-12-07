@@ -172,15 +172,15 @@ namespace BefungeInterpreter.Logic
 
             while (!args.IsExit)
             {
-                ConsoleKeyInfo cki = Console.ReadKey(true);
+                ConsoleKey key = this.KeyboardWatcher.ReadKey();
 
                 // stops looping the program.
-                if (cki.Key == ConsoleKey.Escape)
+                if (key == ConsoleKey.Escape)
                 {
                     this.loop = false;
                     this.StopExitThread();
                 }
-                else if (cki.Key == ConsoleKey.Enter)
+                else if (key == ConsoleKey.Enter)
                 {
                     // Stops running the program and waits for user to step further as before.
                     this.isInputDesired = true;

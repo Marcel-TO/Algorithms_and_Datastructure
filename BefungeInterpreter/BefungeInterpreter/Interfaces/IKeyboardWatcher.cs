@@ -24,5 +24,10 @@ namespace BefungeInterpreter.Interfaces
         /// Represents the start of the keyboard watcher.
         /// </summary>
         void Start();
+
+        /// <summary>
+        /// Represents the method for awaiting user input to continue.
+        /// </summary>
+        ConsoleKey ReadKey();
     }
 }

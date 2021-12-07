@@ -31,6 +31,11 @@ namespace BefungeInterpreter.KeyboardWatcher
             this.FireKeyPressed(cki.Key);
         }
 
+        public ConsoleKey ReadKey()
+        {
+            return Console.ReadKey(true).Key;
+        }
+
         /// <summary>
         /// Represents the method for firing the event.
         /// </summary>

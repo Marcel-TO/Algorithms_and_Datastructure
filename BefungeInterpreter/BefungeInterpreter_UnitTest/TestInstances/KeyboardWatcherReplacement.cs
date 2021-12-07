@@ -21,12 +21,20 @@ namespace BefungeInterpreter_UnitTests.TestInstances
         /// </summary>
         public event EventHandler<KeyboardWatcherKeyPressedEventArgs> KeyPressed;
 
+        public ConsoleKey ReadKey()
+        {
+            return ConsoleKey.Escape;
+        }
+
         /// <summary>
         /// Represents the start of the keyboard watcher.
         /// </summary>
         public void Start()
         {
-            return;
+            this.KeyPressed?.Invoke(this, new KeyboardWatcherKeyPressedEventArgs(ConsoleKey.UpArrow));
+            this.KeyPressed?.Invoke(this, new KeyboardWatcherKeyPressedEventArgs(ConsoleKey.UpArrow));
+            this.KeyPressed?.Invoke(this, new KeyboardWatcherKeyPressedEventArgs(ConsoleKey.Enter));
+            this.KeyPressed?.Invoke(this, new KeyboardWatcherKeyPressedEventArgs(ConsoleKey.Escape));
         }
     }
 }
