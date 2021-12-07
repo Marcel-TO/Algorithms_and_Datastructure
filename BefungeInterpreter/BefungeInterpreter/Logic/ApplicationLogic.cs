@@ -131,7 +131,7 @@ namespace BefungeInterpreter.Logic
         }
 
         /// <summary>
-        /// Gets or sets the interpreter of the <see cref="BefungeProgram"/>.
+        /// Gets the interpreter of the <see cref="BefungeProgram"/>.
         /// </summary>
         /// <value>The interpreter of the current program.</value>
         public Interpreter Interpreter

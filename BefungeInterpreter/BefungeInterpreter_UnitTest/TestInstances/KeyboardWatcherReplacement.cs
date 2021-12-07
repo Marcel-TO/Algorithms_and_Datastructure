@@ -21,6 +21,10 @@ namespace BefungeInterpreter_UnitTests.TestInstances
         /// </summary>
         public event EventHandler<KeyboardWatcherKeyPressedEventArgs> KeyPressed;
 
+        /// <summary>
+        /// Represents the method for awaiting user input.
+        /// </summary>
+        /// <returns>The replaced key input.</returns>
         public ConsoleKey ReadKey()
         {
             return ConsoleKey.Escape;

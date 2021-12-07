@@ -31,6 +31,10 @@ namespace BefungeInterpreter.KeyboardWatcher
             this.FireKeyPressed(cki.Key);
         }
 
+        /// <summary>
+        /// Represents the method for awaiting key input.
+        /// </summary>
+        /// <returns>The pressed key.</returns>
         public ConsoleKey ReadKey()
         {
             return Console.ReadKey(true).Key;

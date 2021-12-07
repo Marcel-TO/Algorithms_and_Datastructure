@@ -28,6 +28,7 @@ namespace BefungeInterpreter.Interfaces
         /// <summary>
         /// Represents the method for awaiting user input to continue.
         /// </summary>
+        /// <returns>The key value of the pressed key.</returns>
         ConsoleKey ReadKey();
     }
 }
