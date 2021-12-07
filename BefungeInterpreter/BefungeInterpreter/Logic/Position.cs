@@ -45,6 +45,12 @@ namespace BefungeInterpreter.Logic
             set;
         }
 
+        /// <summary>
+        /// Represents a method for checking if position is set correctly and corrects if necessary.
+        /// </summary>
+        /// <param name="position">The current position.</param>
+        /// <param name="content">The content of the current program.</param>
+        /// <returns>The if changed new position.</returns>
         public Position ValidatePosition(Position position, string[] content)
         {
             if (content == null)
