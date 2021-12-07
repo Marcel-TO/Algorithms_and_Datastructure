@@ -1,24 +1,57 @@
-﻿namespace BefungeInterpreter.Logic
-{
-    using BefungeInterpreter.Commands;
+﻿//-----------------------------------------------------------------------
+// <copyright file="BefungeProgram.cs" company="FHWN">
+//     Copyright (c) Marcel Turobin-Ort. All rights reserved.
+// </copyright>
+// <author>Marcel Turobin-Ort</author>
+// <summary>Defines the current befunge program of the application.</summary>
+//-----------------------------------------------------------------------
+namespace BefungeInterpreter.Logic
+{  
     using System;
-    using System.Collections;
     using System.Collections.Generic;
+    using BefungeInterpreter.Commands;
 
+    /// <summary>
+    /// Represents the current program that gets interpreted.
+    /// </summary>
     public class BefungeProgram
     {
+        /// <summary>
+        /// Represents the current stack of the program.
+        /// </summary>
         private Stack<int> stack;
 
+        /// <summary>
+        /// Represents the output stack of the program.
+        /// </summary>
         private List<string> outputStack;
 
+        /// <summary>
+        /// Represents the list of all values from the stack.
+        /// </summary>
         private List<int> valueList;
 
+        /// <summary>
+        /// Represents the content of the program.
+        /// </summary>
         private string[] content;
 
+        /// <summary>
+        /// Represents the position of the current program cursor.
+        /// </summary>
         private Position position;
 
+        /// <summary>
+        /// Represents the list of all supported commands for the interpreter.
+        /// </summary>
         private BaseCommand[] commands;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BefungeProgram"/> class.
+        /// </summary>
+        /// <param name="stack">The stack of the program.</param>
+        /// <param name="content">The content of the program.</param>
+        /// <param name="position">The position of the cursor.</param>
         public BefungeProgram(Stack<int> stack, string[] content, Position position)
         {
             this.Stack = stack;
@@ -61,6 +94,10 @@
             };
         }
 
+        /// <summary>
+        /// Gets the stack of the current program.
+        /// </summary>
+        /// <value>The stack of the current program.</value>
         public Stack<int> Stack
         {
             get
@@ -79,6 +116,10 @@
             }
         }
 
+        /// <summary>
+        /// Gets the output of the current program.
+        /// </summary>
+        /// <value>The list of all output values.</value>
         public List<string> Output
         {
             get
@@ -97,6 +138,10 @@
             }
         }
 
+        /// <summary>
+        /// Gets the list of all values from the stack.
+        /// </summary>
+        /// <value>The list of all values from the stack.</value>
         public List<int> ValueList
         {
             get
@@ -115,6 +160,10 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the content of the current program.
+        /// </summary>
+        /// <value>The content of the current program.</value>
         public string[] Content
         {
             get
@@ -133,6 +182,10 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the position of the cursor.
+        /// </summary>
+        /// <value>The position of the current program cursor.</value>
         public Position Position
         {
             get
@@ -167,6 +220,10 @@
             }
         }
 
+        /// <summary>
+        /// Gets the list of all commands supported from the interpreter.
+        /// </summary>
+        /// <value>The list of all commands.</value>
         public BaseCommand[] Commands
         {
             get
@@ -175,24 +232,40 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the program is interpreted.
+        /// </summary>
+        /// <value>True if the program is interpreted, otherwise false.</value>
         public bool IsInterpreted
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the program is currently in string format or not.
+        /// </summary>
+        /// <value>True if the program is in string format, otherwise false.</value>
         public bool IsStringFormat
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the direction of the cursor.
+        /// </summary>
+        /// <value>The current direction of the cursor.</value>
         public Direction Direction
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Represents a method for popping a value from the stack and the value list.
+        /// </summary>
+        /// <returns>The value that got popped.</returns>
         public int StackPop()
         {
             if (this.Stack.Count == 0)
@@ -206,6 +279,10 @@
             return value;
         }
 
+        /// <summary>
+        /// Represents a method for pushing a value on the stack and the value list.
+        /// </summary>
+        /// <param name="value">The value that gets pushed.</param>
         public void StackPush(int value)
         {
             this.Stack.Push(value);

@@ -1,10 +1,20 @@
-﻿namespace BefungeInterpreter.Logic
+﻿//-----------------------------------------------------------------------
+// <copyright file="ConsoleLogger.cs" company="FHWN">
+//     Copyright (c) Marcel Turobin-Ort. All rights reserved.
+// </copyright>
+// <author>Marcel Turobin-Ort</author>
+// <summary>Defines the console logger of the application.</summary>
+//-----------------------------------------------------------------------
+namespace BefungeInterpreter.Logic
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using BefungeInterpreter.Interfaces;
 
+    /// <summary>
+    /// Represents a console logger for the application.
+    /// </summary>
     public class ConsoleLogger : ILogger
     {
         /// <summary>
@@ -17,26 +27,59 @@
         /// </summary>
         private static int startNameListY = 4;
 
+        /// <summary>
+        /// Represents the right border position of the program.
+        /// </summary>
         private int rightBorder;
 
+        /// <summary>
+        /// Represents the bottom border position of the program.
+        /// </summary>
         private int bottomBorder;
 
+        /// <summary>
+        /// Represents the starting x position for the stack.
+        /// </summary>
         private int stackDisplayX;
 
+        /// <summary>
+        /// Represents the starting y position for the stack.
+        /// </summary>
         private int stackDisplayY;
 
+        /// <summary>
+        /// Represents the starting position of the stack.
+        /// </summary>
         private int stackDisplayStart;
 
+        /// <summary>
+        /// Represents amount of displayed stack values.
+        /// </summary>
         private int stackCounter;
 
+        /// <summary>
+        /// Represents the starting x position of the output list.
+        /// </summary>
         private int outDisplayX;
 
+        /// <summary>
+        /// Represents the starting y position of the output list.
+        /// </summary>
         private int outDisplayY;
 
+        /// <summary>
+        /// Represents the starting position of the output list.
+        /// </summary>
         private int outDisplayStart;
 
+        /// <summary>
+        /// Represents the amount of displayed output values.
+        /// </summary>
         private int outCounter;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConsoleLogger"/> class.
+        /// </summary>
         public ConsoleLogger()
         {
             #pragma warning disable CA1416
@@ -49,11 +92,19 @@
             this.outCounter = 0;
         }
 
+        /// <summary>
+        /// Represents a method for displaying a message.
+        /// </summary>
+        /// <param name="message">The current message.</param>
         public void Log(string message)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(message);
         }
 
+        /// <summary>
+        /// Represents the method for showing all possible <see cref="BefungeProgram"/>.
+        /// </summary>
+        /// <param name="befungeProgramPaths">The paths of all programs.</param>
         public void ShowBefungePrograms(string[] befungeProgramPaths)
         {
             Console.CursorVisible = false;
@@ -73,6 +124,11 @@
             }
         }
 
+        /// <summary>
+        /// Represents the method for displaying the cursor position.
+        /// </summary>
+        /// <param name="yPosition">The y position of the cursor.</param>
+        /// <param name="lengthOfBefungePrograms">The amount of programs.</param>
         public void ShowCursor(int yPosition, int lengthOfBefungePrograms)
         {
             int xPos = 1;
@@ -108,6 +164,13 @@
             }
         }
 
+        /// <summary>
+        /// Represents the method for showing the content of the current <see cref="BefungeProgram"/>.
+        /// </summary>
+        /// <param name="content">The current content of the program.</param>
+        /// <param name="position">The current cursor position.</param>
+        /// <param name="values">The current values of the stack.</param>
+        /// <param name="output">The current output of the program.</param>
         public void ShowProgramContent(string[] content, Position position, List<int> values, List<string> output)
         {
             Console.CursorVisible = false;
@@ -138,6 +201,9 @@
             this.MoreInformation(this.rightBorder, this.bottomBorder, values, output);
         }
 
+        /// <summary>
+        /// Represents the method for indicating that the interpreter is finished.
+        /// </summary>
         public void Finished()
         {
             int offset = 2;
@@ -173,7 +239,13 @@
             this.Continue();
         }
 
-        public void UpdateContent(BefungeProgram program ,List<int> stackValues, List<string> output)
+        /// <summary>
+        /// Represents the method for updating the cursor position, the stack values and the output.
+        /// </summary>
+        /// <param name="program">The current program.</param>
+        /// <param name="stackValues">The current values of the stack.</param>
+        /// <param name="output">The current output of the stack.</param>
+        public void UpdateContent(BefungeProgram program, List<int> stackValues, List<string> output)
         {
             this.UpdateCursor(program.Content, program.Position, program.Direction);
 
@@ -187,16 +259,26 @@
             this.ShowOutput(output, this.outDisplayX, this.outDisplayY);
         }
 
+        /// <summary>
+        /// Represents the method for clearing the console.
+        /// </summary>
         public void Clear()
         {
             Console.Clear();
         }
 
+        /// <summary>
+        /// Represents the method for waiting for user input to continue.
+        /// </summary>
         public void Continue()
         {
             Console.ReadKey(true);
         }
 
+        /// <summary>
+        /// Represents the method for getting a character from the user.
+        /// </summary>
+        /// <returns>The character from the user input.</returns>
         public char GetUserCharInput()
         {
             this.Clear();
@@ -218,6 +300,10 @@
             }
         }
 
+        /// <summary>
+        /// Represents the method for getting a integer value from the user.
+        /// </summary>
+        /// <returns>The integer from the user input.</returns>
         public int GetUserIntInput()
         {
             this.Clear();
@@ -238,6 +324,12 @@
             }
         }
 
+        /// <summary>
+        /// Represents the method for updating the cursor position.
+        /// </summary>
+        /// <param name="content">The content of the current program.</param>
+        /// <param name="position">The current position of the cursor.</param>
+        /// <param name="direction">The current direction of the cursor.</param>
         private void UpdateCursor(string[] content, Position position, Direction direction)
         {
             Console.BackgroundColor = ConsoleColor.Blue;
@@ -262,6 +354,14 @@
             }
         }
 
+        /// <summary>
+        /// Represents the method for showing the printed character.
+        /// </summary>
+        /// <param name="content">The content of the current program.</param>
+        /// <param name="contentX">The x position of the current content.</param>
+        /// <param name="contentY">The y position of the current content.</param>
+        /// <param name="cursorXOffset">The offset of the x position.</param>
+        /// <param name="cursorYOffset">The offset of the y position.</param>
         private void PrintChar(string[] content, int contentX, int contentY, int cursorXOffset, int cursorYOffset)
         {
             if (contentY > content.Length - 1)
@@ -285,6 +385,13 @@
             Console.Write(content[contentY][contentX]);
         }
 
+        /// <summary>
+        /// Represents the method for visualizing info's.
+        /// </summary>
+        /// <param name="right">The position of the right border.</param>
+        /// <param name="bottom">The position of the bottom border.</param>
+        /// <param name="values">The list of all values on the stack.</param>
+        /// <param name="output">The list of all output values.</param>
         private void MoreInformation(int right, int bottom, List<int> values, List<string> output)
         {
             int offset = 2;
@@ -320,12 +427,24 @@
             this.ShowOutput(output, this.outDisplayX, this.outDisplayY);
         }
 
+        /// <summary>
+        /// Represents the method for showcasing the topic of the showcase.
+        /// </summary>
+        /// <param name="name">The name of the displayed list.</param>
+        /// <param name="y">The y position of the cursor.</param>
         private void Topic(string name, int y)
         {
             Console.SetCursorPosition(0, y);
             Console.WriteLine(name + ":");
         }
 
+        /// <summary>
+        /// Represents the method for showing the stack information.
+        /// </summary>
+        /// <param name="values">The values of the current stack.</param>
+        /// <param name="x">The x position of the cursor.</param>
+        /// <param name="y">The y position of the cursor.</param>
+        /// <returns>The y position of the current cursor.</returns>
         private int ShowStack(List<int> values, int x, int y)
         {
             int xPos = x;
@@ -371,6 +490,10 @@
             return yPos;
         }
 
+        /// <summary>
+        /// Represents the method for clearing the line from the console.
+        /// </summary>
+        /// <param name="y">The y position of the cursor.</param>
         private void ClearLine(int y)
         {
             Console.SetCursorPosition(0, y);
@@ -381,6 +504,12 @@
             }
         }
 
+        /// <summary>
+        /// Represents the method for showing the output values.
+        /// </summary>
+        /// <param name="values">The values of the output list.</param>
+        /// <param name="x">The x position of the cursor.</param>
+        /// <param name="y">The y position of the cursor.</param>
         private void ShowOutput(List<string> values, int x, int y)
         {
             int start = 0;
@@ -418,6 +547,10 @@
             this.outDisplayY = Console.CursorTop;
         }
 
+        /// <summary>
+        /// Represents the method for displaying the stack of the program.
+        /// </summary>
+        /// <param name="y">The y position of the cursor.</param>
         private void StackBorders(int y)
         {
             Console.SetCursorPosition(0, y);
@@ -432,7 +565,7 @@
         /// Represents the visitor pattern of the clear command.
         /// </summary>
         /// <param name="message">Represents the message of the application.</param>
-        /// <param name="commands">Represents the list of commands.</param>
+        /// <param name="lengthsOfContents">Represents the list of content lengths.</param>
         private void Borders(string message, int[] lengthsOfContents)
         {
             int longestName = message.Length;
@@ -544,6 +677,11 @@
             }
         }
 
+        /// <summary>
+        /// Represents the method for extracting the length of each content line.
+        /// </summary>
+        /// <param name="content">The content of the program.</param>
+        /// <returns>The length of each content line.</returns>
         private int[] GetLength(string[] content)
         {
             int[] lengths = new int[content.Length];
@@ -556,6 +694,11 @@
             return lengths;
         }
 
+        /// <summary>
+        /// Represents the method for extracting the length of each file name from the directory.
+        /// </summary>
+        /// <param name="paths">The list of all possible programs.</param>
+        /// <returns>The length of each file name.</returns>
         private int[] GetPathLengths(string[] paths)
         {
             int[] lengths = new int[paths.Length];
@@ -566,11 +709,6 @@
             }
 
             return lengths;
-        }
-
-        public void CursorOutOfRange()
-        {
-            throw new NotImplementedException();
         }
     }
 }
