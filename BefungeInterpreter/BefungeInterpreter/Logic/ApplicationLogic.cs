@@ -116,6 +116,8 @@
                 this.KeyboardWatcher.Start();
                 this.Logger.ShowCursor(this.Index, this.filepaths.Length - 1);
             }
+
+            this.logger.Clear();
         }
 
         protected void KeyPressed(object sender, KeyboardWatcherKeyPressedEventArgs e)

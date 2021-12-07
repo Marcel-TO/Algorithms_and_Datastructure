@@ -179,10 +179,11 @@
 
             int currY = this.ShowStack(stackValues, this.stackDisplayX, this.stackDisplayY);
             this.StackBorders(++currY);
-            this.Topic("Output", ++currY);
-            this.outDisplayX = 1;
+            this.ClearLine(++currY);
+            this.Topic("Output", currY);
             this.outDisplayY = ++currY;
             this.outDisplayStart = currY;
+            this.ClearLine(currY + 1);
             this.ShowOutput(output, this.outDisplayX, this.outDisplayY);
         }
 
@@ -398,7 +399,18 @@
 
             for (int i = start; i < values.Count; i++)
             {
-                Console.Write(values[i].ToString());
+                int number;
+                bool isNumber = int.TryParse(values[i], out number);
+
+                if (isNumber)
+                {
+                    Console.Write(values[i].ToString() + " ");
+                }
+                else
+                {
+                    Console.Write(values[i].ToString());
+                }
+
                 this.outCounter++;
             }
 
