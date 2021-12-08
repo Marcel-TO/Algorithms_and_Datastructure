@@ -89,6 +89,7 @@ namespace BefungeInterpreter_UnitTest.Commands
         /// <summary>
         /// Represents a method for testing if values are out of range.
         /// </summary>
+        [TestMethod]
         public void TestIfStackValuesAreOutOfRange()
         {
             GetCommand command = new GetCommand(new BefungeProgram(new Stack<int>(), new string[] { "4g" }, new Position(0, 0)));
