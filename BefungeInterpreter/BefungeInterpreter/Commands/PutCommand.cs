@@ -86,6 +86,10 @@ namespace BefungeInterpreter.Commands
             {
                 throw new ArgumentOutOfRangeException($"The {x} position is out of range.");
             }
+            else if (value > 127)
+            {
+                throw new ArgumentOutOfRangeException($"The {value} must be an ascii value.");
+            }
 
             var valueChars = Encoding.ASCII.GetChars(new byte[] { Convert.ToByte(value) });
 

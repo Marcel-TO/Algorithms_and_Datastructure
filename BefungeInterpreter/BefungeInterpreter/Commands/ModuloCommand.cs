@@ -56,6 +56,13 @@ namespace BefungeInterpreter.Commands
             int value2 = program.StackPop();
             int value1 = program.StackPop();
 
+            // Checks if values are zero to avoid dividing by 0.
+            if (value2 == 0 || value1 == 0)
+            {
+                program.StackPush(0);
+                return;
+            }
+
             // Calculates the modulo of the values and pushes the result on the stack.
             int res = value1 % value2;
             program.StackPush(res);

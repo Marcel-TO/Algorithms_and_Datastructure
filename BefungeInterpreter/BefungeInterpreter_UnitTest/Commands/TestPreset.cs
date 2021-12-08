@@ -30,6 +30,18 @@ namespace BefungeInterpreter_UnitTest.Commands
         }
 
         /// <summary>
+        /// Represents a method if execute reacts properly to null program.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestIfProgramInExecuteIsNull()
+        {
+            ModuloCommand command = new ModuloCommand(new BefungeProgram(new Stack<int>(), new string[] { "&" }, new Position(0, 0)));
+
+            command.Execute(null);
+        }
+
+        /// <summary>
         /// Represents a method for testing if add command works properly.
         /// </summary>
         [TestMethod]

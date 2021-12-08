@@ -49,7 +49,7 @@ namespace BefungeInterpreter.Commands
             // Checks if there are no values to be popped.
             if (program.Stack.Count == 0)
             {
-                return;
+                program.StackPush(0);
             }
 
             // Pops the value.
