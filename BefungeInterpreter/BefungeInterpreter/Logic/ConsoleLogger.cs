@@ -9,12 +9,14 @@ namespace BefungeInterpreter.Logic
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using BefungeInterpreter.Interfaces;
 
     /// <summary>
     /// Represents a console logger for the application.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class ConsoleLogger : ILogger
     {
         /// <summary>

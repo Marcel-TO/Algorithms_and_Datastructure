@@ -61,15 +61,59 @@ namespace BefungeInterpreter.Logic
         /// <param name="visitor">The visitor pattern of the current program.</param>
         public Interpreter(ILogger logger, ICommandVisitor visitor)
         {
-            this.logger = logger;
+            this.Logger = logger;
             this.KeyboardWatcher = new KeyboardWatcher();
             this.KeyboardWatcher.KeyPressed += this.KeyPressed;
-            this.visitor = visitor;
+            this.Visitor = visitor;
 
             this.loop = true;
             this.isInputDesired = true;
 
             this.threadArguments = new ExitThreadArguments();
+        }
+
+        /// <summary>
+        /// Gets the logger of the application.
+        /// </summary>
+        /// <value>The logger of the application.</value>
+        public ILogger Logger
+        {
+            get
+            {
+                return this.logger;
+            }
+
+            private set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException($"The {nameof(this.logger)} must not be null.");
+                }
+
+                this.logger = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets the visitor pattern of the commands.
+        /// </summary>
+        /// <value>The visitor pattern of the commands.</value>
+        public ICommandVisitor Visitor
+        {
+            get
+            {
+                return this.visitor;
+            }
+
+            private set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException($"The {nameof(this.visitor)} must not be null.");
+                }
+
+                this.visitor = value;
+            }
         }
 
         /// <summary>
@@ -100,7 +144,7 @@ namespace BefungeInterpreter.Logic
         /// <param name="program">The current program.</param>
         public void RunBefungeProgram(BefungeProgram program)
         {
-            this.logger.ShowProgramContent(program.Content, program.Position, program.ValueList, program.Output);
+            this.Logger.ShowProgramContent(program.Content, program.Position, program.ValueList, program.Output);
 
             if (this.stopThread != null && this.stopThread.IsAlive)
             {
@@ -123,7 +167,7 @@ namespace BefungeInterpreter.Logic
                 }
 
                 this.GoThroughCode(program);
-                this.logger.UpdateContent(program, program.ValueList, program.Output);
+                this.Logger.UpdateContent(program, program.ValueList, program.Output);
             }
         }
 
@@ -214,7 +258,7 @@ namespace BefungeInterpreter.Logic
                         // Checks if the current character is the same as the string format command, to end the string format.
                         if (program.Content[program.Position.Y][program.Position.X].ToString() == "\"")
                         {
-                            program.Commands[i].Accept(this.visitor);
+                            program.Commands[i].Accept(this.Visitor);
                             this.MovePosition(program);
                             return;
                         }
@@ -223,13 +267,13 @@ namespace BefungeInterpreter.Logic
                     }
 
                     // If the string format is not activated the current command gets executed.
-                    program.Commands[i].Accept(this.visitor);
+                    program.Commands[i].Accept(this.Visitor);
 
                     // Checks if the befunge program is finished.
                     if (program.IsInterpreted)
                     {
                         this.loop = false;
-                        this.logger.Finished();
+                        this.Logger.Finished();
                         return;
                     }
 
