@@ -163,6 +163,8 @@ namespace BefungeInterpreter.Logic
                 if (!this.loop)
                 {
                     this.StopExitThread();
+                    this.isInputDesired = true;
+                    this.loop = true;
                     return;
                 }
 
@@ -182,10 +184,10 @@ namespace BefungeInterpreter.Logic
             {
                 case ConsoleKey.Escape:
                     this.loop = false;
+                    this.StopExitThread();
                     break;
                 case ConsoleKey.Enter:
                     this.SetUpRun();
-                    
                     break;
             }
         }
@@ -218,16 +220,15 @@ namespace BefungeInterpreter.Logic
             {
                 ConsoleKey key = this.KeyboardWatcher.ReadKey();
 
-                // stops looping the program.
-                if (key == ConsoleKey.Escape)
-                {
-                    this.loop = false;
-                    this.StopExitThread();
-                }
-                else if (key == ConsoleKey.Enter)
+                if (key == ConsoleKey.Enter)
                 {
                     // Stops running the program and waits for user to step further as before.
                     this.isInputDesired = true;
+                    this.StopExitThread();
+                }
+                else if (key == ConsoleKey.Escape)
+                {
+                    this.loop = false;
                     this.StopExitThread();
                 }
             }
