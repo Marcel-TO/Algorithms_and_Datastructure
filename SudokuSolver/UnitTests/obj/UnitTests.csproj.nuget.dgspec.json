@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "M:\\Visual_Studio\\Semester_3\\SudokuSolver\\UnitTests\\UnitTests.csproj": {}
+    "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SudokuSolver\\UnitTests\\UnitTests.csproj": {}
   },
   "projects": {
-    "M:\\Visual_Studio\\Semester_3\\SudokuSolver\\Sudoku_Model\\Sudoku_Model.csproj": {
+    "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SudokuSolver\\Sudoku_Model\\Sudoku_Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "M:\\Visual_Studio\\Semester_3\\SudokuSolver\\Sudoku_Model\\Sudoku_Model.csproj",
+        "projectUniqueName": "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SudokuSolver\\Sudoku_Model\\Sudoku_Model.csproj",
         "projectName": "Sudoku_Model",
-        "projectPath": "M:\\Visual_Studio\\Semester_3\\SudokuSolver\\Sudoku_Model\\Sudoku_Model.csproj",
+        "projectPath": "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SudokuSolver\\Sudoku_Model\\Sudoku_Model.csproj",
         "packagesPath": "D:\\Users\\Marcel\\.nuget\\packages\\",
-        "outputPath": "M:\\Visual_Studio\\Semester_3\\SudokuSolver\\Sudoku_Model\\obj\\",
+        "outputPath": "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SudokuSolver\\Sudoku_Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "D:\\Users\\Marcel\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -54,18 +54,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "D:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "D:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "M:\\Visual_Studio\\Semester_3\\SudokuSolver\\UnitTests\\UnitTests.csproj": {
+    "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SudokuSolver\\UnitTests\\UnitTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "M:\\Visual_Studio\\Semester_3\\SudokuSolver\\UnitTests\\UnitTests.csproj",
+        "projectUniqueName": "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SudokuSolver\\UnitTests\\UnitTests.csproj",
         "projectName": "UnitTests",
-        "projectPath": "M:\\Visual_Studio\\Semester_3\\SudokuSolver\\UnitTests\\UnitTests.csproj",
+        "projectPath": "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SudokuSolver\\UnitTests\\UnitTests.csproj",
         "packagesPath": "D:\\Users\\Marcel\\.nuget\\packages\\",
-        "outputPath": "M:\\Visual_Studio\\Semester_3\\SudokuSolver\\UnitTests\\obj\\",
+        "outputPath": "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SudokuSolver\\UnitTests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "D:\\Users\\Marcel\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -82,8 +82,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "M:\\Visual_Studio\\Semester_3\\SudokuSolver\\Sudoku_Model\\Sudoku_Model.csproj": {
-                "projectPath": "M:\\Visual_Studio\\Semester_3\\SudokuSolver\\Sudoku_Model\\Sudoku_Model.csproj"
+              "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SudokuSolver\\Sudoku_Model\\Sudoku_Model.csproj": {
+                "projectPath": "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SudokuSolver\\Sudoku_Model\\Sudoku_Model.csproj"
               }
             }
           }
@@ -130,7 +130,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "D:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "D:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

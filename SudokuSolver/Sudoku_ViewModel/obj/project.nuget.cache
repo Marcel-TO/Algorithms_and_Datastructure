@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6vUhJlya5hQ0TmAdRO8FhdApJwjoUrbFJTZDvE+uKLp1nVMbN++V9G6t16+QEcPFDIubziYYCoPVOMiJi46gDA==",
+  "dgSpecHash": "iUS2lv8E/C0VYaW98WXFdodlpoityemUV0h/juBXQBWTOFQpjJcrJpvupREk4SraGo+YHplYnjetbSiej25HRw==",
   "success": true,
-  "projectFilePath": "M:\\Visual_Studio\\Semester_3\\SudokuSolver\\Sudoku_ViewModel\\Sudoku_ViewModel.csproj",
+  "projectFilePath": "M:\\Marcel\\Desktop\\Studium\\3.Semester\\AlgoDat\\MyGit\\SudokuSolver\\Sudoku_ViewModel\\Sudoku_ViewModel.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
