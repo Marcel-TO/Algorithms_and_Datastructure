@@ -41,9 +41,9 @@ namespace SnakesAndLadders.GameObjects
 
             private set
             {
-                if (value < 0)
+                if (value < 1)
                 {
-                    throw new ArgumentOutOfRangeException($"The {nameof(this.size)} must not be negative.");
+                    throw new ArgumentOutOfRangeException($"The {nameof(this.size)} must not be less than 1.");
                 }
 
                 this.size = value;

@@ -57,7 +57,7 @@ namespace SnakesAndLadders.GameObjects
 
             private set
             {
-                if (value < 0)
+                if (value < 1)
                 {
                     throw new ArgumentOutOfRangeException($"The {nameof(this.roll)} must not be negative.");
                 }

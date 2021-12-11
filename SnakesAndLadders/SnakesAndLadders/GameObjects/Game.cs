@@ -55,7 +55,9 @@ namespace SnakesAndLadders.GameObjects
             this.Fields = fields;
             this.Dice = dice;
             this.Players = players;
+            this.IsFinished = false;
             this.finishedCounter = 0;
+            this.Time = TimeSpan.Zero;
         }
 
         /// <summary>
