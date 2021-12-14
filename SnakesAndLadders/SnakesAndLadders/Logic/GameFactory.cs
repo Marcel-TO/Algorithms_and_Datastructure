@@ -31,6 +31,15 @@ namespace SnakesAndLadders.Logic
         /// <returns>The new game instance.</returns>
         public Game CreateGame(string name, int boardSize, int diceSize, int playerSize)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException($"The {nameof(name)} must not be null.");
+            }
+            else if (boardSize < 1 || diceSize < 1 || playerSize < 1)
+            {
+                throw new ArgumentOutOfRangeException("The size values must not be at least 1.");
+            }
+
             List<Field> fields = this.CreateFields(boardSize, diceSize);
             Dice dice = this.CreateDice(diceSize);
             List<Player> players = this.CreatePlayers(playerSize);

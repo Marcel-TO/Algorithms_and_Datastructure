@@ -8,12 +8,14 @@
 namespace SnakesAndLadders.Logic
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using SnakesAndLadders.GameObjects;
     using SnakesAndLadders.Interfaces;
 
     /// <summary>
     /// Represents a method for logging on console.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class ConsoleLogger : ILogger
     {
         /// <summary>
@@ -120,7 +122,7 @@ namespace SnakesAndLadders.Logic
             Console.SetCursorPosition(x, y++);
             Console.WriteLine($"The player {fastestPlayer.Name} finished first:");
             Console.SetCursorPosition(x, y++);
-            Console.WriteLine($"All {fastestPlayer.Turns.Count} Turns.");
+            Console.WriteLine($"It took the player {fastestPlayer.Turns.Count} Turns.");
 
             y++;
 
@@ -166,7 +168,7 @@ namespace SnakesAndLadders.Logic
             Console.SetCursorPosition(x, y++);
             Console.WriteLine($"The the turns of the player {game.Players[playerIndex].Name}:");
             Console.SetCursorPosition(x, y++);
-            Console.WriteLine($"All {game.Players[playerIndex].Turns.Count} Turns.");
+            Console.WriteLine($"It took the player {game.Players[playerIndex].Turns.Count} Turns.");
 
             y++;
 
@@ -201,6 +203,16 @@ namespace SnakesAndLadders.Logic
         public void Clear()
         {
             Console.Clear();
+        }
+
+        /// <summary>
+        /// Represents the method for asking user if he wants to exit.
+        /// </summary>
+        public void Exit()
+        {
+            this.Clear();
+
+            Console.WriteLine("If you want to exit press escape, otherwise it will continue.");
         }
     }
 }

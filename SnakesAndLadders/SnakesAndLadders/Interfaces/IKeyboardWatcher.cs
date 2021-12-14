@@ -25,5 +25,11 @@ namespace SnakesAndLadders.Interfaces
         /// </summary>
         /// <returns>The pressed key from user.</returns>
         ConsoleKeyInfo Continue();
+
+        /// <summary>
+        /// Represents the method for awaiting if user wants to exit.
+        /// </summary>
+        /// <returns>True if the user wants to exit, otherwise false.</returns>
+        bool Exit();
     }
 }

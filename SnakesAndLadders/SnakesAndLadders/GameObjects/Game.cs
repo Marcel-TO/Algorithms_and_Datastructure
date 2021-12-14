@@ -10,7 +10,11 @@ namespace SnakesAndLadders.GameObjects
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Threading;
+    using System.Threading.Tasks;
     using SnakesAndLadders.EventArgs;
+    using SnakesAndLadders.Interfaces;
+    using SnakesAndLadders.Logic;
 
     /// <summary>
     /// Represents the snakes and ladders game.
@@ -33,6 +37,11 @@ namespace SnakesAndLadders.GameObjects
         private List<Player> players;
 
         /// <summary>
+        /// Represents the list of every player movement simulation.
+        /// </summary>
+        private List<Thread> playerSimulations;
+
+        /// <summary>
         /// Represents the used dice.
         /// </summary>
         private Dice dice;
@@ -43,6 +52,11 @@ namespace SnakesAndLadders.GameObjects
         private int finishedCounter;
 
         /// <summary>
+        /// Represents the logger of the application.
+        /// </summary>
+        private ILogger logger;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Game"/> class.
         /// </summary>
         /// <param name="name">The name of the current game.</param>
@@ -51,6 +65,8 @@ namespace SnakesAndLadders.GameObjects
         /// <param name="players">The list of all players in the game.</param>
         public Game(string name, List<Field> fields, Dice dice, List<Player> players)
         {
+            this.Logger = new ConsoleLogger();
+
             this.Name = name;
             this.Fields = fields;
             this.Dice = dice;
@@ -58,6 +74,12 @@ namespace SnakesAndLadders.GameObjects
             this.IsFinished = false;
             this.finishedCounter = 0;
             this.Time = TimeSpan.Zero;
+            this.playerSimulations = new List<Thread>();
+
+            for (int i = 0; i < this.Players.Count; i++)
+            {
+                this.playerSimulations.Add(new Thread(this.RunPlayerSimulation));
+            }
         }
 
         /// <summary>
@@ -174,12 +196,40 @@ namespace SnakesAndLadders.GameObjects
         }
 
         /// <summary>
+        /// Gets the logger of the application.
+        /// </summary>
+        /// <value>The logger of the application.</value>
+        public ILogger Logger
+        {
+            get
+            {
+                return this.logger;
+            }
+
+            private set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException($"The {nameof(this.logger)} must not be null.");
+                }
+
+                this.logger = value;
+            }
+        }
+
+        /// <summary>
         /// Represents the method for playing the game.
         /// </summary>
         public void Run()
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
+
+            // Starts moving with every player.
+            for (int i = 0; i < this.playerSimulations.Count; i++)
+            {
+                this.playerSimulations[i].Start(this.Players[i]);
+            }
 
             while (true)
             {
@@ -192,32 +242,43 @@ namespace SnakesAndLadders.GameObjects
                     this.GameIsFinished?.Invoke(this, new GameIsFinishedEventArg(this));
                     return;
                 }
+            }
+        }
 
-                // Lets every Player move.
-                foreach (Player player in this.Players)
+        /// <summary>
+        /// Represents the simulation of the player movement.
+        /// </summary>
+        /// <param name="playerData">The current player data.</param>
+        private void RunPlayerSimulation(object playerData)
+        {
+            if (!(playerData is Player))
+            {
+                throw new ArgumentOutOfRangeException($"The specified arguments must be of the type {nameof(Player)}.");
+            }
+
+            Player player = (Player)playerData;
+
+            while (true)
+            {
+                int roll = this.Dice.RollDice();
+
+                // Checks if player would move too far.
+                if (player.Position + roll > this.Fields.Count - 1)
                 {
-                    // Checks if player is finished.
-                    if (!player.IsFinished)
-                    {
-                        int roll = this.Dice.RollDice();
+                    player.Turns.Add(new Turn(roll, player.Position, player.Position, false));
+                    continue;
+                }
 
-                        // Checks if player would move too far.
-                        if (player.Position + roll > this.Fields.Count - 1)
-                        {
-                            player.Turns.Add(new Turn(roll, player.Position, player.Position, false));
-                            continue;
-                        }
+                // Moves player to the new position.
+                player.Turns.Add(new Turn(roll, player.Position, this.Fields[player.Position + roll].Pointer, this.Fields[player.Position + roll].IsSpecial));
+                player.Position = this.Fields[player.Position + roll].Pointer;
 
-                        // Moves player to the new position.
-                        player.Turns.Add(new Turn(roll, player.Position, this.Fields[player.Position + roll].Pointer, this.Fields[player.Position + roll].IsSpecial));
-                        player.Position = this.Fields[player.Position + roll].Pointer;
-
-                        if (player.Position == this.Fields.Count - 1)
-                        {
-                            this.finishedCounter++;
-                            player.IsFinished = true;
-                        }
-                    }
+                if (player.Position == this.Fields.Count - 1)
+                {
+                    this.Logger.Message($"Game: {this.Name} | Player: {player.Name} finished.");
+                    this.finishedCounter++;
+                    player.IsFinished = true;
+                    return;
                 }
             }
         }

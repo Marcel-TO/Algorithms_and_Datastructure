@@ -66,5 +66,10 @@ namespace SnakesAndLadders.Interfaces
         /// Represents the method for clearing the console.
         /// </summary>
         void Clear();
+
+        /// <summary>
+        /// Represents the method for asking user if he wants to exit.
+        /// </summary>
+        void Exit();
     }
 }

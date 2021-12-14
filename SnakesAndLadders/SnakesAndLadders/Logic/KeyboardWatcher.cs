@@ -8,11 +8,13 @@
 namespace SnakesAndLadders.Logic
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using SnakesAndLadders.Interfaces;
 
     /// <summary>
     /// Represents a class for watching user input.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class KeyboardWatcher : IKeyboardWatcher
     {
         /// <summary>
@@ -31,6 +33,23 @@ namespace SnakesAndLadders.Logic
         public ConsoleKeyInfo Continue()
         {
             return Console.ReadKey(true);
+        }
+
+        /// <summary>
+        /// Represents the method for awaiting if user wants to exit.
+        /// </summary>
+        /// <returns>True if the user wants to exit, otherwise false.</returns>
+        public bool Exit()
+        {
+            ConsoleKey key = Console.ReadKey(true).Key;
+
+            switch (key)
+            {
+                case ConsoleKey.Escape:
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }

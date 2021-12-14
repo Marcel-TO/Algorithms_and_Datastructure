@@ -10,6 +10,7 @@ namespace SnakesAndLadders.Logic
     using System;
     using System.Collections.Generic;
     using System.Threading;
+    using System.Threading.Tasks;
     using SnakesAndLadders.EventArgs;
     using SnakesAndLadders.GameObjects;
     using SnakesAndLadders.Interfaces;
@@ -70,6 +71,11 @@ namespace SnakesAndLadders.Logic
         private int finishedCounter;
 
         /// <summary>
+        /// Represents the value that indicates whether the game should stop.
+        /// </summary>
+        private bool isExit;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationLogic"/> class.
         /// </summary>
         /// <param name="logger">The current logger of the application.</param>
@@ -83,6 +89,7 @@ namespace SnakesAndLadders.Logic
             this.games = new List<Game>();
             this.simulations = new List<Thread>();
             this.finishedCounter = 0;
+            this.isExit = false;
         }
 
         /// <summary>
@@ -134,7 +141,7 @@ namespace SnakesAndLadders.Logic
         /// </summary>
         public void Run()
         {
-            while (true)
+            while (!this.isExit)
             {
                 this.Logger.BoardSize(defaultBoardSize);
                 int boardSize = this.SetSize(defaultBoardSize);
@@ -154,10 +161,8 @@ namespace SnakesAndLadders.Logic
                     this.simulations.Add(new Thread(this.RunSimulation));
                 }
 
-                for (int i = 0; i < this.simulations.Count; i++)
-                {
-                    this.simulations[i].Start(this.games[i]);
-                }
+                // Starts the different games in parallel fashion.
+                Parallel.For(0, this.simulations.Count, (i) => { this.simulations[i].Start(this.games[i]); });
 
                 while (true)
                 {
@@ -230,6 +235,9 @@ namespace SnakesAndLadders.Logic
             this.games = new List<Game>();
             this.simulations = new List<Thread>();
             this.finishedCounter = 0;
+
+            this.Logger.Exit();
+            this.isExit = this.KeyboardWatcher.Exit();
         }
 
         /// <summary>
