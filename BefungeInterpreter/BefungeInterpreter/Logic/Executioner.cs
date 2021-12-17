@@ -76,7 +76,7 @@ namespace BefungeInterpreter.Logic
         /// <param name="command">Represents the divide command of the current <see cref="BefungeProgram"/>.</param>
         public void Visit(DivideCommand command)
         {
-            command.Execute(command.Program);
+            command.Execute(command.Program, this.Logger);
         }
 
          /// <summary>
@@ -179,7 +179,7 @@ namespace BefungeInterpreter.Logic
         /// <param name="command">Represents the modulo command of the current <see cref="BefungeProgram"/>.</param>
         public void Visit(ModuloCommand command)
         {
-            command.Execute(command.Program);
+            command.Execute(command.Program, this.Logger);
         }
 
          /// <summary>

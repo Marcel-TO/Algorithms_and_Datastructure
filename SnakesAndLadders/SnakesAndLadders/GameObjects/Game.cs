@@ -5,6 +5,7 @@
 // <author>Marcel Turobin-Ort</author>
 // <summary>Defines the game instance of the snakes and ladders game.</summary>
 //-----------------------------------------------------------------------
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("SnakesAndLadders_UnitTests")]
 namespace SnakesAndLadders.GameObjects
 {
     using System;
@@ -249,9 +250,13 @@ namespace SnakesAndLadders.GameObjects
         /// Represents the simulation of the player movement.
         /// </summary>
         /// <param name="playerData">The current player data.</param>
-        private void RunPlayerSimulation(object playerData)
+        internal void RunPlayerSimulation(object playerData)
         {
-            if (!(playerData is Player))
+            if (playerData == null)
+            {
+                throw new ArgumentNullException($"The {nameof(playerData)} must not be null");
+            }
+            else if (!(playerData is Player))
             {
                 throw new ArgumentOutOfRangeException($"The specified arguments must be of the type {nameof(Player)}.");
             }

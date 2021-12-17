@@ -45,14 +45,9 @@ namespace BefungeInterpreter.Commands
                 throw new ArgumentNullException($"The {nameof(program)} must not be null.");
             }
 
-            // Checks if there are no values to be popped.
-            if (program.Stack.Count == 0)
-            {
-                program.StackPush(0);
-            }
-
             // Checks the value on top of the stack and pushes the same value again.
-            int value = program.Stack.Peek();
+            int value = program.StackPop();
+            program.StackPush(value);
             program.StackPush(value);
         }
     }

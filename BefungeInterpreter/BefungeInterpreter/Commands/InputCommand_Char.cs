@@ -56,8 +56,7 @@ namespace BefungeInterpreter.Commands
                 throw new ArgumentOutOfRangeException($"The {nameof(character)} must be in the supported ascii range.");
             }
 
-            byte[] byteValue = Encoding.ASCII.GetBytes(character.ToString());
-            program.StackPush(byteValue[0]);
+            program.StackPush(character);
 
             logger.ShowProgramContent(program.Content, program.Position, program.ValueList, program.Output);
         }

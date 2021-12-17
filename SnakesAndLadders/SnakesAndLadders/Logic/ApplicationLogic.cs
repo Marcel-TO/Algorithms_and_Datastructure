@@ -337,7 +337,7 @@ namespace SnakesAndLadders.Logic
 
                 bool isNumber = int.TryParse(sizeString, out int number);
 
-                if (isNumber && number >= 0)
+                if (isNumber && number >= 1)
                 {
                     return number;
                 }

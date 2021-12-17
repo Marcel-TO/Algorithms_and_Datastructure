@@ -11,6 +11,7 @@ namespace BefungeInterpreter_UnitTest.Commands
     using System.Collections.Generic;
     using BefungeInterpreter.Commands;
     using BefungeInterpreter.Logic;
+    using BefungeInterpreter_UnitTests.TestInstances;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
@@ -38,7 +39,19 @@ namespace BefungeInterpreter_UnitTest.Commands
         {
             ModuloCommand command = new ModuloCommand(new BefungeProgram(new Stack<int>(), new string[] { "&" }, new Position(0, 0)));
 
-            command.Execute(null);
+            command.Execute(null, new LoggerReplacementInstance());
+        }
+
+        /// <summary>
+        /// Represents a method if execute reacts properly to null logger.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestIfLoggerInExecuteIsNull()
+        {
+            ModuloCommand command = new ModuloCommand(new BefungeProgram(new Stack<int>(), new string[] { "&" }, new Position(0, 0)));
+
+            command.Execute(command.Program, null);
         }
 
         /// <summary>
@@ -53,7 +66,7 @@ namespace BefungeInterpreter_UnitTest.Commands
             command.Program.StackPush(3);
             Assert.IsTrue(command.Program.Stack.Count == 2);
 
-            command.Execute(command.Program);
+            command.Execute(command.Program, new LoggerReplacementInstance());
 
             Assert.IsTrue(command.Program.Stack.Count == 1);
             Assert.IsTrue(command.Program.Stack.Peek() == 2);
@@ -67,7 +80,7 @@ namespace BefungeInterpreter_UnitTest.Commands
         {
             ModuloCommand command = new ModuloCommand(new BefungeProgram(new Stack<int>(), new string[] { "%" }, new Position(0, 0)));
 
-            command.Execute(command.Program);
+            command.Execute(command.Program, new LoggerReplacementInstance());
 
             Assert.IsTrue(command.Program.Stack.Count == 1);
             Assert.IsTrue(command.Program.Stack.Peek() == 0);
@@ -82,7 +95,7 @@ namespace BefungeInterpreter_UnitTest.Commands
             ModuloCommand command = new ModuloCommand(new BefungeProgram(new Stack<int>(), new string[] { "%" }, new Position(0, 0)));
             command.Program.StackPush(3);
 
-            command.Execute(command.Program);
+            command.Execute(command.Program, new LoggerReplacementInstance());
 
             Assert.IsTrue(command.Program.Stack.Count == 1);
             Assert.IsTrue(command.Program.Stack.Peek() == 0);
@@ -98,10 +111,28 @@ namespace BefungeInterpreter_UnitTest.Commands
             command.Program.StackPush(105);
             command.Program.StackPush(102);
 
-            command.Execute(command.Program);
+            command.Execute(command.Program, new LoggerReplacementInstance());
 
             Assert.IsTrue(command.Program.Stack.Count == 1);
             Assert.IsTrue(command.Program.Stack.Peek() == 3);
+        }
+
+        /// <summary>
+        /// Represents a method for testing if divide command reacts properly to dividing by 0.
+        /// </summary>
+        [TestMethod]
+        public void TestIfDivideByZeroIsCorrect()
+        {
+            ModuloCommand command = new ModuloCommand(new BefungeProgram(new Stack<int>(), new string[] { "%" }, new Position(0, 0)));
+            command.Program.StackPush(5);
+            command.Program.StackPush(0);
+
+            command.Execute(command.Program, new LoggerReplacementInstance());
+
+            Assert.IsTrue(command.Program.Stack.Count == 1);
+
+            // It is 5 because the user gets asked what the result should be. In this case the replacement instance choses 5.
+            Assert.IsTrue(command.Program.Stack.Peek() == 5);
         }
     }
 }

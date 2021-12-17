@@ -10,3 +10,15 @@ M:\Visual_Studio\Semester_3\SudokuSolver\Sudoku_Model\obj\Debug\net5.0\Sudoku_Mo
 M:\Visual_Studio\Semester_3\SudokuSolver\Sudoku_Model\obj\Debug\net5.0\ref\Sudoku_Model.dll
 M:\Visual_Studio\Semester_3\SudokuSolver\Sudoku_Model\obj\Debug\net5.0\Sudoku_Model.pdb
 M:\Visual_Studio\Semester_3\SudokuSolver\Sudoku_Model\obj\Debug\net5.0\Sudoku_Model.csproj.AssemblyReference.cache
+M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SudokuSolver\Sudoku_Model\bin\Debug\net5.0\Sudoku_Model.deps.json
+M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SudokuSolver\Sudoku_Model\bin\Debug\net5.0\Sudoku_Model.dll
+M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SudokuSolver\Sudoku_Model\bin\Debug\net5.0\ref\Sudoku_Model.dll
+M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SudokuSolver\Sudoku_Model\bin\Debug\net5.0\Sudoku_Model.pdb
+M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SudokuSolver\Sudoku_Model\obj\Debug\net5.0\Sudoku_Model.csproj.AssemblyReference.cache
+M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SudokuSolver\Sudoku_Model\obj\Debug\net5.0\Sudoku_Model.GeneratedMSBuildEditorConfig.editorconfig
+M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SudokuSolver\Sudoku_Model\obj\Debug\net5.0\Sudoku_Model.AssemblyInfoInputs.cache
+M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SudokuSolver\Sudoku_Model\obj\Debug\net5.0\Sudoku_Model.AssemblyInfo.cs
+M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SudokuSolver\Sudoku_Model\obj\Debug\net5.0\Sudoku_Model.csproj.CoreCompileInputs.cache
+M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SudokuSolver\Sudoku_Model\obj\Debug\net5.0\Sudoku_Model.dll
+M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SudokuSolver\Sudoku_Model\obj\Debug\net5.0\ref\Sudoku_Model.dll
+M:\Marcel\Desktop\Studium\3.Semester\AlgoDat\MyGit\SudokuSolver\Sudoku_Model\obj\Debug\net5.0\Sudoku_Model.pdb

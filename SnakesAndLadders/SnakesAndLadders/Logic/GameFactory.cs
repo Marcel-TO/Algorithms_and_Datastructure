@@ -39,6 +39,10 @@ namespace SnakesAndLadders.Logic
             {
                 throw new ArgumentOutOfRangeException("The size values must not be at least 1.");
             }
+            else if (boardSize > 1000000 || diceSize > 1000000 || playerSize > 1000000)
+            {
+                throw new ArgumentOutOfRangeException("The size values must not be above 1 million.");
+            }
 
             List<Field> fields = this.CreateFields(boardSize, diceSize);
             Dice dice = this.CreateDice(diceSize);

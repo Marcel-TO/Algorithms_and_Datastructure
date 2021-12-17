@@ -159,5 +159,15 @@ namespace SnakesAndLadders_UnitTests.GameObjects
             Assert.IsTrue(game.Players[game.Players.Count - 1].IsFinished);
             Assert.IsTrue(game.Players[game.Players.Count - 1].Position == 99);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestRunSimulation()
+        {
+            GameFactory factory = new GameFactory();
+            Game game = factory.CreateGame("test", 100, 6, 1);
+
+            game.RunPlayerSimulation(null);
+        }
     }
 }

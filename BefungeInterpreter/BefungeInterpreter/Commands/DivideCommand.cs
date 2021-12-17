@@ -37,29 +37,38 @@ namespace BefungeInterpreter.Commands
         /// Represents the execution method of the current command.
         /// </summary>
         /// <param name="program">The <see cref="BefungeProgram"/> that gets interpreted.</param>
-        public void Execute(BefungeProgram program)
+        /// <param name="logger">The current logger of the application.</param>
+        public void Execute(BefungeProgram program, ILogger logger)
         {
             // Checks if the parameter is null.
             if (program == null)
             {
                 throw new ArgumentNullException($"The {nameof(program)} must not be null.");
             }
-
-            // Checks if there are no values to be popped.
-            if (program.Stack.Count == 0)
+            else if (logger == null)
             {
-                program.StackPush(0);
-                return;
+                throw new ArgumentNullException($"The {nameof(logger)} must not be null.");
             }
+
+            //// Checks if there are no values to be popped.
+            //if (program.Stack.Count == 0)
+            //{
+            //    program.StackPush(0);
+            //    return;
+            //}
 
             // Pops the values.
             int value2 = program.StackPop();
             int value1 = program.StackPop();
 
             // Checks if values are zero to avoid dividing by 0.
-            if (value2 == 0 || value1 == 0)
+            if (value2 == 0)
             {
-                program.StackPush(0);
+                logger.Clear();
+                logger.Log("It appears the interpreter would divide by 0. What should be the result?");
+                logger.Continue();
+                program.StackPush(logger.GetUserIntInput());
+                logger.ShowProgramContent(program.Content, program.Position, program.ValueList, program.Output);
                 return;
             }
 
