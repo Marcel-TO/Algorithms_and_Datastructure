@@ -115,7 +115,7 @@ namespace Encryption.Logic
 
             for (int i = 0; i < encryptedMessage.Length; i++)
             {
-                for (int j = 0; j < this.LeftAlphabet.Length; j++)
+                for (int j = 0; j < this.RightAlphabet.Length; j++)
                 {
                     if (encryptedMessage[i] == this.RightAlphabet[j])
                     {

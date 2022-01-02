@@ -1,20 +1,50 @@
-﻿namespace MazeGenerator_Model.Logic
+﻿//-----------------------------------------------------------------------
+// <copyright file="Hexagon.cs" company="FHWN">
+//     Copyright (c) Marcel Turobin-Ort. All rights reserved.
+// </copyright>
+// <author>Marcel Turobin-Ort</author>
+// <summary>Defines the a single Hexagon of the maze.</summary>
+//-----------------------------------------------------------------------
+namespace MazeGenerator_Model.Logic
 {
     using System;
-    using System.Collections.Generic;
 
+    /// <summary>
+    /// Represents the hexagon class.
+    /// </summary>
     public class Hexagon
     {
+        /// <summary>
+        /// Represents the q position of the axial coordinates.
+        /// </summary>
         private int q;
 
+        /// <summary>
+        /// Represents the r position of the axial coordinate.
+        /// </summary>
         private int r;
 
+        /// <summary>
+        /// Represents the s position of the axial coordinate.
+        /// </summary>
         private int s;
 
+        /// <summary>
+        /// Represents the values for the open borders.
+        /// </summary>
         private bool[] isOpen;
 
+        /// <summary>
+        /// Represents the direction of the hexagon.
+        /// </summary>
         private int direction;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Hexagon"/> class.
+        /// </summary>
+        /// <param name="q">The q position of the axial coordinate.</param>
+        /// <param name="r">The r position of the axial coordinate.</param>
+        /// <param name="s">The s position of the axial coordinate.</param>
         public Hexagon(int q, int r, int s)
         {
             this.Q = q;
@@ -34,24 +64,40 @@
             };
         }
 
+        /// <summary>
+        /// Gets the Q position of the axial coordinate.
+        /// </summary>
+        /// <value>The Q position.</value>
         public int Q
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the R position of the axial coordinate.
+        /// </summary>
+        /// <value>The R position.</value>
         public int R
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the S position of the axial coordinate.
+        /// </summary>
+        /// <value>The S position.</value>
         public int S
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the array of all open borders.
+        /// </summary>
+        /// <value>The array of all open borders.</value>
         public bool[] IsOpen
         {
             get
@@ -74,6 +120,10 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the direction of the hexagon.
+        /// </summary>
+        /// <value>The direction of the hexagon.</value>
         public int Direction
         {
             get
@@ -92,6 +142,10 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the hexagon is chosen.
+        /// </summary>
+        /// <value>The value indicating whether the hexagon is chosen.</value>
         public bool IsChosen
         {
             get;

@@ -1,4 +1,11 @@
-﻿namespace MazeGenerator_Model.Factories
+﻿//-----------------------------------------------------------------------
+// <copyright file="MazeFactory.cs" company="FHWN">
+//     Copyright (c) Marcel Turobin-Ort. All rights reserved.
+// </copyright>
+// <author>Marcel Turobin-Ort</author>
+// <summary>Defines the factory class for the hexagon maze.</summary>
+//-----------------------------------------------------------------------
+namespace MazeGenerator_Model.Factories
 {
     using System;
     using System.Collections.Generic;
@@ -6,12 +13,25 @@
     using MazeGenerator_Model.Interfaces;
     using MazeGenerator_Model.Logic;
 
+    /// <summary>
+    /// Represents the factory class for the hexagon maze.
+    /// </summary>
     public class MazeFactory
     {
+        /// <summary>
+        /// Represents the directions for the neighbor navigation.
+        /// </summary>
         private List<Hexagon> directions;
 
+        /// <summary>
+        /// Represents the random number generator.
+        /// </summary>
         private IRandom random;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MazeFactory"/> class.
+        /// </summary>
+        /// <param name="random">The random number generator.</param>
         public MazeFactory(IRandom random)
         {
             if (random == null)
@@ -40,8 +60,18 @@
             };
         }
 
+        /// <summary>
+        /// Represents the method for creating a hexagon maze.
+        /// </summary>
+        /// <param name="size">The size of the maze.</param>
+        /// <returns>The generated maze.</returns>
         public Maze CreateMaze(int size)
         {
+            if (size < 1)
+            {
+                throw new ArgumentOutOfRangeException($"The {nameof(size)} must be atleast 1.");
+            }
+
             List<Hexagon> hexagons = this.CreateHexagons(size);
 
             int startIndex = this.GetRandomHex(hexagons);
@@ -62,6 +92,11 @@
             }
         }
 
+        /// <summary>
+        /// Represents the method for creating the list of hexagons.
+        /// </summary>
+        /// <param name="size">The size of the maze.</param>
+        /// <returns>The list of all hexagons.</returns>
         private List<Hexagon> CreateHexagons(int size)
         {
             List<Hexagon> hexagons = new List<Hexagon>();
@@ -83,6 +118,13 @@
             return hexagons;
         }
 
+        /// <summary>
+        /// Represents the method for a random walk.
+        /// </summary>
+        /// <param name="hexagons">The list of all hexagons.</param>
+        /// <param name="randomIndex">The index of the random start position.</param>
+        /// <param name="size">The size of the maze.</param>
+        /// <returns>The list of all hexagons from the walk.</returns>
         private List<Hexagon> RandomWalk(List<Hexagon> hexagons, int randomIndex, int size)
         {
             List<Hexagon> walk = new List<Hexagon> { hexagons[randomIndex] };
@@ -93,7 +135,7 @@
                 Hexagon neighbor = this.HexNeighbor(walk[walk.Count - 1], direction);
 
                 // Check if neighbor is in range.
-                if (neighbor.Q <= size && neighbor.R <= size && neighbor.S <= size && neighbor.Q >= -size && neighbor.R >= -size && neighbor.S >= -size)
+                if (neighbor.Q < size && neighbor.R < size && neighbor.S < size && neighbor.Q > -size && neighbor.R > -size && neighbor.S > -size)
                 {
                     walk[walk.Count - 1].Direction = direction;
 
@@ -120,6 +162,12 @@
             }
         }
 
+        /// <summary>
+        /// Represents the method for adding the random walk to the maze.
+        /// </summary>
+        /// <param name="walk">The random walk.</param>
+        /// <param name="hexagons">The list of all hexagons.</param>
+        /// <returns>The list of the changed hexagons.</returns>
         private List<Hexagon> AddWalk(List<Hexagon> walk, List<Hexagon> hexagons)
         {
             for (int w = 0; w < walk.Count; w++)
@@ -143,6 +191,12 @@
                 return hexagons;
         }
 
+        /// <summary>
+        /// Represents the method for checking if the random walk hit the current maze.
+        /// </summary>
+        /// <param name="latestWalk">The latest position of the walk.</param>
+        /// <param name="hexagons">The list of all hexagons of the maze.</param>
+        /// <returns>True if the walk hit the current maze, otherwise false.</returns>
         private bool CheckIfWalkHitCurrentMaze(Hexagon latestWalk, List<Hexagon> hexagons)
         {
             for (int i = 0; i < hexagons.Count; i++)
@@ -159,6 +213,11 @@
             return false;
         }
 
+        /// <summary>
+        /// Represents the method for inversing the direction.
+        /// </summary>
+        /// <param name="direction">The current direction.</param>
+        /// <returns>The inversed direction.</returns>
         private int InverseDirection(int direction)
         {
             direction += 3;
@@ -171,6 +230,11 @@
             return direction;
         }
 
+        /// <summary>
+        /// Represents the method for getting a random position from the maze that isn't chosen.
+        /// </summary>
+        /// <param name="hexagons">The list of all hexagons.</param>
+        /// <returns>The random hexagon that isn't chosen.</returns>
         private int GetRandomHex(List<Hexagon> hexagons)
         {
             while (true)
@@ -184,6 +248,12 @@
             }
         }
 
+        /// <summary>
+        /// Represents the method for adding the hexagons together.
+        /// </summary>
+        /// <param name="a">The first hexagon.</param>
+        /// <param name="b">The second hexagon.</param>
+        /// <returns>The new hexagon.</returns>
         private Hexagon Hex_Add(Hexagon a, Hexagon b)
         {
             if (a == null)
@@ -198,6 +268,12 @@
             return new Hexagon(a.Q + b.Q, a.R + b.R, a.S + b.S);
         }
 
+        /// <summary>
+        /// Represents the method for subtracting the hexagons.
+        /// </summary>
+        /// <param name="a">The first hexagon.</param>
+        /// <param name="b">The second hexagon.</param>
+        /// <returns>The new subtracted hexagon.</returns>
         private Hexagon Hex_Subtract(Hexagon a, Hexagon b)
         {
             if (a == null)
@@ -212,6 +288,11 @@
             return new Hexagon(a.Q - b.Q, a.R - b.R, a.S - b.S);
         }
 
+        /// <summary>
+        /// Represents the direction for the next hexagon.
+        /// </summary>
+        /// <param name="direction">The direction.</param>
+        /// <returns>The new Hexagon direction.</returns>
         private Hexagon HexDirection(int direction)
         {
             if (direction < 0 || direction >= this.directions.Count)
@@ -222,6 +303,12 @@
             return this.directions[direction];
         }
 
+        /// <summary>
+        /// Represents the method for getting the neighbor of the current hexagon.
+        /// </summary>
+        /// <param name="hex">The current hexagon.</param>
+        /// <param name="direction">The direction for the next hexagon.</param>
+        /// <returns>The neighbor of the hexagon.</returns>
         private Hexagon HexNeighbor(Hexagon hex, int direction)
         {
             if (hex == null)
