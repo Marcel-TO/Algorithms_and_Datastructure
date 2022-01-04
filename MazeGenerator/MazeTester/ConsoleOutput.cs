@@ -55,6 +55,14 @@ namespace MazeTester
                 int x = middleX + positions[i].Item1;
                 int y = middleY + positions[i].Item2;
 
+                //// For visualizing the hexagons without maze paths.
+                //Console.SetCursorPosition(x, y - 1);
+                //Console.Write("/\\");
+                //Console.SetCursorPosition(x - 1, y);
+                //Console.Write("|  |");
+                //Console.SetCursorPosition(x, y + 1);
+                //Console.Write("\\/");
+
                 Console.SetCursorPosition(x, y - 1);
                 if (hexagons[i].IsOpen[1])
                 {
