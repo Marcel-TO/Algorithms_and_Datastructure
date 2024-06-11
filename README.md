@@ -1,2 +1,3 @@
-# ALgoDat
-Contains all Projects from the AlgoDat Execrise
+# Algorithms and Datastructure
+
+This repository represents some different projects to learn more about certain data structures and algorithms.
